@@ -1,120 +1,142 @@
 <template>
     <div class="wrapper">
-        <div class="top">
-            <div class="logo"><img src="@/assets/logo.png" alt="" /></div>
-            <div class="header">
-                <el-dropdown class="avatar-container" trigger="click">
-                    <div class="avatar-wrapper">
-                        <i class="el-icon-user-solid"></i>
-                        <span class="avatar-name">幸会，王先生</span>
-                        <i class="el-icon-caret-bottom" />
+        <HeadIndex></HeadIndex>
+        <div class="banner">
+            <img src="@/assets/banner.png" alt="">
+            <div class="banner-content">
+                <div class="search">
+                    <el-input placeholder="请输入关键字" v-model="searchContent"></el-input>
+                    <img src="@/assets/icon_search.png" alt="">
+                </div>
+                <div class="banner-desc">是距今600多年前明朝中央政府在南京编纂《永乐大典》以来，南京地方政府对南京文献的首次系统编簒整理<br>同时，也是南京自行组织编纂的最大规模的出版工程</div>
+                <img src="@/assets/icon_banner_b.png" alt="" class="banner-img">
+            </div>
+        </div>
+        <div class="file-desc">
+            <div class="file-word">
+                <div class="file-word-item" v-for="item in wordsList" :key="item.word">
+                    <div class="file-word-item-zi">{{item.word}}</div>
+                    <div class="file-word-item-eng">
+                        <span>{{item.english}}</span>
+                        <span>{{item.desc}}</span>
                     </div>
-                    <el-dropdown-menu slot="dropdown" class="user-dropdown">
-                        <router-link to="/">
-                            <el-dropdown-item>
-                                <img src="@/assets/qq.png" alt="" class="icon" style="width: 14px;height: 14px;">我的书架
-                            </el-dropdown-item>
-                        </router-link>
-                        <router-link to="/">
-                            <el-dropdown-item>
-                                <img src="@/assets/qq.png" alt="" class="icon">我的笔记
-                            </el-dropdown-item>
-                        </router-link>
-                        <router-link to="/">
-                            <el-dropdown-item>
-                                <img src="@/assets/qq.png" alt="" class="icon">检索历史
-                            </el-dropdown-item>
-                        </router-link>
-                        <router-link to="/">
-                            <el-dropdown-item>
-                                <img src="@/assets/qq.png" alt="" class="icon">阅读历史
-                            </el-dropdown-item>
-                        </router-link>
-                    </el-dropdown-menu>
-                </el-dropdown>
-                <div class="layout">
-                    <span>登出</span>
-                    <i class="el-icon-user-solid"></i>
                 </div>
-                <div class="header-right">
-                    <img src="@/assets/login_Bitmap.png" alt="">
-                    <img src="@/assets/login_Bitmap.png" alt="">
-                    <img src="@/assets/login_Bitmap.png" alt="">
-                </div>
+            </div>
+            <div class="file-content">
+
             </div>
         </div>
     </div>
 </template>
 
 <script>
-import {} from "vuex";
+import HeadIndex from '@/components/head/index.vue'
 
 export default {
     name: "Index",
+    data(){
+        return {
+            searchContent: '',
+            wordsList: [
+                {word: '史', english: 'history',desc: '史料编'},
+                {word: '方', english: 'history',desc: '方志编'},
+                {word: '文', english: 'history',desc: '文献编'},
+                {word: '档', english: 'history',desc: '档案编'},
+            ]
+        }
+    },
     computed: {
 
     },
+    components:{
+		HeadIndex,
+	},
 };
 </script>
 <style lang="scss">
-.icon{
-    width: 14px;
-    height: 14px;
-    margin: 0 16px 0 0;
-}
+    .search .el-input__inner{
+        width: 629px;
+        height: 49px;
+        border: none;
+        background-image: url(../../assets/search_bg.png);
+        background-size: 100%;
+        background-color: initial;
+        padding: 0 60px 0 30px;
+    }
 </style>
 <style lang="scss" scoped>
 .wrapper {
-    .top {
-        width: 100%;
-        height: 900px;
-        .logo {
-            position: fixed;
-            top: 26px;
-            left: 159px;
-            img {
-                width: 199px;
-                height: 37px;
+    .banner{
+        position: relative;
+        img{
+            width:100%;
+            // height: 900px;
+        }
+        .banner-content{
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            margin-left: -358px;
+            text-align: center;
+            .search{
+                width: 629px;
+                height: 49px;
+                overflow: hidden;
+                position: relative;
+                margin: 0 auto;
+                img{
+                    position: absolute;
+                    right: 30px;
+                    top: 15px;
+                    width: 19px;
+                    height: 19px;
+                }
+            }
+            .banner-desc{
+                color: #330000;
+                font-size: 14px;
+                line-height: 30px;
+                letter-spacing: 1px;
+                text-align: center;
+                margin: 13px 0 30px;
+            }
+            .banner-img{
+                width: 49px;
+                height: 42px;
+                margin: 0 auto;
+                display: block;
             }
         }
-        .header {
+    }
+    .file-desc{
+        width: 100%;
+        height: 900px;
+        background-color: #fff;
+        text-align: center;
+        padding: 67px 0 27px;
+        .file-word{
             display: flex;
-            height: 84px;
             align-items: center;
-            background-color: #dda281;
-            padding-right: 80px;
-            font-size: 12px;
-            color: #000;
-            .avatar-container{
-                margin-left: auto;
-                height: 29px;
-                line-height: 29px;
-                border-right: 3px solid #979797;
-                padding: 0 14px;
-                .user-dropdown{
-                    .icon{
-                        width: 14px !important;
-                        height: 14px !important;
-                        padding: 0 16px 0 22px;
+            justify-content: center;
+            .file-word-item{
+                width: 333px;
+                display: flex;
+                justify-content: center;
+                .file-word-item-zi{
+                    font-size: 100px;
+                    font-family: SourceHanSerifTC-Regular, SourceHanSerifTC;
+                    font-weight: 400;
+                    color: #000000;
+                }
+                .file-word-item-eng{
+                    display: flex;
+                    span{
+                        width:10px;
+                        word-wrap:break-word;
+                        font-size: 14px;
+                        color:#333333;
+                        display: block;
                     }
-                }
-                .avatar-name{
-                    margin: 0 7px 0 4px;
-                    color: #000;
-                }
-            }
-            .layout{
-                margin: 0 0 0 14px;
-                span{
-                    margin-right: 8px;
-                }
-            }
-            .header-right{
-                margin-left: 21px;
-                img{
-                    width: 49px;
-                    height: 150px;
-                    margin-left: 19px;
                 }
             }
         }
