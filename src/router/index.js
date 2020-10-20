@@ -27,7 +27,27 @@ export const constantRoutes = [
         component: () => import('@/views/404'),
         hidden: true
     },
-
+    {
+        path: '/personalCenter',//个人中心
+        component: () => import('@/views/personalCenter/index'),
+    },
+    {
+        path: '/changePasswordOne',//修改密码页面1
+        component: () => import('@/views/changePasswordOne/index'),
+    },
+    {
+        path: '/changePasswordTwo',//修改密码页面2
+        component: () => import('@/views/changePasswordTwo/index'),
+    },
+    {
+        path: '/advancedSearch',//高级检索
+        component: () => import('@/views/advancedSearch/index'),
+    },
+    {
+        path: '/detectionResult',//检索结果
+        component: () => import('@/views/detectionResult/index'),
+    },
+    
     {
         path: '/',
         component: Layout,
