@@ -1,5 +1,6 @@
 <template>
   <div class="passOne_box">
+    <HeadIndex></HeadIndex>
     <div class="passOne_box_t">基本信息</div>
      <div class="passOne_centent">
        <div 
@@ -16,22 +17,26 @@
 </template>
 
 <script>
+  import HeadIndex from '@/components/head/index.vue'
   export default {
     data() {
       return {
         listData:[
           {
-            'img':require('../..//assets/second/password.png'),
+            'img':require('../../assets/second/password.png'),
             'name':'通过密码修改',
             'circular':''
           },
             {
-            'img':require('../..//assets/second/phone_red.png'),
+            'img':require('../../assets/second/phone_red.png'),
             'name':'通过手机号修改',
             'circular':''
           }
         ]
       };
+    },
+    components:{
+      HeadIndex
     },
     methods: {
       handlepassOne(index){
@@ -57,7 +62,7 @@
   font-weight: 400;
   color: #000000;
   line-height: 20px;
-  padding: 42px 0 17px;
+  padding: 124px 0 17px;
   border-bottom: 1px dashed #979797;
   margin: 0 auto;
 }

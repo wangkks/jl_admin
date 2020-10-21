@@ -1,5 +1,6 @@
 <template>
   <div class="personal_box">
+    <HeadIndex></HeadIndex>
     <div class="personal_box_t">基本信息</div>
     <div class="personal_form">
       <el-form 
@@ -49,7 +50,11 @@
 </template>
 
 <script>
+import HeadIndex from '@/components/head/index.vue'
   export default {
+    components:{
+      HeadIndex
+    },
     data() {
       return {
         ruleForm: {
@@ -75,19 +80,19 @@
         },
         listData:[
           {
-            'img':require('../..//assets/second/password.png'),
+            'img':require('../../assets/second/password.png'),
             'name':'修改密码',
             'title':'通过绑定手机号或邮箱更改',
             'circular':''
           },
             {
-            'img':require('../..//assets/second/phone_red.png'),
+            'img':require('../../assets/second/phone_red.png'),
             'name':'修改手机号',
             'title':'通过绑定手机号或邮箱更改',
             'circular':''
           },
             {
-            'img':require('../..//assets/second/mail.png'),
+            'img':require('../../assets/second/mail.png'),
             'name':'修改邮箱',
             'title':'通过绑定手机号或邮箱更改',
             'circular':''
@@ -163,7 +168,7 @@ $cursor: #fff;
   font-weight: 400;
   color: #000000;
   line-height: 20px;
-  padding: 42px 0 17px;
+  padding: 124px 0 17px;
   border-bottom: 1px dashed #979797;
   margin: 0 auto;
 }

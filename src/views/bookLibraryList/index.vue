@@ -1,57 +1,62 @@
 <template>
-  <div class="detection_box">
-    <HeadIndex></HeadIndex>
-    <div class="detection_box_t">
-      <div class="detection_left">
-        <div>搜索 ”诗国 “</div>
-        <div class="detection_totle">
-          共有 
-          <span class="detection_num">10000</span> 
-          条记录库
-        </div>
-      </div>
-      <div class="detection_right">
-        <div class="detection_sort_box">
-          <div>出版时间</div>
-          <img src="@/assets/second/sort_down.png" alt="" class="sort_box"/>
-        </div>
-        <img src="@/assets/second/list_red.png" alt="" class="sort_list"/>
-        <img src="@/assets/second/window.png" alt="" class="sort_window"/>
-      </div>
-    </div>
-    <div class="detection_mine">
-      <div 
-        class="detection_mine_box"
-        v-for="(item,index) in detectionData"
-        :key="index"
-        >
-        <img :src="item.img" alt="" class="detection_mine_box_i"/>
-        <div class="detection_mine_right">
-          <div class="detection_mine_right_t">{{item.name}}</div>
-          <div class="detection_mine_cent">
-            <div class="detection_mine_cent_l">
-              <div>作者：{{item.author}}  编</div>
-              <div>收藏：{{item.collection}}</div>
-            </div>
-            <img :src="item.more" alt="" class="detection_mine_cent_i"/>
+  <div class="booklibrary_box">
+    <div class="booklibrary_box_left"></div>
+    <div class="booklibrary_box_right">
+      <div class="booklibrary_box_t">
+        <div class="booklibrary_left">
+          <div class="booklibrary_left_n">书籍库</div>
+          <div class="booklibrary_totle">
+            共有 
+            <span class="booklibrary_num">10000</span> 
+            条记录库
           </div>
-          <div class="detection_mine_cent_btm">{{item.details}}</div>
         </div>
-        <img :src="item.bookmark" alt="" class="bookmark"/>
+        <div class="booklibrary_right">
+          <div class="booklibrary_input">
+            <el-input v-model="input" placeholder="请输入关键字"></el-input>
+            <img src="@/assets/icon_search.png" alt="" class="booklibrary_input_i"/>
+          </div>
+          <div class="booklibrary_sort_box">
+            <div>出版时间</div>
+            <img src="@/assets/second/sort_down.png" alt="" class="sort_box"/>
+          </div>
+          <img src="@/assets/second/list_red.png" alt="" class="sort_list"/>
+          <img src="@/assets/second/window.png" alt="" class="sort_window"/>
+        </div>
+      </div>
+      <div class="detection_mine">
+        <div 
+          class="detection_mine_box"
+          v-for="(item,index) in detectionData"
+          :key="index"
+          >
+          <img :src="item.img" alt="" class="detection_mine_box_i"/>
+          <div class="detection_mine_right">
+            <div class="detection_mine_right_t">{{item.name}}</div>
+            <div class="detection_mine_cent">
+              <div class="detection_mine_cent_l">
+                <div>作者：{{item.author}}  编</div>
+                <div>收藏：{{item.collection}}</div>
+              </div>
+              <img :src="item.more" alt="" class="detection_mine_cent_i"/>
+            </div>
+            <div class="detection_mine_cent_btm">{{item.details}}</div>
+          </div>
+          <img :src="item.bookmark" alt="" class="bookmark"/>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import HeadIndex from '@/components/head/index.vue'
   export default {
     components:{
-      HeadIndex
     },
     data() {
       return {
-        detectionData:[
+        input: '',
+         detectionData:[
           {
             'img':require('../../assets/second/bitmap_bg.png'),
             'name':'诗国南京',
@@ -92,54 +97,86 @@ import HeadIndex from '@/components/head/index.vue'
       };
     },
     methods: {
-      handledetection(index){
-        if(index == 0){
-          this.$router.push({
-            path:'/changePasswordTwo'
-          })
-        }
-
-      }
+     
     }
   }
 </script>
 <style lang="scss">
-.detection_box{
+/* reset element-ui css */
+.booklibrary_box{
+  .booklibrary_input .el-input__inner{
+    width: 434px;
+    height: 42px;
+    color: #000;
+    background: #F7F7F3;
+    border-radius: 21px;
+    border: 1px solid #C5C5C5;
+  }
+}
+
+
+</style>
+<style lang="scss">
+.booklibrary_box{
   width: 100%;
   height: auto;
-  padding: 20px;
+  display: flex;
   background:  rgba(237, 239, 243, 1);
 }
-.detection_box_t{
-  width: 1286px;
+.booklibrary_box_left{
+  width: 207px;
+  height: auto;
+  background: red;
+}
+.booklibrary_box_right{
+  width: auto;
+  margin-left: 30px;
+}
+.booklibrary_box_t{
+  width: 1100px;
   font-size: 14px;
   font-weight: 400;
   color: #000000;
   line-height: 20px;
-  padding: 104px 0 17px;
+  padding: 40px 0 38px;
   border-bottom: 1px dashed #979797;
-  margin: 0 auto;
   display: flex;
   justify-content: space-between;
 }
-.detection_left{
+.booklibrary_left{
   font-size: 14px;
   font-weight: 400;
   color: #000000;
   line-height: 20px;
   display: flex;
+  align-items: center;
 }
-.detection_totle{
-  margin-left: 26px;
+.booklibrary_left_n{
+  font-size: 24px;
+  line-height: 35px;
 }
-.detection_num{
+.booklibrary_totle{
+  margin-left: 14px;
+}
+.booklibrary_num{
   color: #D0021B;
 }
-.detection_right{
+.booklibrary_right{
   display: flex;
-  margin-right: 220px;
+  align-items: center;
 }
-.detection_sort_box{
+.booklibrary_input{
+  margin-right: 67px;
+  position: relative;
+}
+.booklibrary_input_i{
+  width: 19px;
+  height: 19px;
+  position: absolute;
+  right: 30px;
+  top: 10px;
+}
+.booklibrary_sort_box{
   display: flex;
 }
 .sort_box{
@@ -160,7 +197,7 @@ import HeadIndex from '@/components/head/index.vue'
   margin: 22px auto;
 }
 .detection_mine_box{
-  width: 1286px;
+  width: 1100px;
   height: 226px;
   background: #fff;
   margin: 0 auto 10px;

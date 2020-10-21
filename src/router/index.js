@@ -47,7 +47,34 @@ export const constantRoutes = [
         path: '/detectionResult',//检索结果
         component: () => import('@/views/detectionResult/index'),
     },
-    
+    {
+        path: '/libraryWindow',//书籍库橱窗
+        component: () => import('@/views/libraryWindow/index'),
+    },
+    {
+        path: '/bookLibraryList',//书籍库列表
+        component: () => import('@/views/bookLibraryList/index'),
+    },
+    {
+        path: '/myBookshelf',//我的书架
+        component: () => import('@/views/myBookshelf/index'),
+    },
+    {
+        path: '/myNotes',//我的笔记
+        component: () => import('@/views/myNotes/index'),
+    },
+    {
+        path: '/searchRecords',//检索记录
+        component: () => import('@/views/searchRecords/index'),
+    },
+    {
+        path: '/readingHistory',//阅读历史
+        component: () => import('@/views/readingHistory/index'),
+    },
+    {
+        path: '/myFeedback',//我的反馈
+        component: () => import('@/views/myFeedback/index'),
+    },
     {
         path: '/',
         component: Layout,

@@ -1,5 +1,6 @@
 <template>
   <div class="advance_box">
+    <HeadIndex></HeadIndex>
     <div class="advance_box_t">
       <div class="advance_box_span">
         <div>高级检索</div>
@@ -43,6 +44,7 @@
 </template>
 
 <script>
+import HeadIndex from '@/components/head/index.vue'
 const cityOptions = ['关联字检索', '同义词关联', '忽略一个字', '忽略标点'];
   export default {
     data() {
@@ -51,6 +53,9 @@ const cityOptions = ['关联字检索', '同义词关联', '忽略一个字', '�
         checkedCities: ['关联字检索', '忽略一个字'],
         cities: cityOptions
       };
+    },
+    components:{
+      HeadIndex
     },
     methods: {
       clickBtn(){
@@ -71,7 +76,7 @@ const cityOptions = ['关联字检索', '同义词关联', '忽略一个字', '�
   width: 1286px;
   padding: 90px 0 44px;
   border-bottom: 1px dashed #979797;
-  margin: 0 auto;
+  margin: 84px auto 0;
 }
 .advance_box_span{
   font-size: 24px;

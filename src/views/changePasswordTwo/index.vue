@@ -1,5 +1,6 @@
 <template>
   <div class="passTwo_box">
+    <HeadIndex></HeadIndex>
     <div class="passTwo_box_t">基本信息</div>
     <div class="passTwo_form">
       <div class="passTwo_form_tit">
@@ -48,6 +49,7 @@
 </template>
 
 <script>
+  import HeadIndex from '@/components/head/index.vue'
   export default {
     data() {
       return {
@@ -60,6 +62,9 @@
           passwordTwo:''
         }
       };
+    },
+    components:{
+      HeadIndex
     },
     methods: {
        submitForm(formName) {
@@ -164,7 +169,7 @@ $cursor: #fff;
   font-weight: 400;
   color: #000000;
   line-height: 20px;
-  padding: 42px 0 17px;
+  padding: 124p                                                                                                                                                                                  x 0 17px;
   border-bottom: 1px dashed #979797;
   margin: 0 auto;
 }
