@@ -1,120 +1,146 @@
 <template>
-  <div class="booklibrary_box">
-    <div class="booklibrary_box_left"></div>
-    <div class="booklibrary_box_right">
-      <div class="booklibrary_box_t">
-        <div class="booklibrary_left">
-          <div class="booklibrary_left_n">书籍库</div>
-          <div class="booklibrary_totle">
-            共有 
-            <span class="booklibrary_num">10000</span> 
-            条记录库
-          </div>
-        </div>
-        <div class="booklibrary_right">
-          <div class="booklibrary_input">
-            <el-input v-model="input" placeholder="请输入关键字"></el-input>
-            <img src="@/assets/icon_search.png" alt="" class="booklibrary_input_i"/>
-          </div>
-          <div class="booklibrary_sort_box">
-            <div>出版时间</div>
-            <img src="@/assets/second/sort_down.png" alt="" class="sort_box"/>
-          </div>
-          <img src="@/assets/second/list_red.png" alt="" class="sort_list"/>
-          <img src="@/assets/second/window.png" alt="" class="sort_window"/>
-        </div>
-      </div>
-      <div class="detection_mine">
-        <div 
-          class="detection_mine_box"
-          v-for="(item,index) in detectionData"
-          :key="index"
-          >
-          <img :src="item.img" alt="" class="detection_mine_box_i"/>
-          <div class="detection_mine_right">
-            <div class="detection_mine_right_t">{{item.name}}</div>
-            <div class="detection_mine_cent">
-              <div class="detection_mine_cent_l">
-                <div>作者：{{item.author}}  编</div>
-                <div>收藏：{{item.collection}}</div>
-              </div>
-              <img :src="item.more" alt="" class="detection_mine_cent_i"/>
+    <div class="booklibrary_box">
+        <div class="booklibrary_box_left"></div>
+        <div class="booklibrary_box_right">
+            <div class="booklibrary_box_t">
+                <div class="booklibrary_left">
+                    <div class="booklibrary_left_n">书籍库</div>
+                    <div class="booklibrary_totle">
+                        共有
+                        <span class="booklibrary_num">10000</span>
+                        条记录库
+                    </div>
+                </div>
+                <div class="booklibrary_right">
+                    <div class="booklibrary_input">
+                        <el-input
+                            v-model="input"
+                            placeholder="请输入关键字"
+                        ></el-input>
+                        <img
+                            src="@/assets/icon_search.png"
+                            alt=""
+                            class="booklibrary_input_i"
+                        />
+                    </div>
+                    <div class="booklibrary_sort_box">
+                        <div>出版时间</div>
+                        <img
+                            src="@/assets/second/sort_down.png"
+                            alt=""
+                            class="sort_box"
+                        />
+                    </div>
+                    <img
+                        src="@/assets/second/list_red.png"
+                        alt=""
+                        class="sort_list"
+                    />
+                    <img
+                        src="@/assets/second/window.png"
+                        alt=""
+                        class="sort_window"
+                    />
+                </div>
             </div>
-            <div class="detection_mine_cent_btm">{{item.details}}</div>
-          </div>
-          <img :src="item.bookmark" alt="" class="bookmark"/>
+            <div class="detection_mine">
+                <div
+                    class="detection_mine_box"
+                    v-for="(item, index) in detectionData"
+                    :key="index"
+                >
+                    <img :src="item.img" alt="" class="detection_mine_box_i" />
+                    <div class="detection_mine_right">
+                        <div class="detection_mine_right_t">
+                            {{ item.name }}
+                        </div>
+                        <div class="detection_mine_cent">
+                            <div class="detection_mine_cent_l">
+                                <div>作者：{{ item.author }} 编</div>
+                                <div>收藏：{{ item.collection }}</div>
+                            </div>
+                            <img
+                                :src="item.more"
+                                alt=""
+                                class="detection_mine_cent_i"
+                            />
+                        </div>
+                        <div class="detection_mine_cent_btm">
+                            {{ item.details }}
+                        </div>
+                    </div>
+                    <img :src="item.bookmark" alt="" class="bookmark" />
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </template>
 
 <script>
-  export default {
-    components:{
-    },
+export default {
+    components: {},
     data() {
-      return {
-        input: '',
-         detectionData:[
-          {
-            'img':require('../../assets/second/bitmap_bg.png'),
-            'name':'诗国南京',
-            'author':'陈勇',
-            'collection':'12',
-            'more':require('../../assets/second/more.png'),
-            'details':'2019年10月31日，联合国教科文组织宣布南京成为“创意城市网络·文学之都”，《诗国南京》为“文学之都经典文库”从书中的一本。金陵诗词承载南京历史文化、传承中华诗词优秀传统，是南京“世界文学之都”魅力的重要组成部分。我们在作者分布和篇目选择上，尽可能兼顾经典性、代表性、多样性和创新性，并收录诸多以往选本未收录的诗词，以求更加全面地反映南京这座城市以及金陵诗词的全貌。全书按年代排序、简要介绍作者生平及诗词的写作年代和背景，有助于读者深入了解诗词作品的内涵。',
-            'bookmark':require('../../assets/second/bookmark-line.png')
-          },
-         {
-            'img':require('../../assets/second/bitmap_bg.png'),
-            'name':'诗国南京',
-            'author':'陈勇',
-            'collection':'12',
-            'more':require('../../assets/second/more.png'),
-            'details':'2019年10月31日，联合国教科文组织宣布南京成为“创意城市网络·文学之都”，《诗国南京》为“文学之都经典文库”从书中的一本。金陵诗词承载南京历史文化、传承中华诗词优秀传统，是南京“世界文学之都”魅力的重要组成部分。我们在作者分布和篇目选择上，尽可能兼顾经典性、代表性、多样性和创新性，并收录诸多以往选本未收录的诗词，以求更加全面地反映南京这座城市以及金陵诗词的全貌。全书按年代排序、简要介绍作者生平及诗词的写作年代和背景，有助于读者深入了解诗词作品的内涵。',
-            'bookmark':require('../../assets/second/bookmark-line.png')
-          },
-          {
-            'img':require('../../assets/second/bitmap_bg.png'),
-            'name':'诗国南京',
-            'author':'陈勇',
-            'collection':'12',
-            'more':require('../../assets/second/more.png'),
-            'details':'2019年10月31日，联合国教科文组织宣布南京成为“创意城市网络·文学之都”，《诗国南京》为“文学之都经典文库”从书中的一本。金陵诗词承载南京历史文化、传承中华诗词优秀传统，是南京“世界文学之都”魅力的重要组成部分。我们在作者分布和篇目选择上，尽可能兼顾经典性、代表性、多样性和创新性，并收录诸多以往选本未收录的诗词，以求更加全面地反映南京这座城市以及金陵诗词的全貌。全书按年代排序、简要介绍作者生平及诗词的写作年代和背景，有助于读者深入了解诗词作品的内涵。',
-            'bookmark':require('../../assets/second/bookmark-line.png')
-          },
-          {
-            'img':require('../../assets/second/bitmap_bg.png'),
-            'name':'诗国南京',
-            'author':'陈勇',
-            'collection':'12',
-            'more':require('../../assets/second/more.png'),
-            'details':'2019年10月31日，联合国教科文组织宣布南京成为“创意城市网络·文学之都”，《诗国南京》为“文学之都经典文库”从书中的一本。金陵诗词承载南京历史文化、传承中华诗词优秀传统，是南京“世界文学之都”魅力的重要组成部分。我们在作者分布和篇目选择上，尽可能兼顾经典性、代表性、多样性和创新性，并收录诸多以往选本未收录的诗词，以求更加全面地反映南京这座城市以及金陵诗词的全貌。全书按年代排序、简要介绍作者生平及诗词的写作年代和背景，有助于读者深入了解诗词作品的内涵。',
-            'bookmark':require('../../assets/second/bookmark-line.png')
-          },
-        ]
-      };
+        return {
+            input: "",
+            detectionData: [
+                {
+                    img: require("../../assets/second/bitmap_bg.png"),
+                    name: "诗国南京",
+                    author: "陈勇",
+                    collection: "12",
+                    more: require("../../assets/second/more.png"),
+                    details:
+                        "2019年10月31日，联合国教科文组织宣布南京成为“创意城市网络·文学之都”，《诗国南京》为“文学之都经典文库”从书中的一本。金陵诗词承载南京历史文化、传承中华诗词优秀传统，是南京“世界文学之都”魅力的重要组成部分。我们在作者分布和篇目选择上，尽可能兼顾经典性、代表性、多样性和创新性，并收录诸多以往选本未收录的诗词，以求更加全面地反映南京这座城市以及金陵诗词的全貌。全书按年代排序、简要介绍作者生平及诗词的写作年代和背景，有助于读者深入了解诗词作品的内涵。",
+                    bookmark: require("../../assets/second/bookmark-line.png"),
+                },
+                {
+                    img: require("../../assets/second/bitmap_bg.png"),
+                    name: "诗国南京",
+                    author: "陈勇",
+                    collection: "12",
+                    more: require("../../assets/second/more.png"),
+                    details:
+                        "2019年10月31日，联合国教科文组织宣布南京成为“创意城市网络·文学之都”，《诗国南京》为“文学之都经典文库”从书中的一本。金陵诗词承载南京历史文化、传承中华诗词优秀传统，是南京“世界文学之都”魅力的重要组成部分。我们在作者分布和篇目选择上，尽可能兼顾经典性、代表性、多样性和创新性，并收录诸多以往选本未收录的诗词，以求更加全面地反映南京这座城市以及金陵诗词的全貌。全书按年代排序、简要介绍作者生平及诗词的写作年代和背景，有助于读者深入了解诗词作品的内涵。",
+                    bookmark: require("../../assets/second/bookmark-line.png"),
+                },
+                {
+                    img: require("../../assets/second/bitmap_bg.png"),
+                    name: "诗国南京",
+                    author: "陈勇",
+                    collection: "12",
+                    more: require("../../assets/second/more.png"),
+                    details:
+                        "2019年10月31日，联合国教科文组织宣布南京成为“创意城市网络·文学之都”，《诗国南京》为“文学之都经典文库”从书中的一本。金陵诗词承载南京历史文化、传承中华诗词优秀传统，是南京“世界文学之都”魅力的重要组成部分。我们在作者分布和篇目选择上，尽可能兼顾经典性、代表性、多样性和创新性，并收录诸多以往选本未收录的诗词，以求更加全面地反映南京这座城市以及金陵诗词的全貌。全书按年代排序、简要介绍作者生平及诗词的写作年代和背景，有助于读者深入了解诗词作品的内涵。",
+                    bookmark: require("../../assets/second/bookmark-line.png"),
+                },
+                {
+                    img: require("../../assets/second/bitmap_bg.png"),
+                    name: "诗国南京",
+                    author: "陈勇",
+                    collection: "12",
+                    more: require("../../assets/second/more.png"),
+                    details:
+                        "2019年10月31日，联合国教科文组织宣布南京成为“创意城市网络·文学之都”，《诗国南京》为“文学之都经典文库”从书中的一本。金陵诗词承载南京历史文化、传承中华诗词优秀传统，是南京“世界文学之都”魅力的重要组成部分。我们在作者分布和篇目选择上，尽可能兼顾经典性、代表性、多样性和创新性，并收录诸多以往选本未收录的诗词，以求更加全面地反映南京这座城市以及金陵诗词的全貌。全书按年代排序、简要介绍作者生平及诗词的写作年代和背景，有助于读者深入了解诗词作品的内涵。",
+                    bookmark: require("../../assets/second/bookmark-line.png"),
+                },
+            ],
+        };
     },
-    methods: {
-     
-    }
-  }
+    methods: {},
+};
 </script>
 <style lang="scss">
 /* reset element-ui css */
-.booklibrary_box{
-  .booklibrary_input .el-input__inner{
-    width: 434px;
-    height: 42px;
-    color: #000;
-    background: #F7F7F3;
-    border-radius: 21px;
-    border: 1px solid #C5C5C5;
-  }
+.booklibrary_box {
+    .booklibrary_input .el-input__inner {
+        width: 434px;
+        height: 42px;
+        color: #000;
+        background: #f7f7f3;
+        border-radius: 21px;
+        border: 1px solid #c5c5c5;
+    }
 }
-
-
 </style>
 <style lang="scss">
 .booklibrary_box{

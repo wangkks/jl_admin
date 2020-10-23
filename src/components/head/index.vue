@@ -30,7 +30,7 @@
                 </router-link>
             </el-dropdown-menu>
         </el-dropdown>
-        <div class="layout">
+        <div class="layout" @click="lagoutHandler">
             <span>登出</span>
             <i class="el-icon-user-solid"></i>
         </div>
@@ -67,7 +67,9 @@ export default {
     },
 
     methods: {
-        
+        lagoutHandler(){
+            this.$router.push('/login')
+        },
     },
 };
 </script>
