@@ -31,7 +31,6 @@
           <el-input v-model="ruleForm.mailbox" class="mail_s"></el-input>
         </el-form-item>
       </el-form>
-
     </div>
      <div class="personal_box_t">账号安全</div>
      <div class="personal_centent">
@@ -59,7 +58,7 @@ import HeadIndex from '@/components/head/index.vue'
       return {
         ruleForm: {
           name: '',
-          resource: '',
+          resource: '男',
           realName:'',
           nationality:'',
           phone:'',
@@ -155,6 +154,23 @@ $cursor: #fff;
   .mail_s input{
     border: 1px solid #fff!important;
   }
+  .el-radio__inner{
+    background: #D8D8D8;
+    border: 1px solid #979797;
+  }
+  .el-radio__label{
+    color: #000;
+  }
+  .el-radio__input.is-checked .el-radio__inner{
+    background: #FF5747;
+    border: 1px solid #D0021B;
+  }
+  .el-radio__inner::after{
+    background-color: #FF5747;
+  }
+  .el-radio__input.is-checked+.el-radio__label{
+    color: #000;
+  }
 }
 </style>
 <style lang="scss">
@@ -213,7 +229,7 @@ $cursor: #fff;
 .personal_centent_o{
   width: 9px;
   height: 9px;
-  background: #fff;
+  background: #A20627;
   border-radius: 50%;
   margin-top: 60px;
 }

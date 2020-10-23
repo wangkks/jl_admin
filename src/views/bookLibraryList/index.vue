@@ -198,7 +198,7 @@
 }
 .detection_mine_box{
   width: 1100px;
-  height: 226px;
+  height: auto;
   background: #fff;
   margin: 0 auto 10px;
   box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.05);

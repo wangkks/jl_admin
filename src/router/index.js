@@ -56,6 +56,18 @@ export const constantRoutes = [
         component: () => import('@/views/bookLibraryList/index'),
     },
     {
+        path: '/resourceDetails',//资源详情页
+        component: () => import('@/views/resourceDetails/index'),
+    },
+    {
+        path: '/resourceReading',//资源阅读页
+        component: () => import('@/views/resourceReading/index'),
+    },
+    {
+        path: '/resourcesOrdered',//已订购资源
+        component: () => import('@/views/resourcesOrdered/index'),
+    },
+    {
         path: '/myBookshelf',//我的书架
         component: () => import('@/views/myBookshelf/index'),
     },
@@ -74,6 +86,18 @@ export const constantRoutes = [
     {
         path: '/myFeedback',//我的反馈
         component: () => import('@/views/myFeedback/index'),
+    },
+    {
+        path: '/organizationInformation',//机构信息
+        component: () => import('@/views/organizationInformation/index'),
+    },
+    {
+        path: '/essentialInformation',//基本信息
+        component: () => import('@/views/essentialInformation/index'),
+    },
+    {
+        path: '/accountSecurity',//账号安全
+        component: () => import('@/views/accountSecurity/index'),
     },
     {
         path: '/',

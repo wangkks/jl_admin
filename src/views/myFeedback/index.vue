@@ -1,67 +1,68 @@
 <template>
-  <div class="mynote_box">
-    <div class="mynote_box_left"></div>
-    <div class="mynote_box_right">
-      <div class="mynote_box_t">
-        <div class="mynote_left">
-          <div class="mynote_left_n">我的反馈</div>
+  <div class="feed_box">
+    <div class="feed_box_left"></div>
+    <div class="feed_box_right">
+      <div class="feed_box_t">
+        <div class="feed_left">
+          <div class="feed_left_n">我的反馈</div>
         </div>
-        <div class="mynote_right">
-          <div class="mynote_right_title redcolr">已回复（2）</div>
-          <div class="mynote_right_title greycolr">待回复（6）</div>
-          <div class="mynote_input">
+        <div class="feed_right">
+          <div class="feed_right_title redcolr">已回复（2）</div>
+          <div class="feed_right_title greycolr">待回复（6）</div>
+          <div class="feed_input">
             <el-input v-model="input" placeholder="搜索"></el-input>
-            <img src="@/assets/icon_search.png" alt="" class="mynote_input_i"/>
+            <img src="@/assets/icon_search.png" alt="" class="feed_input_i"/>
           </div>
         </div>
       </div>
-      <div class="mynote_mine">
+      <div class="feed_mine">
         <div 
-          class="mynote_mine_minebox"
-          v-for="(item,index) in mynoteData"
+          class="feed_mine_minebox"
+          v-for="(item,index) in feedData"
           :key="index"
           >
-          <div class="mynote_mine_box">
-            <div class="mynote_mine_b_topbox">
-              <div class="mynote_mine_b_top">
-                <div class="mynote_mine_b_top_l">{{item.name}}</div>
-                <div class="mynote_mine_b_top_r">
+          <div class="feed_mine_box">
+            <div class="feed_mine_b_topbox">
+              <div class="feed_mine_b_top">
+                <div class="feed_mine_b_top_l">{{item.name}}</div>
+                <div class="feed_mine_b_top_r">
                   <img src="@/assets/delete_red.png" alt="" class="top_r_delete"/>
                 </div>
               </div>
-              <div class="mynote_mine_tion">
-                <div class="mynote_mine_tion_s">{{item.citation}}</div>
+              <div class="feed_mine_tion">
+                <div class="feed_mine_tion_s">{{item.citation}}</div>
               </div>
-              <div class="mynote_mine_b_btmbox">
+              <div class="feed_mine_b_btmbox">
                 <div>反馈时间：{{item.time}}</div>
                 <div>来源：{{item.source}}</div>
               </div>
             </div>
-            <div class="mynote_mine_tion">
-              <div class="mynote_mine_tion_t tionred">回复</div>
-              <div class="mynote_mine_tion_s notecolor">{{item.note}}</div>
+            <div class="feed_mine_tion">
+              <div class="feed_mine_tion_t tionred">回复</div>
+              <div class="feed_mine_tion_s notecolor">{{item.note}}</div>
             </div>
-            <div class="mynote_mine_b_btmbox">
+            <div class="feed_mine_b_btmbox">
               <div>回复时间：{{item.replyTime}}</div>
             </div>
           </div>
         </div>
       </div>
-      <div class="mynote_centent">
+      <div class="feed_centent">
          <div 
-          class="mynote_mine_minebox"
-          v-for="(item,index) in mynoteData"
+          class="feed_centent_minebox"
+          v-for="(item,index) in myFeedData"
           :key="index"
           >
-          <div class="mynote_mine_box">
-            <div class="mynote_mine_b_topbox">
-              <div class="mynote_mine_b_top">
-                <div class="mynote_mine_b_top_l">{{item.name}}</div>
+          <div class="feed_centent_box">
+            <div class="feed_centent_b_topbox">
+              <div class="feed_centent_b_top">
+                <div>待回复</div>
+                <div class="feed_centent_b_top_l">{{item.name}}</div>
               </div>
-              <div class="mynote_mine_tion">
-                <div class="mynote_mine_tion_s">{{item.citation}}</div>
+              <div class="feed_centent_tion">
+                <div class="feed_centent_tion_s">{{item.citation}}</div>
               </div>
-              <div class="mynote_mine_b_btmbox">
+              <div class="feed_centent_b_btmbox">
                 <div>反馈时间：{{item.time}}</div>
                 <div>来源：{{item.source}}</div>
               </div>
@@ -80,7 +81,7 @@
     data() {
       return {
         input: '',
-        mynoteData:[
+        feedData:[
           {
             'name':'反馈内容',
             'citation':'这是一条反馈内容，这是一条反馈内容，这是一条反馈内容。',
@@ -97,6 +98,32 @@
             'source':'诗国南京／第六册簡介',
             'replyTime':'2020-09-19'
           },
+        ],
+        myFeedData:[
+           {
+            'name':'反馈内容',
+            'citation':'这是一条反馈内容，这是一条反馈内容，这是一条反馈内容。',
+            'time':'2020-09-12',
+            'source':'诗国南京／第六册簡介',
+          },
+          {
+            'name':'反馈内容',
+            'citation':'这是一条反馈内容，这是一条反馈内容，这是一条反馈内容。',
+            'time':'2020-09-12',
+            'source':'诗国南京／第六册簡介',
+          },
+          {
+            'name':'反馈内容',
+            'citation':'这是一条反馈内容，这是一条反馈内容，这是一条反馈内容。',
+            'time':'2020-09-12',
+            'source':'诗国南京／第六册簡介',
+          },
+          {
+            'name':'反馈内容',
+            'citation':'这是一条反馈内容，这是一条反馈内容，这是一条反馈内容。',
+            'time':'2020-09-12',
+            'source':'诗国南京／第六册簡介',
+          },
         ]
       };
     },
@@ -107,8 +134,8 @@
 </script>
 <style lang="scss">
 /* reset element-ui css */
-.mynote_box{
-  .mynote_input .el-input__inner{
+.feed_box{
+  .feed_input .el-input__inner{
     width: 434px;
     height: 42px;
     color: #000;
@@ -140,22 +167,22 @@
 
 </style>
 <style lang="scss">
-.mynote_box{
+.feed_box{
   width: 100%;
   height: auto;
   display: flex;
   background:  rgba(237, 239, 243, 1);
 }
-.mynote_box_left{
+.feed_box_left{
   width: 207px;
   height: auto;
   background: red;
 }
-.mynote_box_right{
+.feed_box_right{
   width: auto;
   margin-left: 30px;
 }
-.mynote_box_t{
+.feed_box_t{
   width: 1100px;
   font-size: 14px;
   font-weight: 400;
@@ -166,7 +193,7 @@
   display: flex;
   justify-content: space-between;
 }
-.mynote_left{
+.feed_left{
   font-size: 14px;
   font-weight: 400;
   color: #000000;
@@ -174,15 +201,15 @@
   display: flex;
   align-items: center;
 }
-.mynote_left_n{
+.feed_left_n{
   font-size: 24px;
   line-height: 35px;
 }
-.mynote_right{
+.feed_right{
   display: flex;
   align-items: center;
 }
-.mynote_right_title{
+.feed_right_title{
   font-size: 14px;
   font-weight: 400;
   line-height: 20px;
@@ -194,31 +221,31 @@
 .greycolr{
   color: #000000;
 }
-.mynote_input{
+.feed_input{
   margin-right: 36px;
   position: relative;
 }
-.mynote_input_i{
+.feed_input_i{
   width: 19px;
   height: 19px;
   position: absolute;
   right: 30px;
   top: 10px;
 }
-.mynote_mine{
+.feed_mine{
   width: 1100px;
   margin: 22px 70px 0 0;
   display: flex;
   flex-wrap: wrap;
   border-bottom: 1px dashed #979797;
 }
-.mynote_mine_minebox{
+.feed_mine_minebox{
   display: flex;
   margin-left: 10px;
 }
-.mynote_mine_box{
+.feed_mine_box{
   width: 520px;
-  height: 223px;
+  height: auto;
   background: #fff;
   margin: 0 0 20px 5px;
   box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.05);
@@ -227,18 +254,18 @@
   display: flex;
   flex-direction: column
 }
-.mynote_mine_b_topbox{
+.feed_mine_b_topbox{
   display: flex;
   flex-direction: column;
   border-bottom: 1px solid #979797;
   padding-bottom: 10px;
 }
-.mynote_mine_b_top{
+.feed_mine_b_top{
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.mynote_mine_b_top_l{
+.feed_mine_b_top_l{
   width: 72px;
   height: 24px;
   text-align: center;
@@ -251,11 +278,9 @@
 .top_r_delete{
   width: 15px;
   height: 15px;
-}
-.top_r_delete{
   margin: 0 10px 0 14px;
 }
-.mynote_mine_tion_t{
+.feed_mine_tion_t{
   width: 45px;
   height: 24px;
   font-size: 12px;
@@ -265,7 +290,7 @@
   line-height: 24px;
   background: #D0021B;
 }
-.mynote_mine_tion_s{
+.feed_mine_tion_s{
   font-size: 14px;
   font-weight: 400;
   color: #9B9B9B;
@@ -278,7 +303,7 @@
   margin-top: 14px;
   background: #99BFFF;
 }
-.mynote_mine_b_btmbox{
+.feed_mine_b_btmbox{
   display: flex;
   justify-content: space-between;
   font-size: 12px;
@@ -286,10 +311,62 @@
   margin-top: 10px;
   color: #999999;
 }
-.mynote_centent{
+.feed_centent{
   width: 1100px;
   margin: 22px 70px 80px 0;
   display: flex;
   flex-wrap: wrap;
+}
+.feed_centent_minebox{
+  display: flex;
+  margin-left: 10px;
+}
+.feed_centent_box{
+  width: 520px;
+  height: auto;
+  background: #fff;
+  margin: 0 0 20px 5px;
+  box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.05);
+  border: 1px solid #E6E6E6;
+  padding: 8px 12px 12px;
+  display: flex;
+  flex-direction: column
+}
+.feed_centent_b_topbox{
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 10px;
+}
+.feed_centent_b_top{
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  font-weight: 600;
+  color: #000000;
+}
+.feed_centent_b_top_l{
+  width: 72px;
+  height: 24px;
+  text-align: center;
+  line-height: 24px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #FFFFFF;
+  background: #D0021B;
+  margin-left: 16px;
+}
+.feed_centent_tion_s{
+  font-size: 14px;
+  font-weight: 400;
+  color: #9B9B9B;
+  margin-top: 10px;
+}
+.feed_centent_b_btmbox{
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  font-weight: 400;
+  margin-top: 10px;
+  color: #999999;
 }
 </style>
