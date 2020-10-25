@@ -71,10 +71,10 @@ export const constantRoutes = [
         path: '/myBookshelf',//我的书架
         component: () => import('@/views/myBookshelf/index'),
     },
-    {
-        path: '/myNotes',//我的笔记
-        component: () => import('@/views/myNotes/index'),
-    },
+    // {
+    //     path: '/myNotes',//我的笔记
+    //     component: () => import('@/views/myNotes/index'),
+    // },
     {
         path: '/searchRecords',//检索记录
         component: () => import('@/views/searchRecords/index'),
@@ -118,13 +118,13 @@ export const constantRoutes = [
                         path: 'table',
                         name: 'Table',
                         component: () => import('@/views/table/index'),
-                        meta: { title: 'Table', icon: 'table' }
+                        meta: { title: 'Table'}
                     },
                     {
                         path: 'tree',
                         name: 'Tree',
                         component: () => import('@/views/tree/index'),
-                        meta: { title: 'Tree', icon: 'tree' }
+                        meta: { title: 'Tree'}
                     }
                 ]
             },
@@ -138,14 +138,14 @@ export const constantRoutes = [
                     {
                         path: 'menu1',
                         name: 'Menu1',
-                        component: () => import('@/views/nested/menu1/index'), // Parent router-view
-                        meta: { title: 'Menu1', icon: 'table' },
+                        component: () => import('@/views/nested/menu1/index'),
+                        meta: { title: 'Menu1'},
                     },
                     {
                         path: 'tree',
                         name: 'Tree',
                         component: () => import('@/views/tree/index'),
-                        meta: { title: 'Tree', icon: 'tree' }
+                        meta: { title: 'Tree'}
                     }
                 ]
             },
@@ -154,20 +154,20 @@ export const constantRoutes = [
     {
         path: '/language',
         component: Layout,
-        redirect: '/nested',
+        redirect: '/language',
         name: 'Language',
         meta: { title: '' },
         children: [
             {
-                path: '/nested',
+                path: '/language',
                 name: 'Menu1',
-                component: () => import('@/views/nested/menu1/index'), // Parent router-view
+                component: () => import('@/views/nested/menu1/index'),
                 meta: { title: '语言文学' },
                 children: [
                     {
                         path: 'menu1',
                         name: 'Menu1',
-                        component: () => import('@/views/nested/menu1/index'), // Parent router-view
+                        component: () => import('@/views/nested/menu1/index'),
                         meta: { title: '中国语言文学' },
                     },
                     {
@@ -186,59 +186,85 @@ export const constantRoutes = [
             },
         ]
     },
-
-    // {
-    //     path: '/nested',
-    //     component: Layout,
-    //     redirect: '/nested/menu1',
-    //     name: 'Nested',
-    //     meta: { title: '经部', icon: 'el-icon-s-help' },
-    //     children: [
-    //         {
-    //             path: 'menu1',
-    //             component: () => import('@/views/nested/menu1/index'), // Parent router-view
-    //             name: 'Menu1',
-    //             meta: { title: 'Menu1' },
-    //             children: [
-    //                 {
-    //                     path: 'menu1-1',
-    //                     component: () => import('@/views/nested/menu1/menu1-1'),
-    //                     name: 'Menu1-1',
-    //                     meta: { title: 'Menu1-1' }
-    //                 },
-    //                 {
-    //                     path: 'menu1-2',
-    //                     component: () => import('@/views/nested/menu1/menu1-2'),
-    //                     name: 'Menu1-2',
-    //                     meta: { title: 'Menu1-2' }
-    //                 },
-    //                 {
-    //                     path: 'menu1-3',
-    //                     component: () => import('@/views/nested/menu1/menu1-3'),
-    //                     name: 'Menu1-3',
-    //                     meta: { title: 'Menu1-3' }
-    //                 }
-    //             ]
-    //         },
-    //         {
-    //             path: 'menu2',
-    //             component: () => import('@/views/nested/menu2/index'),
-    //             name: 'Menu2',
-    //             meta: { title: 'menu2' }
-    //         }
-    //     ]
-    // },
-
-    // {
-    //     path: 'external-link',
-    //     component: Layout,
-    //     children: [
-    //         {
-    //             path: 'https://panjiachen.github.io/vue-element-admin-site/#/',
-    //             meta: { title: 'External Link', icon: 'link' }
-    //         }
-    //     ]
-    // },
+    {
+        path: '/myBook',
+        component: Layout,
+        redirect: '/myBook',
+        name: 'MyBook',
+        meta: { title: '' },
+        children: [
+            {
+                path: '/myBook',
+                name: 'MyBook',
+                component: () => import('@/views/nested/menu1/index'),
+                meta: { 
+                    title: '我的书架', 
+                    icon: '@assets/second/icon_myshape.png',
+                    iconred: '@assets/second/icon_myshape_red.png'
+                },
+                children: [
+                    {
+                        path: 'menu1',
+                        name: 'Menu1',
+                        component: () => import('@/views/nested/menu1/index'),
+                        meta: { title: '古典文学' },
+                    },
+                    {
+                        path: 'tree',
+                        name: 'Tree',
+                        component: () => import('@/views/myNotes/index'),
+                        meta: { title: '期刊'}
+                    },
+                    {
+                        path: 'tree',
+                        name: 'Tree',
+                        component: () => import('@/views/myNotes/index'),
+                        meta: { title: '其它分类'}
+                    }
+                ]
+            },
+            {
+                path: 'myNote',
+                name: 'MyNote',
+                component: () => import('@/views/myNotes/index'),
+                meta: { 
+                    title: '我的笔记',
+                    icon: '@assets/second/icon_mynote.png',
+                    iconred: '@assets/second/icon_mynote_red.png'
+                },
+            },
+            {
+                path: 'searchRecords',
+                name: 'SearchRecords',
+                component: () => import('@/views/nested/menu1/index'),
+                meta: { 
+                    title: '检索记录',
+                    icon: '@assets/second/icon_history.png',
+                    iconred: '@assets/second/icon_history_red.png'
+                },
+            },
+            {
+                path: 'readingHistory',
+                name: 'ReadingHistory',
+                component: () => import('@/views/nested/menu1/index'),
+                meta: { 
+                    title: '阅读历史',
+                    icon: '@assets/second/icon_read.png',
+                    iconred: '@assets/second/icon_read_red.png'
+                },
+            },
+            {
+                path: 'MyFeedback',
+                name: 'MyFeedback',
+                component: () => import('@/views/nested/menu1/index'),
+                meta: { 
+                    title: '我的反馈',
+                    icon: '@assets/second/icon_myFeedback.png',
+                    iconred: '@assets/second/icon_read_red.png'
+                },
+            },
+        ]
+    },
 
     { path: '*', redirect: '/404', hidden: true }
 ]

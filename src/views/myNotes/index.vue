@@ -92,6 +92,7 @@
         showDelete: false,
         showChecked:false,
         showBtn:false,
+        checked: '',
         mynoteData:[
           {
             'name':'01 笔记标题',

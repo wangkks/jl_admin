@@ -1,17 +1,19 @@
 <template>
     <div v-if="!item.hidden">
-        <!-- <template v-if="hasOneShowingChild(item.children,item) && (!onlyOneChild.children||onlyOneChild.noShowingChildren)&&!item.alwaysShow">
-      <app-link v-if="onlyOneChild.meta" :to="resolvePath(onlyOneChild.path)">
-        <el-menu-item :index="resolvePath(onlyOneChild.path)" :class="{'submenu-title-noDropdown':!isNest}">
-          <item :icon="onlyOneChild.meta.icon||(item.meta&&item.meta.icon)" :title="onlyOneChild.meta.title" />
+        <template v-if="!item.children">
+      <!-- <app-link v-if="onlyOneChild.meta" :to="resolvePath(onlyOneChild.path)"> -->
+        <el-menu-item :index="item.path" :class="{'submenu-title-noDropdown':!isNest}">
+          <!-- <item :icon="onlyOneChild.meta.icon||(item.meta&&item.meta.icon)" :title="onlyOneChild.meta.title" /> -->
+          <img :src="item.meta.icon" alt="">{{item.meta.title}}
         </el-menu-item>
-      </app-link>
-    </template> -->
+      <!-- </app-link> -->
+    </template>
 
         <el-submenu
             ref="subMenu"
             :index="resolvePath(item.path)"
             popper-append-to-body
+            v-else
         >
             <template slot="title">
                 <item
@@ -117,8 +119,14 @@ export default {
 };
 </script>
 <style lang="scss">
-.el-menu div:last-child .el-submenu .el-submenu__title {
-    border: none !important;
+.el-menu{
+    div:last-child .el-submenu .el-submenu__title {
+        border: none !important;
+    }
+    .submenu-title-noDropdown{
+        color: #000000 !important;
+        padding-left: 50px !important;
+    }
 }
 .el-submenu {
     .el-menu-item {

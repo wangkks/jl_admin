@@ -17,7 +17,7 @@
                     >
                         <sidebar-item
                             v-for="(route, index) in routes.children"
-                            :key="index"
+                            :key="route.path"
                             :item="route"
                             :base-path="route.path"
                         />
