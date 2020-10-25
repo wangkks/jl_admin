@@ -37,6 +37,10 @@
             <img src="@/assets/icon_banner_b.png" alt="" class="banner-img">
         </div>
         <div class="bookList">
+            <div class="bookList-title">
+                <span class="bookList-new">最新上架</span>
+                <span class="bookList-more" @click="">more</span>
+            </div>
             <div class="mybook_mine">
                 <div
                     class="mybook_mine_box"
@@ -56,6 +60,38 @@
                     <img :src="item.bookmark" alt="" class="bookmark" />
                 </div>
             </div>
+            <img src="@/assets/icon_banner_b.png" alt="" class="banner-img">
+        </div>
+        <div class="news">
+            <img src="@/assets/news_bg.png" alt="" class="news_bg">
+            <div class="news-box">
+                <div class="news-box-l">
+                    <h3>新闻动态</h3>
+                    <ul>
+                        <li v-for="(item,index) in newsDateList" :key="index">
+                            <span>{{item.day}}</span>
+                            <span>{{item.month}} {{item.year}}</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="news-box-r">
+                    <div class="news-more">
+                        <span @click="">more</span>
+                    </div>
+                    <ul>
+                        <li v-for="(item,index) in newsList" :key="index">
+                            <span>{{item.title}}</span>
+                            <span>{{item.content}}</span>
+                            <img :src="item.img" alt="">
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <div class="logo"><img src="@/assets/logo.png" alt="" /></div>
+            <img src="@/assets/icon_banner_b.png" alt="" class="banner-img">
+            <span>京公网安备 11010102004165号   京ICP备05067311号-1   © 2001- 现在  南京出版社</span>
         </div>
     </div>
 </template>
@@ -154,6 +190,18 @@ export default {
                     bookmark: require("../../assets/second/bookmark-line.png"),
                 },
             ],
+            newsDateList: [
+                {year: 2020,month: 10,day: 30},
+                {year: 2020,month: 10,day: 29},
+                {year: 2020,month: 10,day: 28},
+                {year: 2020,month: 10,day: 27},
+            ],
+            newsList: [
+                {title: '三百年前的“神仙打架”？中国vs日本，灼热匠心决战“伊万里”！',content: '古今中外，神仙打架的事数不胜数。不过，很多人都不知道，一衣带水的中日两国工匠，围绕着瓷器这一“白色金子”，也曾进行过一场长达百年的精彩对决古今中外，神仙打架的事数不胜数。不过，很多人都不知道一衣带水的中日两国工匠，围绕着瓷器这一“白色金子”，也曾进行过一场长达百年的精彩对决',img: require("../../assets/second/bitmap_bg.png"),},
+                {title: '三百年前的“神仙打架”？中国vs日本，灼热匠心决战“伊万里”！',content: '古今中外，神仙打架的事数不胜数。不过，很多人都不知道，一衣带水的中日两国工匠，围绕着瓷器这一“白色金子”，也曾进行过一场长达百年的精彩对决',img: require("../../assets/second/bitmap_bg.png"),},
+                {title: '三百年前的“神仙打架”？中国vs日本，灼热匠心决战“伊万里”！',content: '古今中外，神仙打架的事数不胜数。不过，很多人都不知道，一衣带水的中日两国工匠，围绕着瓷器这一“白色金子”，也曾进行过一场长达百年的精彩对决',img: require("../../assets/second/bitmap_bg.png"),},
+                {title: '三百年前的“神仙打架”？中国vs日本，灼热匠心决战“伊万里”！',content: '古今中外，神仙打架的事数不胜数。不过，很多人都不知道，一衣带水的中日两国工匠，围绕着瓷器这一“白色金子”，也曾进行过一场长达百年的精彩对决',img: require("../../assets/second/bitmap_bg.png"),},
+            ]
         }
     },
     computed: {
@@ -346,16 +394,39 @@ export default {
     }
     .bookList{
         text-align: center;
+        width: 1230px;
+        margin: 23px auto 0;
+        .bookList-title{
+            margin: 0 0 23px;
+            display: flex;
+            justify-content: space-between;
+            .bookList-new{
+                width: 225px;
+                font-size: 24px;
+                color: #D0021B;
+                border-bottom: 2px solid #D0021B;
+                text-align: left;
+                padding: 17px 0 27px 12px;
+            }
+            .bookList-more{
+                width: 100px;
+                height: 33px;
+                text-align: center;
+                line-height: 33px;
+                font-size: 14px;
+                color: #363636;
+                border: 1px solid #979797;
+                margin-top: 17px;
+            }
+        }
         .mybook_mine {
-            width: 1100px;
-            margin: 23px auto;
             display: flex;
             flex-wrap: wrap;
             .mybook_mine_box {
                 width: 230px;
                 height: 333px;
                 background: #fff;
-                margin: 0 10px 20px;
+                margin: 0 20px 20px 0;
                 box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.05);
                 border-radius: 8px;
                 border: 1px solid #e6e6e6;
@@ -363,6 +434,9 @@ export default {
                 display: flex;
                 flex-direction: column;
                 position: relative;
+                &:nth-child(5n){
+                    margin-right: 0;
+                }
             }
             .mybook_mine_box_img {
                 text-align: center;
@@ -396,6 +470,137 @@ export default {
                 left: 10px;
                 top: -2px;
             }
+        }
+        .banner-img{
+            margin: 30px auto 24px;
+            width: 49px;
+            height: 42px;
+        }
+    }
+    .news{
+        position: relative;
+        height: 1045px;
+        .news_bg{
+            width: 100%;
+        }
+        .news-box{
+            width: 84%;
+            height: 825px;
+            position: absolute;
+            top: 150px;
+            left: 0;
+            background-color: #fff;
+            display: flex;
+        }
+        .news-box-l{
+            width: 33%;
+            border-right: 1px solid #CBCBCB;
+            h3{
+                width: 225px;
+                height: 120px;
+                line-height: 120px;
+                color: #D0021B;
+                font-size: 24px;
+                padding-left: 12px;
+                margin: 0 0 0 auto;
+            }
+        }
+        ul{
+            width: 225px;
+            margin: 0 0 0 auto;
+            padding: 0;
+            li{
+                height: 171px;
+                // line-height: 171px;
+                border-top: 2px solid #D0021B;
+                padding-left: 12px;
+                color: #363636;
+                margin-right: 9px;
+                span{
+                    display: block;
+                    font-size: 14px;
+                    &:first-child{
+                        margin: 50px 0 12px;
+                        font-size: 24px;
+                    }
+                }
+            }
+        }
+        .news-box-r{
+            flex: 1;
+            .news-more{
+                display: flex;
+                justify-content: flex-end;
+                height: 120px;
+                span{
+                    width: 100px;
+                    height: 33px;
+                    text-align: center;
+                    line-height: 33px;
+                    font-size: 14px;
+                    color: #363636;
+                    border: 1px solid #979797;
+                    margin: 43px 35px 0 0;
+                }
+            }
+            ul{
+                width: 500px;
+                margin: 0;
+                margin-left: 9px;
+                // margin-right: 74px;
+                li{
+                    border-top: 1px solid #CBCBCB;
+                    padding-right: 20px;
+                    position: relative;
+                    span{
+                        display: block;
+                        font-size: 14px;
+                        line-height: 20px;
+                        &:first-child{
+                            margin: 50px 0 12px;
+                            font-size: 16px;
+                        }
+                        &:nth-of-type(2){
+                            display: -webkit-box;
+                            -webkit-box-orient: vertical;
+                            -webkit-box-sizing: border-box;
+                            box-sizing: border-box;
+                            -webkit-line-clamp: 3;
+                            overflow: hidden;
+                        }
+                    }
+                    img{
+                        width: 225px;
+                        height: 140px;
+                        position: absolute;
+                        top: 2px;
+                        right: -270px;
+                    }
+                }
+            }
+        }
+    }
+    .footer{
+        width: 100%;
+        height: 198px;
+        background-color: rgba(221,162,129, 0.15);
+        text-align: center;
+        .logo {
+            img {
+                width: 141px;
+                height: 26px;
+                margin: 47px auto 21px;
+            }
+        }
+        .banner-img{
+            margin: 0 auto 17px;
+            width: 49px;
+            height: 42px;
+            display: block;
+        }
+        span{
+            font-size: 14px;
+            color: #4A4A4A;
         }
     }
 }

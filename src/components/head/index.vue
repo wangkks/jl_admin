@@ -90,7 +90,7 @@ export default {
     display: flex;
     height: 84px;
     align-items: center;
-    background-color: #dda281;
+    background-color: rgba(221,162,129, 0.15);
     padding-right: 80px;
     font-size: 12px;
     color: #000;

@@ -1,5 +1,8 @@
 <template>
   <div class="app-container">
+      <div :class="{ 'fixed-header': fixedHeader }">
+                <navbar />
+            </div>
     <el-table
       v-loading="listLoading"
       :data="list"
@@ -56,6 +59,11 @@ export default {
       }
       return statusMap[status]
     }
+  },
+  computed:{
+      fixedHeader() {
+            return this.$store.state.settings.fixedHeader;
+        },
   },
   data() {
     return {
