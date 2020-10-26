@@ -2,8 +2,9 @@
     <div class="bar-box">
         <div class="leftBar">
             <ul class="leftBar-t">
-                <li v-for="(item,index) in children" :key="index" @click="changeBtn(index)" :class="[index==leftBarIndex?'activited':'']">
+                <li v-for="(item,index) in children" :key="index" @click="changeBtn(index)" :class="[index==leftBarIndex?'activited':'']">{
                     <img :src="index==leftBarIndex?item.urlred:item.url" alt="">
+{{index}}-{{leftBarIndex}}
                 </li>
             </ul>
             <div class="leftBar-c">
@@ -30,6 +31,7 @@
 
 <script>
 import { mapGetters } from "vuex";
+import  Vue from "vue";
 import Logo from "./Logo";
 import BookLibrary from "./BookLibrary";
 import MyBookshelf from "./MyBookshelf";
@@ -64,9 +66,14 @@ export default {
             return !this.sidebar.opened;
         },
     },
+    watch:{
+        leftBarIndex(){
+            // this.leftBarIndex = localStorage.getItem('leftBarIndex')
+        }
+    },
     mounted(){
         this.leftBarIndex = localStorage.getItem('leftBarIndex') || 1;
-        console.log(222,this.leftBarIndex)
+        console.log('新进入：',this.leftBarIndex)
     },
     methods: {
         changeBtn(index){
@@ -74,9 +81,15 @@ export default {
                 this.$router.push('/');
                 return;
             }
-            this.leftBarIndex = index;
+            if(index == 1) {
+                this.$router.push('/example');
+            }
+            if(index == 2) {
+                this.$router.push('/myBook');
+            }
             localStorage.setItem('leftBarIndex' , index);
-            
+            this.leftBarIndex = index;
+            console.log('点击切换:',index)
         }
     },
 };

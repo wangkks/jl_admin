@@ -80,6 +80,7 @@
 
 <script>
 import { validUsername } from "@/utils/validate";
+import { newsList } from '@/api/index'
 
 export default {
   name: "Login",
