@@ -8,6 +8,14 @@ export function tProDatabase(data) {
   });
 }
 
+export function pagList(data) {
+  return request({
+    url: "tproBook/pagList",
+    method: "get",
+    data
+  });
+}
+
 export function newsList(data) {
   return request({
     url: "tsystem/news/web/list",
