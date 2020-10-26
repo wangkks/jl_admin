@@ -38,13 +38,18 @@
 <script>
   export default {
     components:{
+        id: null,
     },
     data() {
       return {
         input: '',
       };
     },
+    mounted(){
+        this.id = this.$route.params.id;
+    },
     methods: {
+        
     }
   }
 </script>

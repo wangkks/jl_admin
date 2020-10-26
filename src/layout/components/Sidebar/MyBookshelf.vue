@@ -105,7 +105,6 @@ data(){
         }
     },
     mounted(){
-        console.log(112221,this.routes)
     },
     methods: {
         changeBtn:function (index , path) {

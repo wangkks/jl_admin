@@ -47,6 +47,7 @@
                     class="detection_mine_box"
                     v-for="(item, index) in detectionData"
                     :key="index"
+                    @click="goBookDetail(item.id)"
                 >
                     <img :src="item.img" alt="" class="detection_mine_box_i" />
                     <div class="detection_mine_right">
@@ -83,6 +84,7 @@ export default {
             input: "",
             detectionData: [
                 {
+                    id:1,
                     img: require("../../assets/second/bitmap_bg.png"),
                     name: "诗国南京",
                     author: "陈勇",
@@ -93,6 +95,7 @@ export default {
                     bookmark: require("../../assets/second/bookmark-line.png"),
                 },
                 {
+                    id: 2,
                     img: require("../../assets/second/bitmap_bg.png"),
                     name: "诗国南京",
                     author: "陈勇",
@@ -125,7 +128,11 @@ export default {
             ],
         };
     },
-    methods: {},
+    methods: {
+        goBookDetail(id){
+            this.$router.push(`/myBook/resourceDetails/${id}`);
+        }
+    },
 };
 </script>
 <style lang="scss">
