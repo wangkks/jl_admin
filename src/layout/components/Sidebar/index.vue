@@ -77,12 +77,6 @@ export default {
     },
     methods: {
         changeBtn(index){
-            this.$nextTick(()=>{
-                this.leftBarIndex = index;
-            })
-            localStorage.setItem('leftBarIndex' , index);
-            // this.leftBarIndex = index;
-            // this.$set(this.leftBarIndex, index)
             if(index == 0){
                 this.$router.push('/');
                 return;
@@ -93,6 +87,8 @@ export default {
             if(index == 2) {
                 this.$router.push('/myBook');
             }
+            localStorage.setItem('leftBarIndex' , index);
+            this.leftBarIndex = index;
             console.log('点击切换:',index)
         }
     },

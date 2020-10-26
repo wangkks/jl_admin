@@ -1,6 +1,5 @@
 <template>
     <div class="booklibrary_box">
-        <div class="booklibrary_box_left"></div>
         <div class="booklibrary_box_right">
             <div class="booklibrary_box_t">
                 <div class="booklibrary_left">
@@ -148,11 +147,6 @@ export default {
   height: auto;
   display: flex;
   background:  rgba(237, 239, 243, 1);
-}
-.booklibrary_box_left{
-  width: 207px;
-  height: auto;
-  background: red;
 }
 .booklibrary_box_right{
   width: auto;
