@@ -1,11 +1,28 @@
 <template>
     <div v-if="!item.hidden">
         <template v-if="!item.children">
-        <el-menu-item :index="item.path" :class="['submenu-title-noDropdown','/'+$route.path.split('/')[1]+'/'+item.path == $route.path ? 'activited':'']">
-          <img :src="'/'+$route.path.split('/')[1]+'/'+item.path == $route.path ? item.meta.iconred:item.meta.icon" alt="" class="title-icon">{{item.meta.title}}
-        </el-menu-item>
-      <!-- </app-link> -->
-    </template>
+            <el-menu-item
+                :index="item.path"
+                :class="[
+                    'submenu-title-noDropdown',
+                    '/' + $route.path.split('/')[1] + '/' + item.path ==
+                    $route.path
+                        ? 'activited'
+                        : '',
+                ]"
+            >
+                <img
+                    :src="
+                        '/' + $route.path.split('/')[1] + '/' + item.path ==
+                        $route.path
+                            ? item.meta.iconred
+                            : item.meta.icon
+                    "
+                    alt=""
+                    class="title-icon"
+                />{{ item.meta.title }}
+            </el-menu-item>
+        </template>
 
         <el-submenu
             ref="subMenu"
@@ -75,9 +92,7 @@ export default {
         this.onlyOneChild = null;
         return {};
     },
-    mounted() {
-        
-    },
+    mounted() {},
     methods: {
         hasOneShowingChild(children = [], parent) {
             const showingChildren = children.filter((item) => {
@@ -117,7 +132,7 @@ export default {
 };
 </script>
 <style lang="scss">
-.el-menu{
+.el-menu {
     div:last-child {
         .el-submenu {
             border: none !important;
@@ -126,21 +141,21 @@ export default {
         //     border-bottom: none;
         // }
     }
-    .submenu-title-noDropdown{
+    .submenu-title-noDropdown {
         color: #000000 !important;
         padding-left: 50px !important;
         border-bottom: 1px dashed #979797;
-        .title-icon{
+        .title-icon {
             margin: 0 9px 0 -30px;
             width: 20px;
             height: 20px;
         }
-        &.activited{
+        &.activited {
             color: #d0021b !important;
         }
     }
 }
-.el-submenu.is-opened{
+.el-submenu.is-opened {
     border: none;
 }
 .el-submenu {

@@ -73,7 +73,6 @@ export default {
     },
     mounted(){
         this.leftBarIndex = localStorage.getItem('leftBarIndex') || 1;
-        console.log('新进入：',this.leftBarIndex)
     },
     methods: {
         changeBtn(index){
@@ -89,7 +88,6 @@ export default {
             }
             localStorage.setItem('leftBarIndex' , index);
             this.leftBarIndex = index;
-            console.log('点击切换:',index)
         }
     },
 };

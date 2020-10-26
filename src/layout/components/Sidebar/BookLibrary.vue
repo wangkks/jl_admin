@@ -99,7 +99,6 @@ export default {
         }
     },
     mounted(){
-        console.log(111,this.routes)
     },
     methods: {
         changeBtn:function (index , path) {

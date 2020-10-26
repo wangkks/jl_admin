@@ -56,10 +56,10 @@ export const constantRoutes = [
     //     path: '/bookLibraryList',//书籍库列表
     //     component: () => import('@/views/bookLibraryList/index'),
     // },
-    {
-        path: '/resourceDetails',//资源详情页
-        component: () => import('@/views/resourceDetails/index'),
-    },
+    // {
+    //     path: '/resourceDetails',//资源详情页
+    //     component: () => import('@/views/resourceDetails/index'),
+    // },
     {
         path: '/resourceReading',//资源阅读页
         component: () => import('@/views/resourceReading/index'),
@@ -265,8 +265,29 @@ export const constantRoutes = [
                     iconred: require('@/assets/second/icon_myFeedback_red.png')
                 },
             },
+            {
+                path: 'resourceDetails/:id',//资源详情页
+                component: () => import('@/views/resourceDetails/index'),
+                hidden: true,
+                meta: {  },
+            },
         ]
     },
+    // {
+    //     path: '/resourceDetails',//资源详情页
+    //     component: Layout,
+    //     name: 'MyBook',
+    //     meta: { title: '' },
+    //     children: [
+    //         {
+    //             path: 'index',
+    //             name: 'Index',
+    //             hidden: false,
+    //             component: () => import('@/views/resourceDetails/index'),
+    //             meta: {},
+    //         },
+    //     ]
+    // },
 
     { path: '*', redirect: '/404', hidden: true }
 ]
