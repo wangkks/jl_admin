@@ -120,7 +120,7 @@ export default {
     position: relative;
     .book-top{
         border-bottom: 1px dashed #979797;
-        padding-bottom: 50px;
+        padding-bottom: 18px;
         margin-bottom: 24px;
     }
     .circular{

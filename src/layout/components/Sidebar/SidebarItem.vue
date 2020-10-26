@@ -4,7 +4,7 @@
       <!-- <app-link v-if="onlyOneChild.meta" :to="resolvePath(onlyOneChild.path)"> -->
         <el-menu-item :index="item.path" :class="{'submenu-title-noDropdown':!isNest}">
           <!-- <item :icon="onlyOneChild.meta.icon||(item.meta&&item.meta.icon)" :title="onlyOneChild.meta.title" /> -->
-          <img :src="item.meta.icon" alt="">{{item.meta.title}}
+          <img :src="item.meta.icon" alt="" class="title-icon">{{item.meta.title}}
         </el-menu-item>
       <!-- </app-link> -->
     </template>
@@ -120,15 +120,33 @@ export default {
 </script>
 <style lang="scss">
 .el-menu{
-    div:last-child .el-submenu .el-submenu__title {
-        border: none !important;
+    div:last-child {
+        .el-submenu {
+            border: none !important;
+        }
+        // .el-menu-item{
+        //     border-bottom: none;
+        // }
     }
     .submenu-title-noDropdown{
         color: #000000 !important;
         padding-left: 50px !important;
     }
 }
+.submenu-title-noDropdown{
+    border-bottom: 1px dashed #979797;
+    .title-icon{
+        margin: 0 9px 0 -30px;
+        width: 20px;
+        height: 20px;
+    }
+}
+.el-submenu.is-opened{
+    border: none;
+}
 .el-submenu {
+    border-bottom: 1px dashed #979797;
+    margin: 0 29px 0 53px;
     .el-menu-item {
         padding-left: 52px !important;
     }
@@ -138,9 +156,9 @@ export default {
     .el-submenu__title {
         height: 40px;
         line-height: 40px;
-        margin: 0 29px 0 53px;
+        // margin: 0 29px 0 53px;
         padding-left: 0 !important;
-        border-bottom: 1px dashed #979797;
+        // border-bottom: 1px dashed #979797;
         color: #000000 !important;
         font-size: 14px;
         .el-submenu__icon-arrow {
@@ -153,7 +171,7 @@ export default {
     }
     .el-menu-item-group {
         border-left: 2px solid #979797;
-        margin: 13px 0 0 64px;
+        margin: 0 0 10px 0;
         .el-menu-item {
             color: #000000 !important;
             font-size: 14px;

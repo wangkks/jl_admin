@@ -201,8 +201,8 @@ export const constantRoutes = [
                 component: () => import('@/views/nested/menu1/index'),
                 meta: { 
                     title: '我的书架', 
-                    icon: '@assets/second/icon_myshape.png',
-                    iconred: '@assets/second/icon_myshape_red.png'
+                    // icon: '@assets/second/icon_myshape.png',
+                    // iconred: '@assets/second/icon_myshape_red.png'
                 },
                 children: [
                     {
@@ -231,8 +231,8 @@ export const constantRoutes = [
                 component: () => import('@/views/myNotes/index'),
                 meta: { 
                     title: '我的笔记',
-                    icon: '@assets/second/icon_mynote.png',
-                    iconred: '@assets/second/icon_mynote_red.png'
+                    icon: require('@/assets/second/icon_mynote.png'),
+                    iconred: require('@/assets/second/icon_mynote_red.png')
                 },
             },
             {
@@ -241,8 +241,8 @@ export const constantRoutes = [
                 component: () => import('@/views/searchRecords/index'),
                 meta: { 
                     title: '检索记录',
-                    icon: '@assets/second/icon_history.png',
-                    iconred: '@assets/second/icon_history_red.png'
+                    icon: require('@/assets/second/icon_history.png'),
+                    iconred: require('@/assets/second/icon_history_red.png')
                 },
             },
             {
@@ -251,8 +251,8 @@ export const constantRoutes = [
                 component: () => import('@/views/readingHistory/index'),
                 meta: { 
                     title: '阅读历史',
-                    icon: '@assets/second/icon_read.png',
-                    iconred: '@assets/second/icon_read_red.png'
+                    icon: require('@/assets/second/icon_read.png'),
+                    iconred: require('@/assets/second/icon_read_red.png')
                 },
             },
             {
@@ -261,8 +261,8 @@ export const constantRoutes = [
                 component: () => import('@/views/myFeedback/index'),
                 meta: { 
                     title: '我的反馈',
-                    icon: '@assets/second/icon_myFeedback.png',
-                    iconred: '@assets/second/icon_myFeedback_red.png'
+                    icon: require('@/assets/second/icon_myFeedback.png'),
+                    iconred: require('@/assets/second/icon_myFeedback_red.png')
                 },
             },
         ]

@@ -126,7 +126,7 @@ data(){
     width: 210px;
     position: relative;
     .book-top{
-        border-bottom: 1px dashed #979797;
+        // border-bottom: 1px dashed #979797;
         padding-bottom: 50px;
         margin-bottom: 24px;
     }
