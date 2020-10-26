@@ -4,6 +4,7 @@ import Router from 'vue-router'
 Vue.use(Router)
 
 import Layout from '@/layout'
+import Empty from '@/components/empty'
 
 export const constantRoutes = [
     {
@@ -51,10 +52,10 @@ export const constantRoutes = [
         path: '/libraryWindow',//书籍库橱窗
         component: () => import('@/views/libraryWindow/index'),
     },
-    {
-        path: '/bookLibraryList',//书籍库列表
-        component: () => import('@/views/bookLibraryList/index'),
-    },
+    // {
+    //     path: '/bookLibraryList',//书籍库列表
+    //     component: () => import('@/views/bookLibraryList/index'),
+    // },
     {
         path: '/resourceDetails',//资源详情页
         component: () => import('@/views/resourceDetails/index'),
@@ -75,18 +76,18 @@ export const constantRoutes = [
     //     path: '/myNotes',//我的笔记
     //     component: () => import('@/views/myNotes/index'),
     // },
-    {
-        path: '/searchRecords',//检索记录
-        component: () => import('@/views/searchRecords/index'),
-    },
-    {
-        path: '/readingHistory',//阅读历史
-        component: () => import('@/views/readingHistory/index'),
-    },
-    {
-        path: '/myFeedback',//我的反馈
-        component: () => import('@/views/myFeedback/index'),
-    },
+    // {
+    //     path: '/searchRecords',//检索记录
+    //     component: () => import('@/views/searchRecords/index'),
+    // },
+    // {
+    //     path: '/readingHistory',//阅读历史
+    //     component: () => import('@/views/readingHistory/index'),
+    // },
+    // {
+    //     path: '/myFeedback',//我的反馈
+    //     component: () => import('@/views/myFeedback/index'),
+    // },
     {
         path: '/organizationInformation',//机构信息
         component: () => import('@/views/organizationInformation/index'),
@@ -109,16 +110,16 @@ export const constantRoutes = [
         children: [
             {
                 path: '/example',
-                component: Layout,
-                redirect: '/example/table',
+                component: Empty,
+                redirect: '/example/bookLibraryList',
                 name: 'Example',
                 meta: { title: '经部' },
                 children: [
                     {
-                        path: 'table',
+                        path: 'bookLibraryList',
                         name: 'Table',
-                        component: () => import('@/views/table/index'),
-                        meta: { title: 'Table'}
+                        component: () => import('@/views/bookLibraryList/index'),
+                        meta: { title: '书籍库'}
                     },
                     {
                         path: 'tree',
@@ -130,7 +131,7 @@ export const constantRoutes = [
             },
             {
                 path: '/nested',
-                component: Layout,
+                component: Empty,
                 redirect: '/nested',
                 name: 'Nested',
                 meta: { title: '史部' },
@@ -237,7 +238,7 @@ export const constantRoutes = [
             {
                 path: 'searchRecords',
                 name: 'SearchRecords',
-                component: () => import('@/views/nested/menu1/index'),
+                component: () => import('@/views/searchRecords/index'),
                 meta: { 
                     title: '检索记录',
                     icon: '@assets/second/icon_history.png',
@@ -247,7 +248,7 @@ export const constantRoutes = [
             {
                 path: 'readingHistory',
                 name: 'ReadingHistory',
-                component: () => import('@/views/nested/menu1/index'),
+                component: () => import('@/views/readingHistory/index'),
                 meta: { 
                     title: '阅读历史',
                     icon: '@assets/second/icon_read.png',
@@ -257,11 +258,11 @@ export const constantRoutes = [
             {
                 path: 'MyFeedback',
                 name: 'MyFeedback',
-                component: () => import('@/views/nested/menu1/index'),
+                component: () => import('@/views/myFeedback/index'),
                 meta: { 
                     title: '我的反馈',
                     icon: '@assets/second/icon_myFeedback.png',
-                    iconred: '@assets/second/icon_read_red.png'
+                    iconred: '@assets/second/icon_myFeedback_red.png'
                 },
             },
         ]

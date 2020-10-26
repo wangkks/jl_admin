@@ -1,6 +1,5 @@
 <template>
   <div class="mynote_box">
-    <div class="mynote_box_left"></div>
     <div class="mynote_box_right">
       <div class="mynote_box_t">
         <div class="mynote_left">
@@ -175,11 +174,6 @@
   height: auto;
   display: flex;
   background:  rgba(237, 239, 243, 1);
-}
-.mynote_box_left{
-  width: 207px;
-  height: auto;
-  background: red;
 }
 .mynote_box_right{
   width: auto;
