@@ -60,10 +60,9 @@
             <img :src="item.coverUrl" alt="" class="mybook_mine_box_i" />
           </div>
           <div class="mybook_mine_right">
-            <div class="mybook_mine_right_t">{{ item.dbName }}</div>
+            <div class="mybook_mine_right_t">{{ item.bookName }}</div>
             <div class="mybook_mine_cent">
-              <div>作者：{{ item.author }} 编</div>
-              <div>收藏：{{ item.collect }}</div>
+              <div>作者：{{ item.mainResponsibility }} 编</div>
             </div>
           </div>
           <img src="../../assets/second/bookmark-line.png" class="bookmark" />

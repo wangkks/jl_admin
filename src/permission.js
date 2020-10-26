@@ -24,7 +24,7 @@ router.beforeEach(async (to, from, next) => {
                 next()
             } else {
                 try {
-                    await store.dispatch('user/getInfo')
+                    // await store.dispatch('user/getInfo')
                     next()
                 } catch (error) {
                     await store.dispatch('user/resetToken')

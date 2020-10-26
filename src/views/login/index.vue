@@ -103,8 +103,8 @@ export default {
     };
     return {
       loginForm: {
-        username: "admin",
-        password: "111111",
+        username: "test@163.com",
+        password: "123456",
         code: ''
       },
       loginRules: {
@@ -148,23 +148,23 @@ export default {
       });
     },
     handleLogin() {
-      this.$refs.loginForm.validate((valid) => {
-        if (valid) {
-          this.loading = true;
-          this.$store
-            .dispatch("user/login", this.loginForm)
-            .then(() => {
-              this.$router.push({ path: this.redirect || "/" });
-              this.loading = false;
-            })
-            .catch(() => {
-              this.loading = false;
-            });
-        } else {
-          console.log("error submit!!");
-          return false;
-        }
-      });
+      // this.$refs.loginForm.validate((valid) => {
+      //   if (valid) {
+      //     this.loading = true;
+      this.$store
+        .dispatch("user/login", this.loginForm)
+        .then(() => {
+          this.$router.push({ path: this.redirect || "/" });
+          this.loading = false;
+        })
+        .catch(() => {
+          this.loading = false;
+        });
+      // } else {
+      //   console.log("error submit!!");
+      //   return false;
+      // }
+      // });
     },
   },
 };
