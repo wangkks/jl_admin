@@ -53,20 +53,20 @@
       <div class="mybook_mine">
         <div
           class="mybook_mine_box"
-          v-for="(item, index) in mybookData"
+          v-for="(item, index) in mybookData.rows"
           :key="index"
         >
           <div class="mybook_mine_box_img">
-            <img :src="item.img" alt="" class="mybook_mine_box_i" />
+            <img :src="item.coverUrl" alt="" class="mybook_mine_box_i" />
           </div>
           <div class="mybook_mine_right">
-            <div class="mybook_mine_right_t">{{ item.name }}</div>
+            <div class="mybook_mine_right_t">{{ item.dbName }}</div>
             <div class="mybook_mine_cent">
               <div>作者：{{ item.author }} 编</div>
               <div>收藏：{{ item.collection }}</div>
             </div>
           </div>
-          <img :src="item.bookmark" alt="" class="bookmark" />
+          <img src="../../assets/second/bookmark-line.png" class="bookmark" />
         </div>
       </div>
       <img src="@/assets/icon_banner_b.png" alt="" class="banner-img" />
@@ -110,7 +110,7 @@
 
 <script>
 import HeadIndex from '@/components/head/index.vue'
-import { newsList, newsDetail } from '@/api/index'
+import { tProDatabase, newsList, newsDetail } from '@/api/index'
 
 export default {
   name: "Index",
@@ -210,8 +210,14 @@ export default {
 
   },
   async created() {
+    // 最新上架
+    const result = await tProDatabase({})
+
+    this.mybookData = result
+
+    // 新闻资讯
     const res = await newsList({
-      pageNum: 0,
+      pageNum: 1,
       pageSize: 4
     })
 
