@@ -1,7 +1,14 @@
 import request from "@/utils/request";
 
+export function tProDatabase(data) {
+  return request({
+    url: "tProDatabase/list",
+    method: "get",
+    data
+  });
+}
+
 export function newsList(data) {
-  console.log("data", data);
   return request({
     url: "tsystem/news/web/list",
     method: "get",
@@ -11,7 +18,7 @@ export function newsList(data) {
 
 export function newsDetail(data) {
   return request({
-    url: "tsystem/news/web",
+    url: "tsystem/news/web/id",
     method: "get",
     data
   });
