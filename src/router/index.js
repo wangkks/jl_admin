@@ -103,7 +103,7 @@ export const constantRoutes = [
     {
         path: '/example',
         component: Layout,
-        redirect: '/example',
+        // redirect: '/example',
         name: 'Example',
         meta: { title: '' },
         children: [
@@ -189,13 +189,14 @@ export const constantRoutes = [
     {
         path: '/myBook',
         component: Layout,
-        redirect: '/myBook',
+        // redirect: '/myBook',
         name: 'MyBook',
         meta: { title: '' },
         children: [
             {
                 path: '/myBook',
                 name: 'MyBook',
+                redirect: '/myBook/menu1',
                 component: () => import('@/views/nested/menu1/index'),
                 meta: { 
                     title: '我的书架', 
