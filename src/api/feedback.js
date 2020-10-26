@@ -1,9 +1,9 @@
 import request from '@/utils/request'
 
-export function login(data) {
+export function feedbackCount(data) {
   return request({
-    url: '/login',
-    method: 'post',
+    url: 'tsystem/feedback/web/getCount',
+    method: 'GET',
     data
   })
 }
