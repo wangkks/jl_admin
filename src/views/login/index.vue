@@ -22,6 +22,16 @@
           auto-complete="on"
         />
       </el-form-item>
+       <el-input
+          ref="username"
+          v-model="loginForm.username"
+          placeholder="手机号"
+          name="username"
+          type="text"
+          tabindex="1"
+          auto-complete="on"
+        />
+      </el-form-item>
       <el-form-item prop="password">
         <el-input
           :key="passwordType"
@@ -126,6 +136,7 @@ export default {
       loading: false,
       passwordType: "password",
       redirect: undefined,
+      type: 1
     };
   },
   watch: {
@@ -271,6 +282,7 @@ $light_gray: #d0021b;
     margin: 21px 0 42px;
     font-size: 12px;
     color: #000000;
+    cursor: pointer;
     .forget {
       span:last-child {
         margin-left: 20px;
