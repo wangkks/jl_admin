@@ -10,69 +10,92 @@
       auto-complete="on"
       label-position="left"
     >
-      <div class="title-container">用户登录</div>
-      <el-form-item v-if="type == 'phone'" prop="username">
+      <div class="title-container">用户注册</div>
+      <el-form-item prop="userTel">
         <el-input
-          ref="username"
-          v-model="loginForm.username"
+          ref="userTel"
+          v-model="loginForm.userTel"
           placeholder="请输入手机号"
-          name="username"
+          name="userTel"
           type="text"
           tabindex="1"
           auto-complete="on"
         />
       </el-form-item>
-      <el-form-item v-if="type == 'email'" prop="username">
+
+      <el-form-item prop="code">
         <el-input
-          ref="username"
-          v-model="loginForm.username"
+          v-model="loginForm.code"
+          placeholder="验证码"
+          name="code"
+          type="text"
+          tabindex="1"
+          auto-complete="on"
+        />
+        <span @click="ysz">输入验证码</span>
+      </el-form-item>
+
+      <el-form-item prop="userEmail">
+        <el-input
+          ref="userEmail"
+          v-model="loginForm.userEmail"
           placeholder="请输入邮箱"
-          name="username"
+          name="userEmail"
           type="text"
           tabindex="1"
           auto-complete="on"
         />
       </el-form-item>
+
+      <el-form-item prop="wxName">
+        <el-input
+          ref="wxName"
+          v-model="loginForm.wxName"
+          placeholder="请输入昵称"
+          name="wxName"
+          type="text"
+          tabindex="1"
+          auto-complete="on"
+        />
+      </el-form-item>
+
+      <el-form-item prop="loginPass">
+        <el-input
+          :key="passwordType"
+          ref="loginPass"
+          v-model="loginForm.loginPass"
+          :type="passwordType"
+          placeholder="设置密码"
+          name="loginPass"
+          tabindex="2"
+          auto-complete="on"
+        />
+      </el-form-item>
+
       <el-form-item prop="password">
         <el-input
           :key="passwordType"
           ref="password"
           v-model="loginForm.password"
           :type="passwordType"
-          placeholder="密 码"
+          placeholder="再次确认密码"
           name="password"
           tabindex="2"
           auto-complete="on"
-          @keyup.enter.native="handleLogin"
-        />
-        <!-- <span class="show-pwd" @click="showPwd">
-                    <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'"/>
-                </span> -->
-      </el-form-item>
-      <el-form-item prop="code">
-        <el-input
-          ref="code"
-          v-model="loginForm.code"
-          placeholder="验 证"
-          name="code"
-          type="text"
-          tabindex="1"
-          auto-complete="on"
         />
       </el-form-item>
+
       <el-button
         :loading="loading"
         type="primary"
-        @click.native.prevent="handleLogin"
-        >登录</el-button
+        @click.native.prevent="handleRegist"
+        >注册</el-button
       >
+
       <div class="loginOther">
-        <div>{{ type == 'phone' ? '邮箱登录' : '手机号登陆' }}</div>
-        <div class="forget">
-          <span @click="jump('/changePasswordOne')">忘记密码</span>
-          <span @click="jump('/regist')">注册</span>
-        </div>
+        <div @click="jump('/login')">已有帐号，去登陆</div>
       </div>
+
       <div class="loginOther">
         <div>第三方登录</div>
         <div class="forget">
@@ -80,10 +103,6 @@
           <img src="@/assets//wechat.png" alt="" />
           <img src="@/assets//qq.png" alt="" />
         </div>
-      </div>
-      <div class="tips">
-        <span style="margin-right: 20px">username: admin</span>
-        <span> password: any</span>
       </div>
     </el-form>
   </div>
@@ -93,6 +112,7 @@
 import { validUsername } from "@/utils/validate";
 import { newsList } from '@/api/index'
 import { getToken } from "@/utils/auth";
+import { createUser, sendSms } from "@/api/user"
 
 export default {
   name: "Login",
@@ -115,9 +135,12 @@ export default {
     };
     return {
       loginForm: {
-        username: "test@163.com",
-        password: "123456",
-        code: ''
+        userTel: '',
+        userEmail: '',
+        wxName: '',
+        loginPass: '',
+        code: '',
+        uuid: ''
       },
       loginRules: {
         username: [
@@ -150,34 +173,59 @@ export default {
     },
   },
   methods: {
-    showPwd() {
-      if (this.passwordType === "password") {
-        this.passwordType = "";
-      } else {
-        this.passwordType = "password";
+    // showPwd() {
+    //   if (this.passwordType === "password") {
+    //     this.passwordType = "";
+    //   } else {
+    //     this.passwordType = "password";
+    //   }
+    //   this.$nextTick(() => {
+    //     this.$refs.password.focus();
+    //   });
+    // },
+    async ysz() {
+      if (!this.loginForm.userTel) {
+        this.$message({
+          showClose: true,
+          message: '请先输入手机号'
+        });
+        return
       }
-      this.$nextTick(() => {
-        this.$refs.password.focus();
-      });
+
+      const res = await sendSms({
+        to: this.loginForm.userTel
+      })
+
+      this.loginForm.uuid = res.uuid
+      console.log('res', res)
     },
-    handleLogin() {
-      this.$refs.loginForm.validate((valid) => {
-        if (valid) {
-          this.loading = true;
-          this.$store
-            .dispatch("user/login", this.loginForm)
-            .then(() => {
-              this.$router.push({ path: this.redirect || "/" });
-              this.loading = false;
-            })
-            .catch(() => {
-              this.loading = false;
-            });
-        } else {
-          console.log("error submit!!");
-          return false;
-        }
-      });
+    handleRegist() {
+      createUser({
+        userTel: '15010958957',
+        userEmail: '15010958957@163.com',
+        wxName: '哈哈哈',
+        loginPass: '123456',
+        // code: '123456',
+        // uuid: '123456'
+      })
+
+      // this.$refs.loginForm.validate((valid) => {
+      //   if (valid) {
+      //     this.loading = true;
+      //     this.$store
+      //       .dispatch("user/login", this.loginForm)
+      //       .then(() => {
+      //         this.$router.push({ path: this.redirect || "/" });
+      //         this.loading = false;
+      //       })
+      //       .catch(() => {
+      //         this.loading = false;
+      //       });
+      //   } else {
+      //     console.log("error submit!!");
+      //     return false;
+      //   }
+      // });
     },
     jump(path) {
       this.$router.push(path)

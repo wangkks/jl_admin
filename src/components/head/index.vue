@@ -75,6 +75,7 @@ export default {
     // 登出
     lagoutHandler() {
       this.$store.dispatch("user/logout", {})
+      this.$router.push('/login')
     },
   },
 };
@@ -102,11 +103,11 @@ export default {
   color: #000;
   z-index: 99;
   .logo {
-    top: 26px;
+    top: 17px;
     margin-left: 159px;
     img {
-      width: 199px;
-      height: 37px;
+      width: 171px;
+      height: 50px;
     }
   }
   .avatar-container {
