@@ -17,6 +17,7 @@ const mutations = {
     Object.assign(state, getDefaultState())
   },
   SET_TOKEN: (state, token) => {
+    console.log('222')
     state.token = token
   },
   SET_NAME: (state, name) => {
@@ -65,17 +66,11 @@ const actions = {
   },
 
   // user logout
-  logout({ commit, state }) {
-    return new Promise((resolve, reject) => {
-      logout(state.token).then(() => {
-        removeToken() // must remove  token  first
-        resetRouter()
-        commit('RESET_STATE')
-        resolve()
-      }).catch(error => {
-        reject(error)
-      })
-    })
+  logout({ commit }) {
+    removeToken();
+    // commit("SET_ROLES", [])
+    // resetRouter()
+    // commit('RESET_STATE')
   },
 
   // remove token

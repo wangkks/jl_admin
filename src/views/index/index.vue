@@ -19,28 +19,32 @@
     </div>
     <div class="file-desc">
       <div class="file-word">
-        <div class="file-word-item" v-for="item in wordsList" :key="item.word">
-          <div class="file-word-item-zi">{{ item.word }}</div>
+        <div
+          class="file-word-item"
+          v-for="item in wordsContentList.rows"
+          :key="item.id"
+        >
+          <div class="file-word-item-zi">{{ item.dbName.slice(0, 1) }}</div>
           <div class="file-word-item-eng">
-            <span>{{ item.english }}</span>
-            <span>{{ item.desc }}</span>
+            <span>History</span>
+            <span>{{ item.dbName }}</span>
           </div>
         </div>
       </div>
       <div class="file-content">
         <div
           class="file-content-item"
-          v-for="item in wordsContentList"
-          :key="item.word"
+          v-for="item in wordsContentList.rows"
+          :key="item.id"
         >
           <div class="file-content-con">
-            <div class="file-content-top">{{ item.word }}</div>
+            <div class="file-content-top">{{ item.dbName }}</div>
             <div class="file-content-l">
-              <span>{{ item.content }}</span>
+              <span>{{ item.dbDesc }}</span>
             </div>
-            <div class="file-content-r">{{ item.desc }}</div>
+            <div class="file-content-r">{{ item.dbName }}</div>
           </div>
-          <img src="@/assets/img_shu.png" alt="" class="file-content-img" />
+          <img :src="item.coverUrl" alt="" class="file-content-img" />
         </div>
       </div>
       <img src="@/assets/icon_banner_b.png" alt="" class="banner-img" />
@@ -146,12 +150,13 @@ export default {
 
   },
   async created() {
-    const result1 = await pagList({})
-    this.wordsContentList = result1
+    // 四个库简介
+    const result = await tProDatabase({})
+    this.wordsContentList = result
 
     // 最新上架
-    const result = await tProDatabase({})
-    this.mybookData = result
+    const result1 = await pagList({})
+    this.mybookData = result1
 
     // 新闻资讯
     const res = await newsList({
@@ -171,6 +176,7 @@ export default {
 
     this.newsDateList = res
 
+    // 新闻详情
     newsDetail({
       id: res.rows[0].id
     })

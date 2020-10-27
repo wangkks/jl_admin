@@ -26,8 +26,7 @@ export function newsList(data) {
 
 export function newsDetail(data) {
   return request({
-    url: "tsystem/news/web/id",
-    method: "get",
-    data
+    url: "tsystem/news/web/" + data.id,
+    method: "get"
   });
 }
