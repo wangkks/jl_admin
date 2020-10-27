@@ -1,7 +1,7 @@
 <template>
   <div class="login-container">
     <div class="logo"><img src="@/assets/logo.png" alt="" /></div>
-    <div class="login-bg"><img src="@/assets/login_bg.png" alt="" /></div>
+    <div class="login-bg"><img src="@/assets/register-bg.jpg" alt="" /></div>
     <el-form
       ref="loginForm"
       :model="loginForm"
@@ -11,7 +11,11 @@
       label-position="left"
     >
       <div class="title-container">用户注册</div>
-      <el-form-item prop="userTel">
+       <el-form-item prop="userTel" class="login-phone">
+        <el-select v-model="loginForm.region" placeholder="请选择" class="login-select">
+          <el-option label="中国" value="zhonguo" ></el-option>
+          <el-option label="美国" value="qita"></el-option>
+        </el-select>
         <el-input
           ref="userTel"
           v-model="loginForm.userTel"
@@ -22,8 +26,7 @@
           auto-complete="on"
         />
       </el-form-item>
-
-      <el-form-item prop="code">
+      <el-form-item prop="code"  class="login-code">
         <el-input
           v-model="loginForm.code"
           placeholder="验证码"
@@ -32,9 +35,8 @@
           tabindex="1"
           auto-complete="on"
         />
-        <span @click="ysz">输入验证码</span>
+        <div class="login-yzm" @click="ysz">获取验证码</div>
       </el-form-item>
-
       <el-form-item prop="userEmail">
         <el-input
           ref="userEmail"
@@ -45,8 +47,7 @@
           tabindex="1"
           auto-complete="on"
         />
-      </el-form-item>
-
+      </el-form-item> 
       <el-form-item prop="wxName">
         <el-input
           ref="wxName"
@@ -58,7 +59,6 @@
           auto-complete="on"
         />
       </el-form-item>
-
       <el-form-item prop="loginPass">
         <el-input
           :key="passwordType"
@@ -71,7 +71,6 @@
           auto-complete="on"
         />
       </el-form-item>
-
       <el-form-item prop="password">
         <el-input
           :key="passwordType"
@@ -84,18 +83,26 @@
           auto-complete="on"
         />
       </el-form-item>
-
+      <div class="login-agreement">
+        <div class="login-agreement-l">
+          <el-checkbox></el-checkbox>
+        </div>
+        <div class="login-agreement-r">
+          我已阅读并同意 
+          <div class="agreement"> 用户协议</div>
+        </div>
+      </div>
       <el-button
         :loading="loading"
         type="primary"
         @click.native.prevent="handleRegist"
-        >注册</el-button
-      >
-
-      <div class="loginOther">
-        <div @click="jump('/login')">已有帐号，去登陆</div>
+        >注册</el-button>
+      <div class="loginzhangh">
+        <div class="loginother-l" @click="jump('/login')">
+          已有账号，去
+          <div class="other-color">登录</div>
+        </div>
       </div>
-
       <div class="loginOther">
         <div>第三方登录</div>
         <div class="forget">
@@ -140,7 +147,8 @@ export default {
         wxName: '',
         loginPass: '',
         code: '',
-        uuid: ''
+        uuid: '',
+        region:''
       },
       loginRules: {
         username: [
@@ -244,7 +252,9 @@ $cursor: #fff;
     color: $cursor;
   }
 }
-
+.el-form-item{
+  margin-bottom: 12px;
+}
 /* reset element-ui css */
 .login-container {
   .el-form-item__content {
@@ -278,6 +288,41 @@ $cursor: #fff;
     line-height: 0;
     letter-spacing: 1px;
     border: none;
+  }
+  .login-code .el-form-item__content , .login-phone .el-form-item__content{
+    display: flex;
+  }
+  .login-phone .el-form-item__content .login-select .el-input {
+    width: 72px;
+    margin-right: 6px;
+  }
+  .login-phone .el-form-item__content .el-form-item__error {
+    left: 80px;
+  }
+  .login-code .el-form-item__content .el-input {
+    width: 168px;
+  }
+  .el-select .el-input .el-select__caret{
+    line-height: 30px;
+  }
+   .el-form-item__content .el-input input {
+    padding: 0 10px;
+  }
+  .el-input__icon{
+    width: 14px;
+  }
+  .el-input__inner{
+    border-radius: unset;
+  }
+  .login-agreement-l .el-checkbox__inner {
+    width: 16px;
+    height: 16px;
+    background: #D8D8D8;
+    border: 1px solid #979797;
+    border-radius: unset;
+  }
+  .login-agreement-l  .el-checkbox__input.is-checked .el-checkbox__inner {
+    background-color: #d0021b;
   }
 }
 </style>
@@ -321,13 +366,35 @@ $light_gray: #d0021b;
     margin-top: -205px;
     margin-left: -197px;
     width: 394px;
-    height: 411px;
+    height: 530px;
     max-width: 100%;
     padding: 46px 64px 49px 60px;
     box-sizing: border-box;
     overflow: hidden;
     background-color: #fff;
     border-radius: 8px;
+  }
+  .login-agreement{
+    font-size: 12px;
+    font-weight: 400;
+    color: #000000;
+    margin-bottom: 24px;
+    display: flex; 
+    align-items: center;
+
+    .login-agreement-l{
+      margin-right: 20px;
+    }
+
+    .login-agreement-r {
+      display: flex;
+      cursor: pointer;
+
+      .agreement{
+        color: #D0021B;
+        margin-left: 4px;
+      }
+    }
   }
   .loginOther {
     display: flex;
@@ -349,6 +416,22 @@ $light_gray: #d0021b;
           width: 18px;
           height: 20px;
         }
+      }
+    }
+  }
+  .loginzhangh{
+    display: flex;
+    margin: 20px 0 0;
+    font-size: 12px;
+    color: #000000;
+    
+    .loginother-l{
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+
+      .other-color {
+        color: #D0021B;
       }
     }
   }
@@ -380,5 +463,15 @@ $light_gray: #d0021b;
     cursor: pointer;
     user-select: none;
   }
+}
+.login-yzm{
+  font-size: 14px;
+  font-weight: 400;
+  color: #FCFCFC;
+  background: #D0021B;
+  padding: 0 13px;
+  margin-left: 3px;
+  border: 1px solid #979797;
+  cursor: pointer;
 }
 </style>
