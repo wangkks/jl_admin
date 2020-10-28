@@ -117,21 +117,13 @@ import { tProDatabase, pagList, newsList, newsDetail } from '@/api/index'
 
 export default {
   name: "Index",
+  components: {
+    HeadIndex
+  },
   data() {
     return {
       searchContent: '',
-      wordsList: [
-        { word: '史', english: 'History', desc: '史料编' },
-        { word: '方', english: 'History', desc: '方志编' },
-        { word: '文', english: 'History', desc: '文献编' },
-        { word: '档', english: 'History', desc: '档案编' },
-      ],
-      wordsContentList: [
-        { word: '史', content: '乙编是南京历代方志以外的史料乙编是南京历代方志以乙编是南京历代方志以外的史料乙编是南京历代方志以', desc: '史料编' },
-        { word: '方', content: '乙编是南京历代方志以外的史料乙编是南京历代方志以乙编是南京历代方志以外的史料乙编是南京历代方志以', desc: '方志编' },
-        { word: '文', content: '乙编是南京历代方志以外的史料乙编是南京历代方志以乙编是南京历代方志以外的史料乙编是南京历代方志以', desc: '文献编' },
-        { word: '档', content: '乙编是南京历代方志以外的史料乙编是南京历代方志以乙编是南京历代方志以外的史料乙编是南京历代方志以', desc: '档案编' },
-      ],
+      wordsContentList: [],
       mybookData: [
         {
           img: require("../../assets/second/bitmap_bg.png"),
@@ -180,9 +172,6 @@ export default {
     newsDetail({
       id: res.rows[0].id
     })
-  },
-  components: {
-    HeadIndex
   }
 };
 </script>
@@ -249,6 +238,9 @@ export default {
     text-align: center;
     padding: 67px 0 27px;
     position: relative;
+    background-image: url('../../assets/icon-database.png');
+    background-size: 100% 900px;
+    background-repeat: no-repeat;
     .file-word {
       display: flex;
       align-items: center;
@@ -391,6 +383,7 @@ export default {
         color: #363636;
         border: 1px solid #979797;
         margin-top: 17px;
+        cursor: pointer;
       }
     }
     .mybook_mine {
@@ -506,6 +499,7 @@ export default {
         display: flex;
         justify-content: flex-end;
         height: 120px;
+        cursor: pointer;
         span {
           width: 100px;
           height: 33px;

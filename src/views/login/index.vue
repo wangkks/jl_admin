@@ -11,28 +11,29 @@
       label-position="left"
     >
       <div class="title-container">用户登录</div>
-      <el-form-item prop="username">
+      <el-form-item v-if="loginForm.type == 'phone'" prop="username">
         <el-input
           ref="username"
           v-model="loginForm.username"
-          placeholder="手机号"
+          placeholder="请输入手机号"
           name="username"
           type="text"
           tabindex="1"
           auto-complete="on"
         />
       </el-form-item>
-      <el-form-item>
+      <el-form-item v-if="loginForm.type == 'email'">
         <el-input
-          ref="username"
-          v-model="loginForm.username"
+          ref="email"
+          v-model="loginForm.email"
           placeholder="邮箱"
-          name="username"
+          name="email"
           type="text"
           tabindex="1"
           auto-complete="on"
         />
       </el-form-item>
+
       <el-form-item prop="password">
         <el-input
           :key="passwordType"
@@ -45,16 +46,13 @@
           auto-complete="on"
           @keyup.enter.native="handleLogin"
         />
-        <!-- <span class="show-pwd" @click="showPwd">
-                    <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'"/>
-                </span> -->
       </el-form-item>
-      <el-form-item prop="username">
+      <el-form-item prop="code">
         <el-input
-          ref="username"
+          ref="code"
           v-model="loginForm.code"
           placeholder="验 证"
-          name="username"
+          name="code"
           type="text"
           tabindex="1"
           auto-complete="on"
@@ -67,10 +65,12 @@
         >登录</el-button
       >
       <div class="loginOther">
-        <div>邮箱登录</div>
+        <div @click="changeLogin">
+          {{ loginForm.type == 'phone' ? '邮箱登录' : '手机号登陆' }}
+        </div>
         <div class="forget">
-          <span>忘记密码</span>
-          <span>注册</span>
+          <span @click="jump('/changePasswordOne')">忘记密码</span>
+          <span @click="jump('/regist')">注册</span>
         </div>
       </div>
       <div class="loginOther">
@@ -92,12 +92,13 @@
 <script>
 import { validUsername } from "@/utils/validate";
 import { newsList } from '@/api/index'
+import { getToken } from "@/utils/auth";
 
 export default {
   name: "Login",
   data() {
     const validateUsername = (rule, value, callback) => {
-      if (!validUsername(value)) {
+      if (value < 11 && this.type == 'phone') {
         callback(new Error("请输入手机号"));
       } else {
         callback();
@@ -114,9 +115,11 @@ export default {
     };
     return {
       loginForm: {
-        username: "test@163.com",
+        username: "15010958957",
         password: "123456",
-        code: ''
+        email: 'test@163.com',
+        code: '',
+        type: 'phone'
       },
       loginRules: {
         username: [
@@ -137,7 +140,7 @@ export default {
       loading: false,
       passwordType: "password",
       redirect: undefined,
-      type: 1
+
     };
   },
   watch: {
@@ -149,6 +152,9 @@ export default {
     },
   },
   methods: {
+    changeLogin() {
+      this.loginForm.type = this.loginForm.type == 'phone' ? 'email' : 'phone'
+    },
     showPwd() {
       if (this.passwordType === "password") {
         this.passwordType = "";
@@ -160,24 +166,27 @@ export default {
       });
     },
     handleLogin() {
-      // this.$refs.loginForm.validate((valid) => {
-      //   if (valid) {
-      //     this.loading = true;
-      this.$store
-        .dispatch("user/login", this.loginForm)
-        .then(() => {
-          this.$router.push({ path: this.redirect || "/" });
-          this.loading = false;
-        })
-        .catch(() => {
-          this.loading = false;
-        });
-      // } else {
-      //   console.log("error submit!!");
-      //   return false;
-      // }
-      // });
+      this.$refs.loginForm.validate((valid) => {
+        if (valid) {
+          this.loading = true;
+          this.$store
+            .dispatch("user/login", this.loginForm)
+            .then(() => {
+              this.$router.push({ path: this.redirect || "/" });
+              this.loading = false;
+            })
+            .catch(() => {
+              this.loading = false;
+            });
+        } else {
+          console.log("error submit!!");
+          return false;
+        }
+      });
     },
+    jump(path) {
+      this.$router.push(path)
+    }
   },
 };
 </script>
