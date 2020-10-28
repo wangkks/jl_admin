@@ -52,7 +52,7 @@
     <div class="bookList">
       <div class="bookList-title">
         <span class="bookList-new">最新上架</span>
-        <span class="bookList-more" @click="">more</span>
+        <span class="bookList-more" @click="goMoreNews">more</span>
       </div>
       <div class="mybook_mine">
         <div
@@ -172,6 +172,11 @@ export default {
     newsDetail({
       id: res.rows[0].id
     })
+  },
+  methods:{
+    goMoreNews(){
+      this.$router.push('news')
+    }
   }
 };
 </script>
@@ -383,6 +388,7 @@ export default {
         color: #363636;
         border: 1px solid #979797;
         margin-top: 17px;
+        cursor: pointer;
         cursor: pointer;
       }
     }
