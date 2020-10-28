@@ -22,10 +22,11 @@
           auto-complete="on"
         />
       </el-form-item>
-       <el-input
+      <el-form-item>
+        <el-input
           ref="username"
           v-model="loginForm.username"
-          placeholder="手机号"
+          placeholder="邮箱"
           name="username"
           type="text"
           tabindex="1"
