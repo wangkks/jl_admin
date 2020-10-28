@@ -19,6 +19,13 @@
         </div>
         <div class="rightBar">
             <logo v-if="showLogo" :collapse="isCollapse" />
+            {{$route.path.split('/')[2] == 'resourceDetails'}}
+            <template v-if="$route.path.split('/')[2] == 'resourceDetails'">
+                <bookDetailBar />
+            </template>
+            <template v-if="$route.path.split('/')[2] == 'resourceReading'">
+                <bookSynopsisBar />
+            </template>
             <template v-if="leftBarIndex == 1">
                 <bookLibrary />
             </template>
@@ -35,6 +42,8 @@ import  Vue from "vue";
 import Logo from "./Logo";
 import BookLibrary from "./BookLibrary";
 import MyBookshelf from "./MyBookshelf";
+import BookDetailBar from "./BookDetailBar";
+import BookSynopsisBar from "./BookSynopsisBar";
 
 export default {
     data(){
@@ -56,7 +65,7 @@ export default {
             ]
         }
     },
-    components: { Logo, BookLibrary, MyBookshelf},
+    components: { Logo, BookLibrary, MyBookshelf, BookDetailBar, BookSynopsisBar},
     computed: {
         ...mapGetters(["sidebar"]),
         showLogo() {

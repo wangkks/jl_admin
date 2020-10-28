@@ -275,6 +275,12 @@ export const constantRoutes = [
         component: () => import("@/views/resourceDetails/index"),
         hidden: true,
         meta: {}
+      },
+      {
+        path: "resourceReading/:id", //资源阅读页
+        component: () => import("@/views/resourceReading/index"),
+        hidden: true,
+        meta: {}
       }
     ]
   },
