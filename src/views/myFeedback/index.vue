@@ -154,8 +154,7 @@ export default {
     };
   },
   async created() {
-    const res = await feedbackCount({
-    })
+    const res = await feedbackCount({})
   },
   methods: {
 

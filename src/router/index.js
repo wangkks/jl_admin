@@ -81,22 +81,22 @@ export const constantRoutes = [
     path: "/myBookshelf", //我的书架
     component: () => import("@/views/myBookshelf/index")
   },
-  // {
-  //     path: '/myNotes',//我的笔记
-  //     component: () => import('@/views/myNotes/index'),
-  // },
-  // {
-  //     path: '/searchRecords',//检索记录
-  //     component: () => import('@/views/searchRecords/index'),
-  // },
-  // {
-  //     path: '/readingHistory',//阅读历史
-  //     component: () => import('@/views/readingHistory/index'),
-  // },
-  // {
-  //     path: '/myFeedback',//我的反馈
-  //     component: () => import('@/views/myFeedback/index'),
-  // },
+  {
+      path: '/myNotes',//我的笔记
+      component: () => import('@/views/myNotes/index'),
+  },
+  {
+    path: '/searchRecords',//检索记录
+    component: () => import('@/views/searchRecords/index'),
+  },
+  {
+      path: '/readingHistory',//阅读历史
+      component: () => import('@/views/readingHistory/index'),
+  },
+  {
+    path: '/myFeedback',//我的反馈
+    component: () => import('@/views/myFeedback/index'),
+  },
   {
     path: "/organizationInformation", //机构信息
     component: () => import("@/views/organizationInformation/index")

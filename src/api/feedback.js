@@ -8,17 +8,12 @@ export function feedbackCount(data) {
   })
 }
 
-export function getInfo(token) {
+export function feedbackAdd(data) {
   return request({
-    url: '/vue-admin-template/user/info',
-    method: 'get',
-    params: { token }
+    url: 'tsystem/feedback/web',
+    method: 'GET',
+    data
   })
 }
 
-export function logout() {
-  return request({
-    url: '/vue-admin-template/user/logout',
-    method: 'post'
-  })
-}
+

@@ -129,6 +129,7 @@ export default {
     }
   },
   async created() {
+    // example/bookLibraryList
     // 四个库简介
     const result = await tProDatabase({})
     this.wordsContentList = result
