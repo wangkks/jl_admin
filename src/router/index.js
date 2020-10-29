@@ -38,6 +38,10 @@ export const constantRoutes = [
     component: () => import("@/views/moreNews/index")
   },
   {
+    path: "/newsDetail/:id", //新闻详情
+    component: () => import("@/views/moreNewsDetail/index")
+  },
+  {
     path: "/personalCenter", //个人中心
     component: () => import("@/views/personalCenter/index")
   },

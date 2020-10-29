@@ -49,7 +49,7 @@ export default {
         bookTitle: '诗国南京'
       },
       catalog:[
-        {title:'目录',icon: require('@/assets/second/catalog.png'), iconred: require('@/assets/second/catalog.png')},
+        {title:'目录',icon: require('@/assets/second/catalog.png'), iconred: require('@/assets/second/catalogred.png')},
         {title:'笔记',icon: require('@/assets/second/icon_mynote.png'), iconred: require('@/assets/second/icon_mynote_red.png')},
       ],
       selected: 0,
