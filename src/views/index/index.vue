@@ -88,7 +88,7 @@
         </div>
         <div class="news-box-r">
           <div class="news-more">
-            <span @click="">more</span>
+            <span @click="goMoreNews">more</span>
           </div>
           <ul>
             <li v-for="(item, index) in newsDateList.rows" :key="index">
@@ -124,22 +124,9 @@ export default {
     return {
       searchContent: '',
       wordsContentList: [],
-      mybookData: [
-        {
-          img: require("../../assets/second/bitmap_bg.png"),
-          name: "诗国南京",
-          author: "陈勇",
-          collection: "12",
-          details:
-            "2019年10月31日，联合国教科文组织宣布南京成为“创意城市网络·文学之都”，《诗国南京》为“文学之都经典文库”从书中的一本。金陵诗词承载南京历史文化、传承中华诗词优秀传统，是南京“世界文学之都”魅力的重要组成部分。我们在作者分布和篇目选择上，尽可能兼顾经典性、代表性、多样性和创新性，并收录诸多以往选本未收录的诗词，以求更加全面地反映南京这座城市以及金陵诗词的全貌。全书按年代排序、简要介绍作者生平及诗词的写作年代和背景，有助于读者深入了解诗词作品的内涵。",
-          bookmark: require("../../assets/second/bookmark-line.png"),
-        }
-      ],
+      mybookData: [],
       newsDateList: [],
     }
-  },
-  computed: {
-
   },
   async created() {
     // 四个库简介
@@ -173,8 +160,8 @@ export default {
       id: res.rows[0].id
     })
   },
-  methods:{
-    goMoreNews(){
+  methods: {
+    goMoreNews() {
       this.$router.push('news')
     }
   }

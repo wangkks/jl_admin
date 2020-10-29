@@ -56,25 +56,20 @@ export function updatePassword(data) {
   });
 }
 
-// export function updatePassword(data) {
-//   return request({
-//     url: "/plat/user/web/updatePassword",
-//     method: "put",
-//     data
-//   });
-// }
+export function updateUser(data) {
+  return request({
+    url: "/plat/user/web",
+    method: "put",
+    data
+  });
+}
 
-// export function getInfo(token) {
-//   return request({
-//     url: '/vue-admin-template/user/info',
-//     method: 'get',
-//     params: { token }
-//   })
-// }
+export function getUser(data) {
+  return request({
+    url: "/plat/user/web",
+    method: "get",
+    data
+  });
+}
 
-// export function logout() {
-//   return request({
-//     url: '/vue-admin-template/user/logout',
-//     method: 'post'
-//   })
-// }
+

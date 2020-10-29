@@ -1,7 +1,8 @@
 import axios from "axios";
 import { MessageBox, Message } from "element-ui";
 import store from "@/store";
-import { getToken } from "@/utils/auth";
+import { getToken, removeToken} from "@/utils/auth";
+
 
 // create an axios instance
 const service = axios.create({
@@ -59,7 +60,8 @@ service.interceptors.response.use(
       });
 
       if (res.code === 403) {
-        this.$router.push("/login");
+        location.href = "/";
+        removeToken()
       }
 
       // 50008: Illegal token; 50012: Other clients logged in; 50014: Token expired;

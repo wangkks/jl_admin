@@ -2,7 +2,6 @@
   <div class="wrapper">
     <HeadIndex></HeadIndex>
     <div class="news">
-      <!-- <img src="@/assets/news_bg.png" alt="" class="news_bg" /> -->
       <div class="news-box">
         <div class="news-box-l">
           <ul>
@@ -25,7 +24,9 @@
       <div class="resour_mine_page">
         <el-pagination
           layout="prev, pager, next"
-          :total="50">
+          :total="newsDateList.total"
+          @current-chang="page"
+        >
         </el-pagination>
       </div>
     </div>
@@ -51,56 +52,44 @@ export default {
   },
   data() {
     return {
-      searchContent: '',
-      wordsContentList: [],
-      mybookData: [
-        {
-          img: require("../../assets/second/bitmap_bg.png"),
-          name: "诗国南京",
-          author: "陈勇",
-          collection: "12",
-          details:
-            "2019年10月31日，联合国教科文组织宣布南京成为“创意城市网络·文学之都”，《诗国南京》为“文学之都经典文库”从书中的一本。金陵诗词承载南京历史文化、传承中华诗词优秀传统，是南京“世界文学之都”魅力的重要组成部分。我们在作者分布和篇目选择上，尽可能兼顾经典性、代表性、多样性和创新性，并收录诸多以往选本未收录的诗词，以求更加全面地反映南京这座城市以及金陵诗词的全貌。全书按年代排序、简要介绍作者生平及诗词的写作年代和背景，有助于读者深入了解诗词作品的内涵。",
-          bookmark: require("../../assets/second/bookmark-line.png"),
-        }
-      ],
       newsDateList: [],
     }
   },
   computed: {
 
   },
-  async created() {
-    // 四个库简介
-    const result = await tProDatabase({})
-    this.wordsContentList = result
+  created() {
 
-    // 最新上架
-    const result1 = await pagList({})
-    this.mybookData = result1
-
+    this.getList(1)
+    // // 新闻详情
+    // newsDetail({
+    //   id: res.rows[0].id
+    // })
+  },
+  methods: {
     // 新闻资讯
-    const res = await newsList({
-      pageNum: 1,
-      pageSize: 4
-    })
+    async getList(page) {
+      const res = await newsList({
+        pageNum: page,
+        pageSize: 10
+      })
 
-    res.rows.map(item => {
-      if (item.publishTime) {
-        item.date = item.publishTime.split(' ')[0]
-        item.date = item.date.split('-')
-        item.year = item.date[0]
-        item.month = item.date[1]
-        item.day = item.date[2]
-      }
-    })
+      res.rows.map(item => {
+        if (item.publishTime) {
+          item.date = item.publishTime.split(' ')[0]
+          item.date = item.date.split('-')
+          item.year = item.date[0]
+          item.month = item.date[1]
+          item.day = item.date[2]
+        }
+      })
 
-    this.newsDateList = res
-
-    // 新闻详情
-    newsDetail({
-      id: res.rows[0].id
-    })
+      this.newsDateList = res
+    },
+    // 翻页
+    page(e) {
+      this.getList(e)
+    }
   }
 };
 </script>
@@ -113,7 +102,7 @@ export default {
     height: 100%;
     margin-top: 84px;
     background-image: url('../../assets/news_bg.png');
-    background-repeat:no-repeat;
+    background-repeat: no-repeat;
     background-size: 100%;
     padding-top: 150px;
 
@@ -156,7 +145,7 @@ export default {
             font-size: 24px;
           }
         }
-        &:first-child{
+        &:first-child {
           border-top: 2px solid #fff;
         }
       }
@@ -214,7 +203,7 @@ export default {
         }
       }
     }
-    .resour_mine_page{
+    .resour_mine_page {
       background-color: #fff;
       padding: 80px 0;
       text-align: center;
@@ -225,7 +214,7 @@ export default {
     height: 198px;
     background-color: rgba(221, 162, 129, 0.15);
     text-align: center;
-    .logo { 
+    .logo {
       img {
         width: 141px;
         height: 26px;
