@@ -21,7 +21,7 @@
           ></el-input>
         </el-form-item>
         <el-form-item class="yzm_box">
-          <el-input v-model="ruleForm.realName"></el-input>
+          <el-input v-model="ruleForm.code"></el-input>
           <div class="yzm_span" @click="ysz">获取验证码</div>
         </el-form-item>
         <el-form-item class="btn_box">
@@ -43,10 +43,10 @@
         class="demo-ruleForm"
       >
         <el-form-item label="请输入新密码">
-          <el-input v-model="ruleFormTwo.passwordOne"></el-input>
+          <el-input v-model="ruleForm.loginPass"></el-input>
         </el-form-item>
         <el-form-item label="再次输入新密码">
-          <el-input v-model="ruleFormTwo.passwordTwo"></el-input>
+          <el-input v-model="ruleForm.passwordTwo"></el-input>
         </el-form-item>
         <el-form-item class="btn_box">
           <el-button type="primary" @click="submitFormTwo('ruleFormTwo')"
@@ -61,18 +61,15 @@
 <script>
 import HeadIndex from '@/components/head/index.vue'
 import { mapGetters } from "vuex";
-import { sendEmail } from '@/api/user'
+import { sendEmail, updatePassword } from '@/api/user'
 
 export default {
   data() {
     return {
       ruleForm: {
-        realName: '',
-        mailbox: '778866554@qq.com'
-      },
-      ruleFormTwo: {
-        passwordOne: '',
-        passwordTwo: ''
+        loginPass: '',
+        uuid: '',
+        code: ''
       }
     };
   },
@@ -83,18 +80,24 @@ export default {
     HeadIndex
   },
   created() {
-    console.log('userinfo', this.userInfo)
   },
   methods: {
-    ysz() {
-      sendEmail({
+    async ysz() {
+      const res = await sendEmail({
         to: this.userInfo.userEmail
       })
+
+      this.ruleForm.uuid = res.data.uuid
     },
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          alert('submit!');
+          let params = Object.assign({}, this.ruleForm, {
+            userEmail: this.userInfo.userEmail,
+            id: this.userInfo.id
+          })
+
+          updatePassword(params)
         } else {
           console.log('error submit!!');
           return false;
