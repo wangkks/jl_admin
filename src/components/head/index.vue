@@ -8,7 +8,7 @@
         <i class="el-icon-caret-bottom" />
       </div>
       <el-dropdown-menu slot="dropdown" class="user-dropdown">
-        <router-link to="/">
+        <router-link to="/myBook/menu1">
           <el-dropdown-item>
             <img
               src="@/assets/qq.png"
@@ -18,17 +18,17 @@
             />我的书架
           </el-dropdown-item>
         </router-link>
-        <router-link to="/">
+        <router-link to="/myBook/myNote">
           <el-dropdown-item>
             <img src="@/assets/qq.png" alt="" class="icon" />我的笔记
           </el-dropdown-item>
         </router-link>
-        <router-link to="/">
+        <router-link to="/myBook/searchRecords">
           <el-dropdown-item>
             <img src="@/assets/qq.png" alt="" class="icon" />检索历史
           </el-dropdown-item>
         </router-link>
-        <router-link to="/">
+        <router-link to="/myBook/readingHistory">
           <el-dropdown-item>
             <img src="@/assets/qq.png" alt="" class="icon" />阅读历史
           </el-dropdown-item>
