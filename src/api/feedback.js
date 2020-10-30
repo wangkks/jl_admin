@@ -1,19 +1,9 @@
 import request from '@/utils/request'
 
-export function feedbackCount(data) {
+export function feedbackList(data) {
   return request({
-    url: 'tsystem/feedback/web/getCount',
+    url: 'tsystem/feedback/web/list',
     method: 'GET',
     data
   })
 }
-
-export function feedbackAdd(data) {
-  return request({
-    url: 'tsystem/feedback/web',
-    method: 'GET',
-    data
-  })
-}
-
-

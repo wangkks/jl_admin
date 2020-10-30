@@ -10,8 +10,7 @@ export function searchHistory(data) {
 
 export function deleteSearchHistory(data) {
   return request({
-    url: "/search/history",
-    method: "delete",
-    data
+    url: "/search/history/" + data.id,
+    method: "delete"
   });
 }

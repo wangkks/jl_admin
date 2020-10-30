@@ -85,7 +85,7 @@
 </template>
 
 <script>
-import { feedbackCount } from "@/api/feedback"
+import { feedbackCount, feedbackList } from "@/api/feedback"
 
 export default {
   components: {
@@ -154,7 +154,12 @@ export default {
     };
   },
   async created() {
-    const res = await feedbackCount({})
+    console.log('11')
+    const res = await feedbackList({
+      pageSize: 1,
+      pageSize: 10,
+      handleStatus: 0
+    })
   },
   methods: {
 

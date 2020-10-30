@@ -73,10 +73,10 @@ export const constantRoutes = [
   //     path: '/resourceDetails',//资源详情页
   //     component: () => import('@/views/resourceDetails/index'),
   // },
-  {
-    path: "/resourceReading", //资源阅读页
-    component: () => import("@/views/resourceReading/index")
-  },
+  //{
+  //   path: "/resourceReading", //资源阅读页
+  //   component: () => import("@/views/resourceReading/index")
+  // },
   {
     path: "/resourcesOrdered", //已订购资源
     component: () => import("@/views/resourcesOrdered/index")

@@ -10,9 +10,8 @@ export function readHistoryList(data) {
 
 export function deleteReadHistory(data) {
   return request({
-    url: "/product/readhistory",
-    method: "DELETE",
-    data
+    url: "/product/readhistory/" + data.id,
+    method: "DELETE"
   });
 }
 
