@@ -7,3 +7,11 @@ export function feedbackList(data) {
     data
   })
 }
+
+export function feedbackCount(data) {
+  return request({
+    url: 'tsystem/feedback/web/getCount',
+    method: 'GET',
+    data
+  })
+}

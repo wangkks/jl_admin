@@ -40,3 +40,18 @@ export function addBookClass(data) {
     data
   })
 }
+
+export function deleteBookShelf(data) {
+  return request({
+    url: 'product/bookshelf/' + data.id,
+    method: 'delete'
+  })
+}
+
+export function deleteBookClass(data) {
+  return request({
+    url: 'product/bookclasses/remove/' + data.id,
+    method: 'delete'
+  })
+}
+

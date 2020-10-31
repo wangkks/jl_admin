@@ -6,20 +6,6 @@
           <div class="mynote_left_n">我的笔记</div>
           <div class="mynote_totle">共{{ mynoteData.total }}条</div>
         </div>
-        <!-- <div class="mynote_right">
-          <div class="mynote_input">
-            <el-input v-model="input" placeholder="搜索"></el-input>
-            <img src="@/assets/icon_search.png" alt="" class="mynote_input_i" />
-          </div>
-          <div class="mynote_manage">
-            <img src="@/assets/manage.png" alt="" class="mynote_manage_i" />
-            <div v-show="showManage" @click="manage()">批量管理</div>
-            <div v-show="showDelete">
-              <span class="delete_red">删除</span>
-              完成
-            </div>
-          </div>
-        </div> -->
       </div>
       <div class="mynote_mine">
         <div
@@ -27,9 +13,6 @@
           v-for="(item, index) in mynoteData.rows"
           :key="index"
         >
-          <div v-show="showChecked">
-            <el-checkbox v-model="checked"></el-checkbox>
-          </div>
           <div class="mynote_mine_box">
             <div class="mynote_mine_b_topbox">
               <div class="mynote_mine_b_top">
@@ -70,36 +53,26 @@
             </div>
           </div>
         </div>
-        <div v-show="showBtn" class="mynote_delebox">
-          <div class="mynote_delebox_top">
-            <div class="mynote_delebox_text">删除笔记</div>
-            <img src="@/assets/delete_red.png" alt="" class="delebox_text_i" />
-            <div>确认删除本条笔记吗？</div>
-            <i class="el-icon-circle-close close"></i>
-          </div>
-          <div class="mynote_delebox_btm">
-            <div class="delebox_btm btml">确认</div>
-            <div class="delebox_btm rtml">取消</div>
-          </div>
-        </div>
       </div>
     </div>
+    <Delete />
   </div>
 </template>
 
 <script>
 import { readNotesList, deleteReadNotes, readReadNotes } from '@/api/note'
+import Delete from '@/components/Delete'
 
 export default {
   components: {
+    Delete
   },
   data() {
     return {
-      input: '',
       showManage: true,
       showDelete: false,
       showChecked: false,
-      showBtn: false,
+      showBtn: true,
       checked: '',
       mynoteData: []
     };
@@ -154,40 +127,8 @@ export default {
   }
 }
 </script>
-<style lang="scss">
-/* reset element-ui css */
-.mynote_box {
-  .mynote_input .el-input__inner {
-    width: 434px;
-    height: 42px;
-    color: #000;
-    background: #f7f7f3;
-    border-radius: 21px;
-    border: 1px solid #c5c5c5;
-  }
-  .el-checkbox__inner {
-    background-color: #edeff3;
-    border-color: #000;
-    border-radius: 50%;
-  }
-  .el-checkbox__input.is-checked .el-checkbox__inner,
-  .el-checkbox__input.is-indeterminate .el-checkbox__inner {
-    background-color: #d0021b;
-    border-color: #d0021b;
-    border-radius: 50%;
-  }
-  .el-checkbox__input.is-checked + .el-checkbox__label {
-    color: #fff;
-  }
-  .el-checkbox.is-bordered.is-checked {
-    border-color: #d0021b;
-  }
-  .el-checkbox__input.is-focus .el-checkbox__inner {
-    border-color: #000;
-  }
-}
-</style>
-<style lang="scss">
+
+<style lang="scss" scope>
 .mynote_box {
   width: 100%;
   height: 100vh;
@@ -231,17 +172,6 @@ export default {
 .mynote_right {
   display: flex;
   align-items: center;
-}
-.mynote_input {
-  margin-right: 36px;
-  position: relative;
-}
-.mynote_input_i {
-  width: 19px;
-  height: 19px;
-  position: absolute;
-  right: 30px;
-  top: 10px;
 }
 .mynote_manage {
   display: flex;
@@ -334,65 +264,5 @@ export default {
 }
 .btmbox_r {
   color: #999999;
-}
-.mynote_delebox {
-  width: 368px;
-  height: 249px;
-  background: #ffffff;
-  box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.05);
-  border: 1px solid #e6e6e6;
-  margin-left: 15px;
-}
-.mynote_delebox_top {
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  font-size: 14px;
-  position: relative;
-}
-.mynote_delebox_text {
-  width: 81px;
-  height: 24px;
-  line-height: 24px;
-  text-align: center;
-  background: #d0021b;
-  font-size: 12px;
-  font-weight: 600;
-  color: #ffffff;
-  margin: 27px auto 40px;
-}
-.delebox_text_i {
-  width: 15px;
-  height: 15px;
-  margin: 0 auto 12px;
-}
-.close {
-  position: absolute;
-  right: 18px;
-  top: 10px;
-  color: #9b9b9b;
-}
-.mynote_delebox_btm {
-  display: flex;
-  justify-content: space-between;
-  border-top: 1px solid #979797;
-  margin-top: 56px;
-  padding-top: 10px;
-}
-.delebox_btm {
-  width: 183px;
-  height: 38px;
-  font-size: 12px;
-  font-weight: 400;
-  text-align: center;
-  line-height: 38px;
-  cursor: pointer;
-}
-.btml {
-  color: #d0021b;
-  border-right: 2px solid #979797;
-}
-.rtml {
-  color: #363636;
 }
 </style>

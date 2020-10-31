@@ -94,7 +94,7 @@ export const constantRoutes = [
     ]
   },
   {
-    path: "/myBook",
+    path: "/myBook/menu",
     component: Layout,
     redirect: "/myBook/menu/:id",
     name: "MyBook",

@@ -8,7 +8,7 @@
         <i class="el-icon-caret-bottom" />
       </div>
       <el-dropdown-menu slot="dropdown" class="user-dropdown">
-        <router-link to="/myBook/menu1">
+        <router-link to="/myBook/menu">
           <el-dropdown-item>
             <img
               src="@/assets/qq.png"
