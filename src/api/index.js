@@ -30,3 +30,12 @@ export function newsDetail(data) {
     method: "get"
   });
 }
+
+export function linkList(data) {
+  return request({
+    url: "/tsystem/link/web/list",
+    method: "get",
+    data
+  });
+}
+

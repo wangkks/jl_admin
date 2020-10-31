@@ -27,7 +27,9 @@
           <div class="file-word-item-zi">{{ item.dbName.slice(0, 1) }}</div>
           <div class="file-word-item-eng">
             <span>History</span>
-            <span>{{ item.dbName }}</span>
+            <span>
+              {{ item.dbName }}
+            </span>
           </div>
         </div>
       </div>
@@ -40,9 +42,17 @@
           <div class="file-content-con">
             <div class="file-content-top">{{ item.dbName }}</div>
             <div class="file-content-l">
-              <span>{{ item.dbDesc }}</span>
+              <span>
+                <i
+                  style="-webkit-writing-mode: vertical-rl;
+13                 writing-mode: vertical-rl;font-style: normal;text-align: left;padding-bottom: 50px;"
+                  >{{ item.dbDesc }}</i
+                >
+              </span>
             </div>
-            <div class="file-content-r">{{ item.dbName }}</div>
+            <div class="file-content-r">
+              {{ item.dbName }}
+            </div>
           </div>
           <img :src="item.coverUrl" alt="" class="file-content-img" />
         </div>
@@ -101,19 +111,24 @@
       </div>
     </div>
     <div class="footer">
-      <div class="logo"><img src="@/assets/logo.png" alt="" /></div>
-      <img src="@/assets/icon_banner_b.png" alt="" class="banner-img" />
-      <span
-        >京公网安备 11010102004165号 京ICP备05067311号-1 © 2001- 现在
-        南京出版社</span
-      >
+      <a v-for="item in linkData.rows" :key="item.webName" :href="item.webUrl">
+        {{ item.webName }}
+      </a>
+      <div class="footer-right">
+        <div class="logo"><img src="@/assets/logo.png" alt="" /></div>
+        <img src="@/assets/icon_banner_b.png" alt="" class="banner-img" />
+        <span>
+          京公网安备 11010102004165号 京ICP备05067311号-1 © 2001- 现在
+          南京出版社
+        </span>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import HeadIndex from '@/components/head/index.vue'
-import { tProDatabase, pagList, newsList, newsDetail } from '@/api/index'
+import { tProDatabase, pagList, newsList, newsDetail, linkList } from '@/api/index'
 
 export default {
   name: "Index",
@@ -126,6 +141,7 @@ export default {
       wordsContentList: [],
       mybookData: [],
       newsDateList: [],
+      linkData: []
     }
   },
   async created() {
@@ -160,6 +176,13 @@ export default {
     newsDetail({
       id: res.rows[0].id
     })
+
+    // 友情链接
+    const res2 = await linkList({
+      pageSize: 1,
+      pageNum: 100
+    })
+    this.linkData = res2
   },
   methods: {
     goMoreNews() {
@@ -232,8 +255,9 @@ export default {
     padding: 67px 0 27px;
     position: relative;
     background-image: url('../../assets/icon-database.png');
-    background-size: 100% 900px;
+    background-size: 1339px 402px;
     background-repeat: no-repeat;
+    background-position: bottom center;
     .file-word {
       display: flex;
       align-items: center;
@@ -269,6 +293,9 @@ export default {
               width: 10px;
               margin: 6px 0 0 -27px;
             }
+            i {
+              width: 16px;
+            }
           }
         }
       }
@@ -288,11 +315,11 @@ export default {
           margin-left: 0;
         }
         .file-content-img {
-          width: 196px;
-          height: 147px;
+          width: 133px;
+          height: 133px;
           position: absolute;
-          bottom: -100px;
-          left: -150px;
+          bottom: -81px;
+          left: -73px;
         }
         .file-content-con {
           width: 125px;
@@ -547,6 +574,20 @@ export default {
     height: 198px;
     background-color: rgba(221, 162, 129, 0.15);
     text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .footer-right {
+      margin-left: 100px;
+    }
+    a {
+      font-size: 14px;
+      color: #4a4a4a;
+      margin-right: 5px;
+    }
+    a:hover {
+      color: #000;
+    }
     .logo {
       img {
         width: 141px;

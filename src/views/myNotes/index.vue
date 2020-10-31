@@ -56,15 +56,17 @@
               <div class="mynote_mine_tion">
                 <div class="mynote_mine_tion_t tionred">笔记</div>
                 <!-- :readonly="item.eidt ? 'readonly' : ''" -->
-                <textarea class="mynote_mine_tion_s">{{
-                  item.noteContent
-                }}</textarea>
+                <textarea class="mynote_mine_tion_s">
+                  {{ item.noteContent }}
+                </textarea>
                 <span @click="edit(item)">确定修改</span>
               </div>
             </div>
             <div class="mynote_mine_b_btmbox">
               <div class="btmbox_l">时间：{{ item.createTime }}</div>
-              <div class="btmbox_r">来源：{{ item.source }}</div>
+              <div class="btmbox_r">
+                来源：{{ item.bookName }}/{{ item.menuName }}
+              </div>
             </div>
           </div>
         </div>

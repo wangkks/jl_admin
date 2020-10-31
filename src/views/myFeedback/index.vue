@@ -12,13 +12,13 @@
             v-for="item in feedTab"
             :key="item.id"
           >
-            {{ item.content }}（{{ item.num }}
+            {{ item.content }}（{{ item.num }})
           </div>
           <!-- <div class="feed_right_title greycolr">待回复（6）</div> -->
-          <div class="feed_input">
+          <!-- <div class="feed_input">
             <el-input v-model="input" placeholder="搜索"></el-input>
             <img src="@/assets/icon_search.png" alt="" class="feed_input_i" />
-          </div>
+          </div> -->
         </div>
       </div>
       <div class="feed_mine">

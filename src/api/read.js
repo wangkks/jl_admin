@@ -22,11 +22,3 @@ export function addReadHistory(data) {
     data
   });
 }
-
-export function linkList(data) {
-  return request({
-    url: "/tsystem/link/web/list",
-    method: "get",
-    data
-  });
-}
