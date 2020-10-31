@@ -12,7 +12,8 @@
                   v-for="item in options"
                   :key="item.value"
                   :label="item.label"
-                  :value="item.value">
+                  :value="item.value"
+                >
                 </el-option>
               </el-select>
             </div>
@@ -22,10 +23,14 @@
               <el-input v-model="input" placeholder="书名名称"></el-input>
             </div>
           </div>
-           <div class="resour_right">
+          <div class="resour_right">
             <div class="resour_input">
               <el-input v-model="input" placeholder="主要责任者"></el-input>
-              <img src="@/assets/icon_search.png" alt="" class="resour_input_i"/>
+              <img
+                src="@/assets/icon_search.png"
+                alt=""
+                class="resour_input_i"
+              />
             </div>
           </div>
           <div class="resour_reset">重置</div>
@@ -37,41 +42,20 @@
           <div class="mine_taboxs_btn">档案编</div>
         </div>
         <div class="resour_mine_table">
-          <el-table
-            :data="tableData"
-            style="width: 100%">
-            <el-table-column
-              prop="name"
-              label="书名"
-              width="180">
+          <el-table :data="tableData" style="width: 100%">
+            <el-table-column prop="name" label="书名" width="180">
             </el-table-column>
-            <el-table-column
-              prop="database"
-              label="数据库"
-              width="180">
+            <el-table-column prop="database" label="数据库" width="180">
             </el-table-column>
-            <el-table-column
-              prop="charge"
-              label="主要责任者">
+            <el-table-column prop="charge" label="主要责任者">
             </el-table-column>
-             <el-table-column
-              prop="class"
-              label="分类">
-            </el-table-column>
-             <el-table-column
-              prop="publish"
-              label="出版社">
-            </el-table-column>
-             <el-table-column
-              prop="time"
-              label="出版时间">
-            </el-table-column>
+            <el-table-column prop="class" label="分类"> </el-table-column>
+            <el-table-column prop="publish" label="出版社"> </el-table-column>
+            <el-table-column prop="time" label="出版时间"> </el-table-column>
           </el-table>
         </div>
         <div class="resour_mine_page">
-          <el-pagination
-            layout="prev, pager, next"
-            :total="50">
+          <el-pagination layout="prev, pager, next" :total="50">
           </el-pagination>
         </div>
       </div>
@@ -80,109 +64,117 @@
 </template>
 
 <script>
-  export default {
-    components:{
-    },
-    data() {
-      return {
-        input: '',
-         options: [{
-          value: '选项1',
-          label: '机构1'
-        }, {
-          value: '选项2',
-          label: '机构2'
-        }],
-        value: '',
-        tableData: [{
-          name: '诗国南京',
-          database: '史料编',
-          charge: '（清）马士图 ',
-          class:'图书',
-          publish:'南京出版社',
-          time:'2020'
-        },
-        {
-          name: '诗国南京',
-          database: '史料编',
-          charge: '（清）马士图 ',
-          class:'图书',
-          publish:'南京出版社',
-          time:'2020'
-        },
-        {
-          name: '诗国南京',
-          database: '史料编',
-          charge: '（清）马士图 ',
-          class:'图书',
-          publish:'南京出版社',
-          time:'2020'
-        },
-        {
-          name: '诗国南京',
-          database: '史料编',
-          charge: '（清）马士图 ',
-          class:'图书',
-          publish:'南京出版社',
-          time:'2020'
-        },]
-      };
-    },
-    methods: {
-    }
+import { recourseList } from "@/api/index"
+export default {
+  components: {
+  },
+  data() {
+    return {
+      input: '',
+      options: [{
+        value: '选项1',
+        label: '机构1'
+      }, {
+        value: '选项2',
+        label: '机构2'
+      }],
+      value: '',
+      tableData: [{
+        name: '诗国南京',
+        database: '史料编',
+        charge: '（清）马士图 ',
+        class: '图书',
+        publish: '南京出版社',
+        time: '2020'
+      },
+      {
+        name: '诗国南京',
+        database: '史料编',
+        charge: '（清）马士图 ',
+        class: '图书',
+        publish: '南京出版社',
+        time: '2020'
+      },
+      {
+        name: '诗国南京',
+        database: '史料编',
+        charge: '（清）马士图 ',
+        class: '图书',
+        publish: '南京出版社',
+        time: '2020'
+      },
+      {
+        name: '诗国南京',
+        database: '史料编',
+        charge: '（清）马士图 ',
+        class: '图书',
+        publish: '南京出版社',
+        time: '2020'
+      },]
+    };
+  },
+  async created() {
+    const res = await recourseList({
+      pagesize: 10,
+      pageNum: 1,
+      createTime: new Date()
+    })
+  },
+  methods: {
+
   }
+}
 </script>
 <style lang="scss">
 /* reset element-ui css */
-.resour_box{
-  .resour_input .el-input__inner{
+.resour_box {
+  .resour_input .el-input__inner {
     width: 260px;
     height: 34px;
     color: #000;
     background: #fff;
     border-radius: 21px;
-    border: 1px solid #C5C5C5;
+    border: 1px solid #c5c5c5;
   }
-  .el-input__icon{
+  .el-input__icon {
     line-height: 34px;
   }
-  .el-select .el-input .el-select__caret{
+  .el-select .el-input .el-select__caret {
     color: #000;
   }
-  .el-table th{
-    background: #E2CFCF;
+  .el-table th {
+    background: #e2cfcf;
   }
-  .el-table td, .el-table th{
+  .el-table td,
+  .el-table th {
     text-align: center;
     color: #000;
   }
-  .el-table td{
+  .el-table td {
     border-bottom: 1px dashed #979797;
   }
-  .el-pagination{
+  .el-pagination {
     text-align: center;
   }
 }
-
-
 </style>
 <style lang="scss">
-.resour_box{
+.resour_box {
   width: 100%;
   height: auto;
   display: flex;
-  background:  rgba(237, 239, 243, 1);
+  background: rgba(237, 239, 243, 1);
 }
-.resour_box_left{
+.resour_box_left {
   width: 207px;
   height: auto;
   background: red;
 }
-.resour_box_right{
+.resour_box_right {
   width: auto;
   margin-left: 30px;
 }
-.resour_box_t{
+.resour_box_t {
   width: 1100px;
   font-weight: 400;
   color: #000000;
@@ -192,47 +184,47 @@
   border-bottom: 1px dashed #979797;
   display: flex;
 }
-.resour_mine{
+.resour_mine {
   width: 1100px;
   margin: 22px 70px 80px 0;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
 }
-.resour_mine_box{
+.resour_mine_box {
   display: flex;
   align-items: center;
   margin-bottom: 30px;
 }
-.resour_right{
+.resour_right {
   display: flex;
   align-items: center;
 }
-.resour_input{
+.resour_input {
   margin-right: 36px;
   position: relative;
 }
-.resour_input_i{
+.resour_input_i {
   width: 19px;
   height: 19px;
   position: absolute;
   right: 24px;
   top: 8px;
 }
-.resour_reset{
+.resour_reset {
   font-size: 14px;
   font-weight: 400;
   color: #000000;
   line-height: 20px;
 }
-.resour_mine_taboxs{
+.resour_mine_taboxs {
   display: flex;
   align-items: center;
   margin-bottom: 27px;
 }
-.mine_taboxs_btn{
+.mine_taboxs_btn {
   background: #edeff3;
-  border: 1px solid #D0021B;
+  border: 1px solid #d0021b;
   font-size: 12px;
   font-weight: 400;
   color: #000;
@@ -240,12 +232,12 @@
   width: 80px;
   margin-right: 10px;
 }
-.btn_red{
+.btn_red {
   color: #fff;
-  background: #D0021B;
-  border: 1px solid #D0021B;
+  background: #d0021b;
+  border: 1px solid #d0021b;
 }
-.resour_mine_table{
+.resour_mine_table {
   margin-bottom: 100px;
 }
 </style>

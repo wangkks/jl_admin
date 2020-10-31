@@ -1,160 +1,283 @@
 <template>
-    <div class="bar-box">
-        <div class="leftBar">
-            <ul class="leftBar-t">
-                <li v-for="(item,index) in children" :key="index" @click="changeBtn(index)" :class="[index==leftBarIndex?'activited':'']">{
-                    <img :src="index==leftBarIndex?item.urlred:item.url" alt="">
-{{index}}-{{leftBarIndex}}
-                </li>
-            </ul>
-            <div class="leftBar-c">
-                <img src="@/assets/second/icon_jianfan.png" alt="">
-                <img src="@/assets/second/icon_jinian.png" alt="" style="width:30px;">
-                <img src="@/assets/second/icon_biaodian.png" alt="">
+  <div class="bar-box">
+    <div class="leftBar">
+      <ul class="leftBar-t">
+        <li
+          v-for="(item, index) in children"
+          :key="index"
+          @click="changeBtn(index)"
+          :class="[index == leftBarIndex ? 'activited' : '']"
+        >
+          {
+          <img :src="index == leftBarIndex ? item.urlred : item.url" alt="" />
+          {{ index }}-{{ leftBarIndex }}
+        </li>
+      </ul>
+      <div class="leftBar-c">
+        <img src="@/assets/second/icon_jianfan.png" alt="" />
+        <img src="@/assets/second/icon_jinian.png" alt="" style="width: 30px" />
+        <img src="@/assets/second/icon_biaodian.png" alt="" />
+      </div>
+      <div class="leftBar-b">
+        <el-dropdown class="avatar-container" trigger="click">
+          <img
+            src="@/assets/second/icon_mine.png"
+            alt=""
+            style="width: 19px; height: 20px"
+          />
+          <el-dropdown-menu slot="dropdown" class="user-dropdown">
+            <div class="user-box">
+              <div class="user-name">
+                <span>王启川</span>
+                <span>普通用户</span>
+              </div>
+              <div class="user-icon-right"><img src="@/assets/second/icon_myshape.png" alt=""></div>
             </div>
-            <div class="leftBar-b">
-                <img src="@/assets/second/icon_logout.png" alt="">
-                <img src="@/assets/second/icon_mine.png" alt="" style="width:19px;height:20px;">
-            </div>
-        </div>
-        <div class="rightBar">
-            <logo v-if="showLogo" :collapse="isCollapse" />
-            {{$route.path.split('/')[2] == 'resourceDetails'}}
-            <template v-if="$route.path.split('/')[2] == 'resourceDetails'">
-                <bookDetailBar />
-            </template>
-            <template v-if="$route.path.split('/')[2] == 'resourceReading'">
-                <bookSynopsisBar />
-            </template>
-            <template v-if="leftBarIndex == 1">
-                <bookLibrary />
-            </template>
-            <template v-if="leftBarIndex == 2">
-                <myBookshelf />
-            </template>
-        </div>
+            <router-link to="/myBook/menu1">
+              <el-dropdown-item>
+                <img
+                  src="@/assets/second/icon_myshape.png"
+                  alt=""
+                  class="icon"
+                  style="width: 14px; height: 14px"
+                /><span class="user-dropdown-title">我的书架</span>
+              </el-dropdown-item>
+            </router-link>
+            <router-link to="/myBook/myNote">
+              <el-dropdown-item>
+                <img src="@/assets/second/icon_mynote.png" alt="" class="icon" /><span class="user-dropdown-title">我的笔记</span>
+              </el-dropdown-item>
+            </router-link>
+            <router-link to="/myBook/searchRecords">
+              <el-dropdown-item>
+                <img src="@/assets/second/icon_history.png" alt="" class="icon" /><span class="user-dropdown-title">检索历史</span>
+              </el-dropdown-item>
+            </router-link>
+            <router-link to="/myBook/readingHistory">
+              <el-dropdown-item>
+                <img src="@/assets/second/icon_read.png" alt="" class="icon" /><span class="user-dropdown-title">阅读历史</span>
+              </el-dropdown-item>
+            </router-link>
+            <router-link to="/myBook/MyFeedback">
+              <el-dropdown-item>
+                <img src="@/assets/second/icon_myFeedback.png" alt="" class="icon" /><span class="user-dropdown-title">我的反馈</span>
+              </el-dropdown-item>
+            </router-link>
+          </el-dropdown-menu>
+        </el-dropdown>
+        <img src="@/assets/second/icon_logout.png" alt="" />
+      </div>
     </div>
+    <div class="rightBar">
+      <logo v-if="showLogo" :collapse="isCollapse" />
+      {{ $route.path.split("/")[2] == "resourceDetails" }}
+      <template v-if="$route.path.split('/')[2] == 'resourceDetails'">
+        <bookDetailBar />
+      </template>
+      <template v-if="$route.path.split('/')[2] == 'resourceReading'">
+        <bookSynopsisBar />
+      </template>
+      <template v-if="leftBarIndex == 1">
+        <template v-if="userRole == 1">
+          <bookLibrary /><!-- 普通用户 -->
+        </template>
+        <template v-else>
+          <userInfo /><!-- 有权限用户 -->
+        </template>
+      </template>
+      <template v-if="leftBarIndex == 2">
+        <myBookshelf />
+      </template>
+    </div>
+  </div>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
-import  Vue from "vue";
+import Vue from "vue";
 import Logo from "./Logo";
 import BookLibrary from "./BookLibrary";
 import MyBookshelf from "./MyBookshelf";
 import BookDetailBar from "./BookDetailBar";
 import BookSynopsisBar from "./BookSynopsisBar";
+import UserInfo from "./UserInfo";
 
 export default {
-    data(){
-        return{
-            leftBarIndex: 1,
-            children: [
-                {
-                    url: require("@/assets/second/icon_home.png"),
-                    urlred:require('@/assets/second/icon_home_red.png')
-                },
-                {
-                    url: require('@/assets/second/icon_book.png'),
-                    urlred:require('@/assets/second/icon_book_red.png')
-                },
-                {
-                    url: require('@/assets/second/icon_bookshelf.png'),
-                    urlred:require('@/assets/second/icon_bookshelf_red.png')
-                },
-            ]
-        }
-    },
-    components: { Logo, BookLibrary, MyBookshelf, BookDetailBar, BookSynopsisBar},
-    computed: {
-        ...mapGetters(["sidebar"]),
-        showLogo() {
-            return this.$store.state.settings.sidebarLogo;
+  data() {
+    return {
+      leftBarIndex: 1,
+      children: [
+        {
+          url: require("@/assets/second/icon_home.png"),
+          urlred: require("@/assets/second/icon_home_red.png"),
         },
-        isCollapse() {
-            return !this.sidebar.opened;
+        {
+          url: require("@/assets/second/icon_book.png"),
+          urlred: require("@/assets/second/icon_book_red.png"),
         },
+        {
+          url: require("@/assets/second/icon_bookshelf.png"),
+          urlred: require("@/assets/second/icon_bookshelf_red.png"),
+        },
+      ],
+      userRole: 2,
+    };
+  },
+  components: {
+    Logo,
+    BookLibrary,
+    MyBookshelf,
+    BookDetailBar,
+    BookSynopsisBar,
+    UserInfo,
+  },
+  computed: {
+    ...mapGetters(["sidebar"]),
+    showLogo() {
+      return this.$store.state.settings.sidebarLogo;
     },
-    watch:{
-        leftBarIndex(){
-            // this.leftBarIndex = localStorage.getItem('leftBarIndex')
+    isCollapse() {
+      return !this.sidebar.opened;
+    },
+  },
+  watch: {
+    leftBarIndex() {
+      // this.leftBarIndex = localStorage.getItem('leftBarIndex')
+    },
+  },
+  mounted() {
+    this.leftBarIndex = localStorage.getItem("leftBarIndex") || 1;
+  },
+  methods: {
+    changeBtn(index) {
+      if (index == 0) {
+        this.$router.push("/");
+        return;
+      }
+      if (index == 1) {
+        if(this.userRole == 1){//角色判断
+          this.$router.push("/example");
+        }else{
+          this.$router.push("/userInfo");
         }
+      }
+      if (index == 2) {
+        this.$router.push("/myBook");
+      }
+      localStorage.setItem("leftBarIndex", index);
+      this.leftBarIndex = index;
     },
-    mounted(){
-        this.leftBarIndex = localStorage.getItem('leftBarIndex') || 1;
-    },
-    methods: {
-        changeBtn(index){
-            if(index == 0){
-                this.$router.push('/');
-                return;
-            }
-            if(index == 1) {
-                this.$router.push('/example');
-            }
-            if(index == 2) {
-                this.$router.push('/myBook');
-            }
-            localStorage.setItem('leftBarIndex' , index);
-            this.leftBarIndex = index;
-        }
-    },
+  },
 };
 </script>
-
 <style lang="scss" scoped>
-.bar-box{
-    display: flex;
-    .leftBar {
-        width: 60px;
-        height: 100%;
-        background-color: #616161;
-        ul{
-            width: 100%;
-            padding: 0;
-            li{
-                display: flex;
-                justify-content: center;
-                img{
-                    width: 26px;
-                    height: 24px;
-                    margin: 34px auto 0;
-                    padding: 0;
-                }
-                &.activited img{
-                    width: 42px;
-                    height: 42px;
-                }
-            }
-        }
-        .leftBar-c{
-            width: 60px;
-            position: absolute;
-            top: 280px;
-            left: 0;
-            img{
-                width: 24px;
-                height: 24px;
-                margin: 0 auto 33px;
-                display: block;
-                
-            }
-        }
-        .leftBar-b{
-            width: 60px;
-            position: absolute;
-            bottom: 7%;
-            left: 0;
-            img{
-                width: 19px;
-                height: 18px;
-                margin: 0 auto 45px;
-                display: block;
-            }
-        }
+.icon {
+  width: 14px;
+  height: 14px;
+  margin: 11px 16px 0 0;
+}
+.el-dropdown-menu__item:focus, .el-dropdown-menu__item:not(.is-disabled):hover{
+  color: #D0021B;
+  background-color: none !important;
+}
+.user-dropdown-title{
+  border-bottom: 1px dashed #E9E9E9;
+}
+.el-dropdown-menu__item{
+  display: flex;
+}
+.user-box{
+  border-bottom: 1px dashed #E9E9E9;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 20px 10px;
+  align-items: center;
+  padding: 10px 0 18px;
+  justify-content: space-between;
+  .user-name{
+    font-size: 14px;
+    color: #000000;
+    span{
+      display: block;
+      &:last-child{
+        font-size: 12px;
+        color: #95909E;
+        margin-top: 10px;
+      }
     }
-    .rightBar{
-        flex: 1;
+  }
+  .user-icon-right img{
+    width: 7px;
+    height: 11px
+  }
+}
+.bar-box {
+  display: flex;
+  .leftBar {
+    width: 60px;
+    height: 100%;
+    background-color: #616161;
+    ul {
+      width: 100%;
+      padding: 0;
+      li {
+        display: flex;
+        justify-content: center;
+        img {
+          width: 26px;
+          height: 24px;
+          margin: 34px auto 0;
+          padding: 0;
+        }
+        &.activited img {
+          width: 42px;
+          height: 42px;
+        }
+      }
     }
+    .leftBar-c {
+      width: 60px;
+      position: absolute;
+      top: 280px;
+      left: 0;
+      img {
+        width: 24px;
+        height: 24px;
+        margin: 0 auto 33px;
+        display: block;
+      }
+    }
+    .leftBar-b {
+      width: 60px;
+      position: absolute;
+      bottom: 7%;
+      left: 0;
+      .avatar-container {
+        width: 100%;
+        height: 29px;
+        margin-bottom: 30px;
+        .user-dropdown {
+          .icon {
+            width: 14px !important;
+            height: 14px !important;
+            padding: 0 16px 0 22px;
+          }
+        }
+        .avatar-name {
+          margin: 0 7px 0 4px;
+          color: #000;
+        }
+      }
+      img {
+        width: 19px;
+        height: 18px;
+        margin: 0 auto 45px;
+        display: block;
+      }
+    }
+  }
+  .rightBar {
+    flex: 1;
+  }
 }
 </style>

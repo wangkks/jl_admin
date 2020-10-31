@@ -39,3 +39,20 @@ export function linkList(data) {
   });
 }
 
+export function recourseList(data) {
+  return request({
+    url: "/tproBook/recoursestatistics/list",
+    method: "get",
+    data
+  });
+}
+
+export function organWeb(data) {
+  return request({
+    url: "/plat/organ/web",
+    method: "get",
+    data
+  });
+}
+
+

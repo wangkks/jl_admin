@@ -12,6 +12,7 @@
         ]"
       >
         <img
+          v-if="item.meta.icon"
           :src="
             '/' + $route.path.split('/')[1] + '/' + item.path == $route.path ||
             item.path == $route.path

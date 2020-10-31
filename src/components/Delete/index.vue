@@ -19,7 +19,9 @@
 export default {
   props: [],
   data() {
-    return {};
+    return {
+      showBtn: true
+    };
   },
   mounted() { },
   computed: {},

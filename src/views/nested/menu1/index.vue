@@ -1,6 +1,5 @@
 <template>
   <div class="reading_box">
-    <div class="reading_box_left"></div>
     <div class="reading_box_right">
       <div class="reading_box_t">
         <div class="reading_left">
@@ -136,11 +135,6 @@ export default {
   height: auto;
   display: flex;
   background: rgba(237, 239, 243, 1);
-}
-.reading_box_left {
-  width: 207px;
-  height: auto;
-  background: red;
 }
 .reading_box_right {
   width: auto;

@@ -131,11 +131,6 @@ export default {
   display: flex;
   background: rgba(237, 239, 243, 1);
 }
-.reading_box_left {
-  width: 207px;
-  height: auto;
-  background: red;
-}
 .reading_box_right {
   width: auto;
   margin-left: 30px;

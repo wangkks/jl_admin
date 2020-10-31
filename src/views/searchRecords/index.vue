@@ -1,6 +1,5 @@
 <template>
   <div class="search_box">
-    <div class="search_box_left"></div>
     <div class="search_box_right">
       <div class="search_box_t">
         <div class="serchre_left">
@@ -116,11 +115,6 @@ export default {
   overflow: scroll;
   display: flex;
   background: rgba(237, 239, 243, 1);
-}
-.search_box_left {
-  width: 207px;
-  height: auto;
-  background: red;
 }
 .search_box_right {
   width: auto;
