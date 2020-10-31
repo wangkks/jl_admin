@@ -1,6 +1,6 @@
 <template>
   <div class="header">
-    <div class="logo"><img src="@/assets/logo.png" alt="" /></div>
+    <div class="logo" @click="goIndex"><img src="@/assets/logo.png" alt="" /></div>
     <el-dropdown class="avatar-container" trigger="click">
       <div class="avatar-wrapper">
         <i class="el-icon-user-solid"></i>
@@ -11,26 +11,26 @@
         <router-link to="/myBook/menu1">
           <el-dropdown-item>
             <img
-              src="@/assets/qq.png"
+              src="@/assets/second/icon_myshape.png"
               alt=""
               class="icon"
               style="width: 14px; height: 14px"
-            />我的书架
+            /><span class="user-dropdown-title">我的书架</span>
           </el-dropdown-item>
         </router-link>
         <router-link to="/myBook/myNote">
           <el-dropdown-item>
-            <img src="@/assets/qq.png" alt="" class="icon" />我的笔记
+            <img src="@/assets/second/icon_mynote.png" alt="" class="icon" /><span class="user-dropdown-title">我的笔记</span>
           </el-dropdown-item>
         </router-link>
         <router-link to="/myBook/searchRecords">
           <el-dropdown-item>
-            <img src="@/assets/qq.png" alt="" class="icon" />检索历史
+            <img src="@/assets/second/icon_history.png" alt="" class="icon" /><span class="user-dropdown-title">检索历史</span>
           </el-dropdown-item>
         </router-link>
         <router-link to="/myBook/readingHistory">
           <el-dropdown-item>
-            <img src="@/assets/qq.png" alt="" class="icon" />阅读历史
+            <img src="@/assets/second/icon_read.png" alt="" class="icon" /><span class="user-dropdown-title">阅读历史</span>
           </el-dropdown-item>
         </router-link>
       </el-dropdown-menu>
@@ -77,6 +77,9 @@ export default {
       this.$store.dispatch("user/logout", {})
       this.$router.push('/login')
     },
+    goIndex(){
+      this.$router.push('/index');
+    },
   },
 };
 </script>
@@ -84,10 +87,20 @@ export default {
 .icon {
   width: 14px;
   height: 14px;
-  margin: 0 16px 0 0;
+  margin: 11px 16px 0 0;
+}
+.el-dropdown-menu__item{
+  display: flex;
 }
 </style>
 <style lang='scss' scoped>
+.el-dropdown-menu__item:focus, .el-dropdown-menu__item:not(.is-disabled):hover{
+  color: #D0021B;
+  background-color: none !important;
+}
+.user-dropdown-title{
+  border-bottom: 1px dashed #E9E9E9;
+}
 .header {
   width: 100%;
   // height: 900px;
@@ -122,6 +135,7 @@ export default {
         height: 14px !important;
         padding: 0 16px 0 22px;
       }
+      
     }
     .avatar-name {
       margin: 0 7px 0 4px;

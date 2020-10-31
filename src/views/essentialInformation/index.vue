@@ -1,6 +1,5 @@
 <template>
   <div class="essent_box">
-    <div class="essent_box_left"></div>
     <div class="essent_box_right">
       <div class="essent_box_t">
         <div class="essent_left">基本信息</div>
@@ -141,11 +140,6 @@ $cursor: #000;
   height: auto;
   display: flex;
   background:  rgba(237, 239, 243, 1);
-}
-.essent_box_left{
-  width: 207px;
-  height: auto;
-  background: red;
 }
 .essent_box_right{
   width: auto;

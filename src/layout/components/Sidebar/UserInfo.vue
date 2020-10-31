@@ -1,7 +1,7 @@
 <template>
-  <div class="book-library">
+  <div class="my-book">
     <div class="book-top">
-      <div class="book-title">书籍库</div>
+      <div class="book-title">机构中心</div>
       <div class="circular"></div>
       <el-scrollbar wrap-class="scrollbar-wrapper">
         <el-menu
@@ -15,17 +15,21 @@
           :collapse-transition="false"
           mode="vertical"
         >
-          <sidebar-item
-            v-for="(route, index) in routes.children"
-            :key="route.path"
-            :item="route"
-            :base-path="route.path"
-          />
+          <el-menu-item
+            v-for="item in routesT"
+            :index="item.path"
+            :class="[
+              'submenu-title-noDropdown',
+              '/' + $route.path.split('/')[1] + '/' + item.path == $route.path ||
+              item.path == $route.path
+                ? 'activited'
+                : '',
+            ]"
+          >{{ (item.meta && item.meta.title) || '' }}
+          </el-menu-item>
         </el-menu>
       </el-scrollbar>
-    </div>
-    <div class="book-bottom">
-      <div class="book-title">分类</div>
+      <div class="book-title user">个人中心</div>
       <div class="circular"></div>
       <el-scrollbar wrap-class="scrollbar-wrapper">
         <el-menu
@@ -39,12 +43,18 @@
           :collapse-transition="false"
           mode="vertical"
         >
-          <sidebar-item
-            v-for="(route, index) in routesT.children"
-            :key="index"
-            :item="route"
-            :base-path="route.path"
-          />
+          <el-menu-item
+            v-for="item in routesB"
+            :index="item.path"
+            :class="[
+              'submenu-title-noDropdown',
+              '/' + $route.path.split('/')[1] + '/' + item.path == $route.path ||
+              item.path == $route.path
+                ? 'activited'
+                : '',
+            ]"
+          >{{ (item.meta && item.meta.title) || '' }}
+          </el-menu-item>
         </el-menu>
       </el-scrollbar>
     </div>
@@ -64,6 +74,8 @@ export default {
         { name: "三级分类" },
         { name: "四级分类" },
       ],
+      routesT: [],
+      routesB: [],
     };
   },
   computed: {
@@ -75,16 +87,6 @@ export default {
         return meta.activeMenu;
       }
       return path;
-    },
-    routes() {
-      return this.$router.options.routes.find(
-        (item) => item.path == "/example"
-      );
-    },
-    routesT() {
-      return this.$router.options.routes.find(
-        (item) => item.path == "/language"
-      );
     },
     variables() {
       return variables;
@@ -102,7 +104,11 @@ export default {
       // }
     },
   },
-  mounted() {},
+  mounted() {
+    let route = this.$router.options.routes.find((item) => item.path == "/userInfo")
+    this.routesT = route.children.slice(0,3);
+    this.routesB = route.children.slice(3);
+  },
   methods: {
     changeBtn: function (index, path) {
       this.num = index;
@@ -112,17 +118,26 @@ export default {
     },
   },
   components: {
-    SidebarItem,
+    SidebarItem
   },
 };
 </script>
 <style lang="scss" scoped>
-.book-library {
+.el-menu {
+  .submenu-title-noDropdown{
+    margin: 0 25px 0 50px !important;
+    padding: 0 !important;
+  }
+  .submenu-title-noDropdown:last-child{
+    border: none;
+  }
+}
+.my-book {
   width: 210px;
   position: relative;
   .book-top {
-    border-bottom: 1px dashed #979797;
-    padding-bottom: 18px;
+    // border-bottom: 1px dashed #979797;
+    padding-bottom: 50px;
     margin-bottom: 24px;
   }
   .circular {
@@ -131,7 +146,7 @@ export default {
     border-radius: 50%;
     background-color: #d0021b;
     position: absolute;
-    top: 60px;
+    top: 68px;
     left: 26px;
     z-index: 1;
   }
@@ -144,9 +159,11 @@ export default {
     letter-spacing: 2px;
     padding-left: 23px;
     margin-bottom: 22px;
-  }
-  .book-bottom {
-    position: relative;
+    &.user{
+      margin-top: 50px;
+      border-top: 1px dashed #979797;
+      padding-top: 24px;
+    }
   }
 }
 </style>

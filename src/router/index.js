@@ -172,6 +172,45 @@ export const constantRoutes = [
     ]
   },
   {
+    path: "/userInfo",
+    component: Layout,
+    redirect: "/userInfo/organization",
+    name: "UserInfo",
+    meta: { title: "" },
+    children: [
+      {
+        path: "organization",
+        name: "Organization",
+        component: () => import("@/views/organizationInformation/index"),
+        meta: {title: "机构信息"}
+      },
+      {
+        path: "searchRecords",
+        name: "ResourcesOrdered",
+        component: () => import("@/views/resourcesOrdered/index"),
+        meta: {title: "已订阅资源"}
+      },
+      {
+        path: "resourcesOrdered",
+        name: "ResourcesOrdered",
+        component: () => import("@/views/resourcesOrdered/index"),
+        meta: {title: "资源统计"}
+      },
+      {
+        path: "baseInfo",
+        name: "BaseInfo",
+        component: () => import("@/views/essentialInformation/index"),
+        meta: {title: "基本信息"}
+      },
+      {
+        path: "accountSecurity",
+        name: "AccountSecurity",
+        component: () => import("@/views/accountSecurity/index"),
+        meta: {title: "账号安全"}
+      },
+    ]
+  },
+  {
     path: "/",
     component: () => import("@/views/index/index"),
     name: "",
@@ -228,22 +267,6 @@ export const constantRoutes = [
   {
     path: "/libraryWindow", //书籍库橱窗
     component: () => import("@/views/libraryWindow/index")
-  },
-  {
-    path: "/resourcesOrdered", //已订购资源
-    component: () => import("@/views/resourcesOrdered/index")
-  },
-  {
-    path: "/organizationInformation", //机构信息
-    component: () => import("@/views/organizationInformation/index")
-  },
-  {
-    path: "/essentialInformation", //基本信息
-    component: () => import("@/views/essentialInformation/index")
-  },
-  {
-    path: "/accountSecurity", //账号安全
-    component: () => import("@/views/accountSecurity/index")
   },
   { path: "*", redirect: "/404", hidden: true }
 ];

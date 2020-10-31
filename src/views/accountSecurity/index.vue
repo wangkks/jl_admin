@@ -1,6 +1,5 @@
 <template>
   <div class="account_box">
-    <div class="account_box_left"></div>
     <div class="account_box_right">
       <div class="account_box_t">
         <div class="account_left">账号安全</div>
@@ -59,11 +58,6 @@
   height: auto;
   display: flex;
   background:  rgba(237, 239, 243, 1);
-}
-.account_box_left{
-  width: 207px;
-  height: auto;
-  background: red;
 }
 .account_box_right{
   width: auto;

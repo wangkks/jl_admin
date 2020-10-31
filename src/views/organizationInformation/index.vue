@@ -1,6 +1,5 @@
 <template>
   <div class="organizat_box">
-    <div class="organizat_box_left"></div>
     <div class="organizat_box_right">
       <div class="organizat_box_t">
         <div class="organizat_left">机构基本信息</div>
@@ -125,11 +124,6 @@ $cursor: #000;
   height: auto;
   display: flex;
   background:  rgba(237, 239, 243, 1);
-}
-.organizat_box_left{
-  width: 207px;
-  height: auto;
-  background: red;
 }
 .organizat_box_right{
   width: auto;

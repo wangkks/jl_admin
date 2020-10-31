@@ -201,6 +201,17 @@ export default {
   background-color: initial;
   padding: 0 60px 0 30px;
 }
+.icon {
+  width: 14px;
+  height: 14px;
+  margin: 11px 16px 0 0;
+}
+.user-dropdown-title{
+  border-bottom: 1px dashed #ccc;
+}
+.el-dropdown-menu__item{
+  display: flex;
+}
 </style>
 <style lang="scss" scoped>
 .wrapper {
