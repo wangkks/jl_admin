@@ -12,29 +12,28 @@
           class="demo-ruleForm"
         >
           <el-form-item label="机构名称">
-            <el-input v-model="ruleForm.name" class="input_name"></el-input>
+            <el-input v-model="ruleForm.orgName" class="input_name"></el-input>
           </el-form-item>
           <el-form-item label="机构类型">
-            <el-select v-model="ruleForm.region" placeholder="请选择机构类型">
+            <el-select v-model="ruleForm.orgType" placeholder="请选择机构类型">
               <el-option label="院校" value="shanghai"></el-option>
               <el-option label="机构" value="beijing"></el-option>
             </el-select>
           </el-form-item>
 
-          <el-form-item label="机构IP" class="institution_top">
-            <el-input v-model="ruleForm.institution"></el-input>
-          </el-form-item>
-          <el-form-item>
-            <el-input v-model="ruleForm.institution"></el-input>
-          </el-form-item>
-          <el-form-item>
-            <el-input v-model="ruleForm.institution"></el-input>
+          <el-form-item
+            label="机构IP"
+            class="institution_top"
+            v-for="item in ruleForm.orgIps"
+            :key="item.ipRange"
+          >
+            <el-input v-model="item.pRange"></el-input>
           </el-form-item>
           <el-form-item label="机构授权时间" class="form_times">
             <el-col :span="11">
               <el-time-picker
                 placeholder="选择时间"
-                v-model="ruleForm.date1"
+                v-model="ruleForm.authStartTime"
                 style="width: 100%"
               ></el-time-picker>
             </el-col>
@@ -42,7 +41,7 @@
             <el-col :span="11">
               <el-time-picker
                 placeholder="选择时间"
-                v-model="ruleForm.date2"
+                v-model="ruleForm.authEndTime"
                 style="width: 100%"
               ></el-time-picker>
             </el-col>
@@ -55,23 +54,25 @@
 
 <script>
 import { organWeb } from "@/api/index"
+import { mapGetters } from "vuex";
+
 export default {
   components: {
   },
   data() {
     return {
-      input: '',
-      ruleForm: {
-        name: '',
-        region: '',
-        institution: '',
-        date1: '',
-        date2: ''
-      },
+      ruleForm: {},
     };
   },
-  created() {
-    organWeb({})
+  computed: {
+    ...mapGetters(["userInfo"])
+  },
+  async created() {
+    const res = await organWeb({
+      id: this.userInfo.id
+    })
+
+    this.ruleForm = res
   },
   methods: {
   }
@@ -133,7 +134,8 @@ $cursor: #000;
 <style lang="scss">
 .organizat_box {
   width: 100%;
-  height: auto;
+  height: 100vh;
+  overflow: scroll;
   display: flex;
   background: rgba(237, 239, 243, 1);
 }

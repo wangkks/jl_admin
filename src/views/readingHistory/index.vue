@@ -7,26 +7,10 @@
           <div class="reading_left_n">阅读历史</div>
         </div>
         <div class="reading_right">
-          <div class="reading_input">
-            <el-input v-model="input" placeholder="搜索"></el-input>
-            <img
-              src="@/assets/icon_search.png"
-              alt=""
-              class="reading_input_i"
-            />
-          </div>
           <div class="reading_sort_box">
             <div>阅读时间</div>
             <img src="@/assets/second/sort_down.png" alt="" class="sort_box" />
           </div>
-          <!-- <div class="reading_manage">
-            <img
-              src="@/assets/delete_red.png"
-              alt=""
-              class="reading_manage_i"
-            />
-            <div>批量删除</div>
-          </div> -->
         </div>
       </div>
       <div class="reading_record">共{{ readingData.total }}条</div>

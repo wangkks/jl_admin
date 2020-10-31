@@ -31,9 +31,11 @@
                 <span>王启川</span>
                 <span>普通用户</span>
               </div>
-              <div class="user-icon-right"><img src="@/assets/second/icon_myshape.png" alt=""></div>
+              <div class="user-icon-right">
+                <img src="@/assets/second/icon_myshape.png" alt="" />
+              </div>
             </div>
-            <router-link to="/myBook/menu1">
+            <router-link to="/myBook">
               <el-dropdown-item>
                 <img
                   src="@/assets/second/icon_myshape.png"
@@ -45,22 +47,38 @@
             </router-link>
             <router-link to="/myBook/myNote">
               <el-dropdown-item>
-                <img src="@/assets/second/icon_mynote.png" alt="" class="icon" /><span class="user-dropdown-title">我的笔记</span>
+                <img
+                  src="@/assets/second/icon_mynote.png"
+                  alt=""
+                  class="icon"
+                /><span class="user-dropdown-title">我的笔记</span>
               </el-dropdown-item>
             </router-link>
             <router-link to="/myBook/searchRecords">
               <el-dropdown-item>
-                <img src="@/assets/second/icon_history.png" alt="" class="icon" /><span class="user-dropdown-title">检索历史</span>
+                <img
+                  src="@/assets/second/icon_history.png"
+                  alt=""
+                  class="icon"
+                /><span class="user-dropdown-title">检索历史</span>
               </el-dropdown-item>
             </router-link>
             <router-link to="/myBook/readingHistory">
               <el-dropdown-item>
-                <img src="@/assets/second/icon_read.png" alt="" class="icon" /><span class="user-dropdown-title">阅读历史</span>
+                <img
+                  src="@/assets/second/icon_read.png"
+                  alt=""
+                  class="icon"
+                /><span class="user-dropdown-title">阅读历史</span>
               </el-dropdown-item>
             </router-link>
             <router-link to="/myBook/MyFeedback">
               <el-dropdown-item>
-                <img src="@/assets/second/icon_myFeedback.png" alt="" class="icon" /><span class="user-dropdown-title">我的反馈</span>
+                <img
+                  src="@/assets/second/icon_myFeedback.png"
+                  alt=""
+                  class="icon"
+                /><span class="user-dropdown-title">我的反馈</span>
               </el-dropdown-item>
             </router-link>
           </el-dropdown-menu>
@@ -70,7 +88,7 @@
     </div>
     <div class="rightBar">
       <logo v-if="showLogo" :collapse="isCollapse" />
-      {{ $route.path.split("/")[2] == "resourceDetails" }}
+      {{ $route.path.split('/')[2] == 'resourceDetails' }}
       <template v-if="$route.path.split('/')[2] == 'resourceDetails'">
         <bookDetailBar />
       </template>
@@ -81,9 +99,7 @@
         <template v-if="userRole == 1">
           <bookLibrary /><!-- 普通用户 -->
         </template>
-        <template v-else>
-          <userInfo /><!-- 有权限用户 -->
-        </template>
+        <template v-else> <userInfo /><!-- 有权限用户 --> </template>
       </template>
       <template v-if="leftBarIndex == 2">
         <myBookshelf />
@@ -155,9 +171,9 @@ export default {
         return;
       }
       if (index == 1) {
-        if(this.userRole == 1){//角色判断
+        if (this.userRole == 1) {//角色判断
           this.$router.push("/example");
-        }else{
+        } else {
           this.$router.push("/userInfo");
         }
       }
@@ -176,39 +192,40 @@ export default {
   height: 14px;
   margin: 11px 16px 0 0;
 }
-.el-dropdown-menu__item:focus, .el-dropdown-menu__item:not(.is-disabled):hover{
-  color: #D0021B;
+.el-dropdown-menu__item:focus,
+.el-dropdown-menu__item:not(.is-disabled):hover {
+  color: #d0021b;
   background-color: none !important;
 }
-.user-dropdown-title{
-  border-bottom: 1px dashed #E9E9E9;
+.user-dropdown-title {
+  border-bottom: 1px dashed #e9e9e9;
 }
-.el-dropdown-menu__item{
+.el-dropdown-menu__item {
   display: flex;
 }
-.user-box{
-  border-bottom: 1px dashed #E9E9E9;
+.user-box {
+  border-bottom: 1px dashed #e9e9e9;
   display: flex;
   justify-content: space-between;
   margin: 0 20px 10px;
   align-items: center;
   padding: 10px 0 18px;
   justify-content: space-between;
-  .user-name{
+  .user-name {
     font-size: 14px;
     color: #000000;
-    span{
+    span {
       display: block;
-      &:last-child{
+      &:last-child {
         font-size: 12px;
-        color: #95909E;
+        color: #95909e;
         margin-top: 10px;
       }
     }
   }
-  .user-icon-right img{
+  .user-icon-right img {
     width: 7px;
-    height: 11px
+    height: 11px;
   }
 }
 .bar-box {

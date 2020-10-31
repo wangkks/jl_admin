@@ -49,9 +49,8 @@ export function recourseList(data) {
 
 export function organWeb(data) {
   return request({
-    url: "/plat/organ/web",
-    method: "get",
-    data
+    url: "/plat/organ/web/" + data.id,
+    method: "get"
   });
 }
 

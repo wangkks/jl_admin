@@ -58,13 +58,13 @@ export default {
   async created() {
     let newRouter = constantRoutes
 
-    if (newRouter[2].children[0]) {
+    if (newRouter[2].children[1]) {
       const res = await bookClassList({})
 
-      newRouter[2].children[0].children = []
+      newRouter[2].children[1].children = []
 
       res.rows.map(item => {
-        newRouter[2].children[0].children.push(
+        newRouter[2].children[1].children.push(
           {
             path: "/myBook/menu/" + item.id,
             name: "Menu" + item.id,

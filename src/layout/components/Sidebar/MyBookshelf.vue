@@ -55,7 +55,7 @@ export default {
       return path;
     },
     routes() {
-      return this.$router.options.routes.find(item => item.path == '/myBook/menu');
+      return this.$router.options.routes.find(item => item.path == '/myBook');
     },
     variables() {
       return variables;
