@@ -9,7 +9,10 @@
     </div>
     <div class="dashed-line"></div>
     <div class="book-synopsis" v-if="selected == 0">
-      <div class="book-synopsis-title">讀四書大全説</div>
+      <div class="book-synopsis-title">
+        <img src="@/assets/second/icon_goldFoil.png" alt="">
+        讀四書大全説
+      </div>
       <el-timeline>
         <el-timeline-item
           v-for="(item, index) in activities"
@@ -108,7 +111,11 @@ export default {
     font-weight: 400;
     color: #000000;
     margin-bottom: 13px;
-    padding-left: 19px
+    padding-left: 19px;
+    img{
+      width: 11px;
+      height: 12px;
+    }
   }
   .el-timeline-item{
     padding-bottom: 15px;

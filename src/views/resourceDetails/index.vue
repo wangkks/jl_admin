@@ -41,7 +41,10 @@
             <div>目录</div>
           </div>
           <div class="book_synopsis">
-            <div class="book_synopsis_title">讀四書大全説</div>
+            <div class="book_synopsis_title">
+              <img src="@/assets/second/icon_goldFoil.png" alt="">
+              讀四書大全説
+            </div>
             <el-timeline>
               <el-timeline-item
                 v-for="(item, index) in activities"
@@ -234,6 +237,10 @@ export default {
     font-weight: 400;
     color: #000000;
     margin-bottom: 13px;
+    img{
+      width: 11px;
+      height: 12px;
+    }
   }
   .el-timeline-item{
     padding-bottom: 15px;

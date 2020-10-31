@@ -120,7 +120,7 @@ export default {
           urlred: require("@/assets/second/icon_bookshelf_red.png"),
         },
       ],
-      userRole: 2,
+      userRole: 1,
     };
   },
   components: {
