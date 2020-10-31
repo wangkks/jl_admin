@@ -1,14 +1,14 @@
 <template>
-  <div class="serchre_box">
-    <div class="serchre_box_left"></div>
-    <div class="serchre_box_right">
-      <div class="serchre_box_t">
+  <div class="search_box">
+    <div class="search_box_left"></div>
+    <div class="search_box_right">
+      <div class="search_box_t">
         <div class="serchre_left">
           <div class="serchre_left_n">检索记录</div>
           <div class="serchre_totle">共{{ searchData.total }}条</div>
         </div>
         <div class="serchre_right">
-          <div class="serchre_input">
+          <!-- <div class="serchre_input">
             <el-input v-model="input" placeholder="搜索"></el-input>
             <img
               src="@/assets/icon_search.png"
@@ -23,7 +23,7 @@
               class="serchre_manage_i"
             />
             <div>批量删除</div>
-          </div>
+          </div> -->
         </div>
       </div>
       <div class="serchre_mine">
@@ -98,7 +98,7 @@ export default {
 </script>
 <style lang="scss">
 /* reset element-ui css */
-.serchre_box {
+.search_box {
   .serchre_input .el-input__inner {
     width: 434px;
     height: 42px;
@@ -110,22 +110,23 @@ export default {
 }
 </style>
 <style lang="scss">
-.serchre_box {
+.search_box {
   width: 100%;
-  height: auto;
+  height: 100vh;
+  overflow: scroll;
   display: flex;
   background: rgba(237, 239, 243, 1);
 }
-.serchre_box_left {
+.search_box_left {
   width: 207px;
   height: auto;
   background: red;
 }
-.serchre_box_right {
+.search_box_right {
   width: auto;
   margin-left: 30px;
 }
-.serchre_box_t {
+.search_box_t {
   width: 1100px;
   font-size: 14px;
   font-weight: 400;

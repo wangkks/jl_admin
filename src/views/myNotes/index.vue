@@ -6,7 +6,7 @@
           <div class="mynote_left_n">我的笔记</div>
           <div class="mynote_totle">共{{ mynoteData.total }}条</div>
         </div>
-        <div class="mynote_right">
+        <!-- <div class="mynote_right">
           <div class="mynote_input">
             <el-input v-model="input" placeholder="搜索"></el-input>
             <img src="@/assets/icon_search.png" alt="" class="mynote_input_i" />
@@ -19,7 +19,7 @@
               完成
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
       <div class="mynote_mine">
         <div
@@ -188,7 +188,8 @@ export default {
 <style lang="scss">
 .mynote_box {
   width: 100%;
-  height: auto;
+  height: 100vh;
+  overflow: scroll;
   display: flex;
   background: rgba(237, 239, 243, 1);
 }

@@ -154,7 +154,6 @@ export default {
     };
   },
   async created() {
-    console.log('11')
     const res = await feedbackList({
       pageSize: 1,
       pageSize: 10,

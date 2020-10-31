@@ -29,7 +29,7 @@
           </div> -->
         </div>
       </div>
-      <div class="reading_record">2020-6月 共{{ readingData.total }}条</div>
+      <div class="reading_record">共{{ readingData.total }}条</div>
       <div class="reading_mine">
         <div
           class="reading_mine_box"
@@ -37,7 +37,7 @@
           :key="index"
         >
           <div class="reading_mine_box_img">
-            <img :src="item.img" alt="" class="reading_mine_box_i" />
+            <img :src="item.thumbCoverUrl" alt="" class="reading_mine_box_i" />
           </div>
           <div class="reading_mine_right">
             <div class="reading_mine_right_t">{{ item.bookName }}</div>

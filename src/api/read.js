@@ -11,15 +11,22 @@ export function readHistoryList(data) {
 export function deleteReadHistory(data) {
   return request({
     url: "/product/readhistory/" + data.id,
-    method: "DELETE"
+    method: "delete"
   });
 }
 
 export function addReadHistory(data) {
   return request({
-    url: "/rproduct/readhistory",
-    method: "POST",
+    url: "/product/readhistory",
+    method: "post",
     data
   });
 }
 
+export function linkList(data) {
+  return request({
+    url: "/tsystem/link/web/list",
+    method: "get",
+    data
+  });
+}
