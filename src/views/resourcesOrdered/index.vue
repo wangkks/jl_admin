@@ -36,19 +36,19 @@
           <div class="resour_reset">重置</div>
         </div>
         <div class="resour_mine_taboxs">
-          <div class="mine_taboxs_btn btn_red">史料编</div>
-          <div class="mine_taboxs_btn">史料编</div>
-          <div class="mine_taboxs_btn">文献编</div>
-          <div class="mine_taboxs_btn">档案编</div>
+          <div 
+            :class="['mine_taboxs_btn',index == orgId?'btn_red':'']" 
+            v-for="(item,index) in typeList"
+            @click="changeType(index)"
+          >
+            {{item.name}}
+          </div>
         </div>
         <div class="resour_mine_table">
           <el-table :data="tableData" style="width: 100%">
-            <el-table-column prop="bookName" label="书名" width="180">
-            </el-table-column>
-            <el-table-column prop="database" label="数据库" width="180">
-            </el-table-column>
-            <el-table-column prop="charge" label="主要责任者">
-            </el-table-column>
+            <el-table-column prop="bookName" label="书名" width="180"></el-table-column>
+            <el-table-column prop="database" label="数据库" width="180"></el-table-column>
+            <el-table-column prop="charge" label="主要责任者"></el-table-column>
             <el-table-column prop="resourceType" label="分类"> </el-table-column>
             <el-table-column prop="publishland" label="出版社"> </el-table-column>
             <el-table-column prop="publishYear" label="出版时间"> </el-table-column>
@@ -84,43 +84,17 @@ export default {
         label: '机构2'
       }],
       value: '',
-      tableData: [
-        {
-          name: '诗国南京',
-          database: '史料编',
-          charge: '（清）马士图 ',
-          class: '图书',
-          publish: '南京出版社',
-          time: '2020'
-        },
-        {
-          name: '诗国南京',
-          database: '史料编',
-          charge: '（清）马士图 ',
-          class: '图书',
-          publish: '南京出版社',
-          time: '2020'
-        },
-        {
-          name: '诗国南京',
-          database: '史料编',
-          charge: '（清）马士图 ',
-          class: '图书',
-          publish: '南京出版社',
-          time: '2020'
-        },
-        {
-          name: '诗国南京',
-          database: '史料编',
-          charge: '（清）马士图 ',
-          class: '图书',
-          publish: '南京出版社',
-          time: '2020'
-        }
+      typeList: [
+        {name: '方志编',id: 0},
+        {name: '史料编',id: 1},
+        {name: '文献编',id: 2},
+        {name: '档案编',id: 3},
       ],
+      tableData: [],
       total: 0,
       pageNum: 1,
       pageSize: 10,
+      orgId: 0,
     };
   },
   async created() {
@@ -130,11 +104,15 @@ export default {
     async getList(page){
       // 最新上架
       const res = await pagList({
-        orgId: 1
+        orgId: this.orgId
       })
       console.log(333,res)
       this.tableData = res.rows;
       this.total = res.total;
+    },
+    changeType(index){
+      this.orgId = index;
+      this.getList(1);
     },
     // 分页
     page(e) {
