@@ -37,7 +37,11 @@
               />
             </div>
           </div>
-          <img :src="item.bookmark" alt="" class="bookmark" />
+          <img
+            src="../../assets/second/bookmark-red.png"
+            alt=""
+            class="bookmark"
+          />
         </div>
       </div>
     </div>

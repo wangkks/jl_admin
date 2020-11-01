@@ -103,7 +103,7 @@ export default {
     border-radius: 50%;
     background-color: #d0021b;
     position: absolute;
-    top: 60px;
+    top: 120px;
     left: 26px;
     z-index: 1;
   }

@@ -190,10 +190,16 @@ export const constantRoutes = [
         component: () => import("@/views/resourcesOrdered/index"),
         meta: {title: "已订阅资源"}
       },
+      // {
+      //   path: "resourcesOrdered",
+      //   name: "ResourcesOrdered",
+      //   component: () => import("@/views/resourcesOrdered/index"),
+      //   meta: {title: "资源统计"}
+      // },
       {
-        path: "resourcesOrdered",
-        name: "ResourcesOrdered",
-        component: () => import("@/views/resourcesOrdered/index"),
+        path: "resourcesOrderedS",
+        name: "resourcesOrderedS",
+        component: () => import("@/views/resourcesOrderedS/index"),
         meta: {title: "资源统计"}
       },
       {

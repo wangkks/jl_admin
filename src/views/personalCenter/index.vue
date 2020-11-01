@@ -107,7 +107,6 @@ export default {
     const res = await getUser({})
 
     this.ruleForm = res.data
-    console.log('res', res)
   },
   methods: {
     async ok() {

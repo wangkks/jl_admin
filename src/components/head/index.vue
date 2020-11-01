@@ -3,87 +3,94 @@
     <div class="logo" @click="goIndex">
       <img src="@/assets/logo.png" alt="" />
     </div>
-    <el-dropdown class="avatar-container" trigger="click">
-      <div class="avatar-wrapper">
+
+    <div style="display: flex; align-items: center">
+      <el-dropdown v-if="userInfo.id" class="avatar-container" trigger="click">
+        <div class="avatar-wrapper">
+          <i class="el-icon-user-solid"></i>
+          <span class="avatar-name">幸会，{{ userInfo.userName }}</span>
+          <i class="el-icon-caret-bottom" />
+        </div>
+        <el-dropdown-menu slot="dropdown" class="user-dropdown">
+          <router-link to="/myBook">
+            <el-dropdown-item>
+              <img
+                src="@/assets/second/icon_myshape.png"
+                alt=""
+                class="icon"
+                style="width: 14px; height: 14px"
+              />
+              <span class="user-dropdown-title">我的书架</span>
+            </el-dropdown-item>
+          </router-link>
+          <router-link to="/myBook/myNote">
+            <el-dropdown-item>
+              <img
+                src="@/assets/second/icon_mynote.png"
+                alt=""
+                class="icon"
+              /><span class="user-dropdown-title">我的笔记</span>
+            </el-dropdown-item>
+          </router-link>
+          <router-link to="/myBook/searchRecords">
+            <el-dropdown-item>
+              <img
+                src="@/assets/second/icon_history.png"
+                alt=""
+                class="icon"
+              /><span class="user-dropdown-title">检索历史</span>
+            </el-dropdown-item>
+          </router-link>
+          <router-link to="/myBook/readingHistory">
+            <el-dropdown-item>
+              <img
+                src="@/assets/second/icon_read.png"
+                alt=""
+                class="icon"
+              /><span class="user-dropdown-title">阅读历史</span>
+            </el-dropdown-item>
+          </router-link>
+        </el-dropdown-menu>
+      </el-dropdown>
+      <div v-if="userInfo.id" class="layout" @click="lagoutHandler">
+        <span>登出</span>
         <i class="el-icon-user-solid"></i>
-        <span class="avatar-name">幸会，王先生</span>
-        <i class="el-icon-caret-bottom" />
       </div>
-      <el-dropdown-menu slot="dropdown" class="user-dropdown">
-        <router-link to="/myBook">
-          <el-dropdown-item>
-            <img
-              src="@/assets/second/icon_myshape.png"
-              alt=""
-              class="icon"
-              style="width: 14px; height: 14px"
-            /><span class="user-dropdown-title">我的书架</span>
-          </el-dropdown-item>
-        </router-link>
-        <router-link to="/myBook/myNote">
-          <el-dropdown-item>
-            <img
-              src="@/assets/second/icon_mynote.png"
-              alt=""
-              class="icon"
-            /><span class="user-dropdown-title">我的笔记</span>
-          </el-dropdown-item>
-        </router-link>
-        <router-link to="/myBook/searchRecords">
-          <el-dropdown-item>
-            <img
-              src="@/assets/second/icon_history.png"
-              alt=""
-              class="icon"
-            /><span class="user-dropdown-title">检索历史</span>
-          </el-dropdown-item>
-        </router-link>
-        <router-link to="/myBook/readingHistory">
-          <el-dropdown-item>
-            <img src="@/assets/second/icon_read.png" alt="" class="icon" /><span
-              class="user-dropdown-title"
-              >阅读历史</span
-            >
-          </el-dropdown-item>
-        </router-link>
-      </el-dropdown-menu>
-    </el-dropdown>
-    <div class="layout" @click="lagoutHandler">
-      <span>登出</span>
-      <i class="el-icon-user-solid"></i>
-    </div>
-    <div class="header-right">
-      <div class="header-right-item">
-        <img src="@/assets/icon_jianfan.png" alt="" />
-        <span>简繁转换</span>
-      </div>
-      <div class="header-right-item">
-        <img src="@/assets/icon_jinian.png" alt="" />
-        <span>纪年换月</span>
-      </div>
-      <div class="header-right-item">
-        <img src="@/assets/icon_biaodian.png" alt="" />
-        <span>自动标点</span>
+
+      <div class="header-right">
+        <div v-if="!userInfo.id" class="layout" @click="login">
+          <span>登录</span>
+          <i class="el-icon-user-solid"></i>
+        </div>
+        <div class="header-right-item">
+          <img src="@/assets/icon_jianfan.png" alt="" />
+          <span>简繁转换</span>
+        </div>
+        <div class="header-right-item">
+          <img src="@/assets/icon_jinian.png" alt="" />
+          <span>纪年换月</span>
+        </div>
+        <div class="header-right-item">
+          <img src="@/assets/icon_biaodian.png" alt="" />
+          <span>自动标点</span>
+        </div>
       </div>
     </div>
   </div>
 </template>
 <script>
+import { mapGetters } from "vuex";
+
 export default {
   props: [],
   data() {
-    return {
-
-    };
+    return {};
+  },
+  computed: {
+    ...mapGetters(["userInfo"])
   },
   mounted() {
-
   },
-
-  computed: {
-
-  },
-
   methods: {
     // 登出
     lagoutHandler() {
@@ -93,6 +100,9 @@ export default {
     goIndex() {
       this.$router.push('/index');
     },
+    login() {
+      this.$router.push('/login');
+    }
   },
 };
 </script>
@@ -129,6 +139,7 @@ export default {
   font-size: 12px;
   color: #000;
   z-index: 99;
+  justify-content: space-between;
   .logo {
     top: 17px;
     margin-left: 159px;
@@ -157,12 +168,12 @@ export default {
   }
   .layout {
     margin: 0 0 0 14px;
+    line-height: 84px;
     span {
       margin-right: 8px;
     }
   }
   .header-right {
-    // width: 49px;
     height: 150px;
     display: flex;
     margin: 68px 0 0 21px;
