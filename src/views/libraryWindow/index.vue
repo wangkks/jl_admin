@@ -1,6 +1,5 @@
 <template>
   <div class="library_box">
-    <div class="library_box_left"></div>
     <div class="library_box_right">
       <div class="library_box_t">
         <div class="library_left">
@@ -147,11 +146,6 @@
   height: auto;
   display: flex;
   background:  rgba(237, 239, 243, 1);
-}
-.library_box_left{
-  width: 207px;
-  height: auto;
-  background: red;
 }
 .library_box_right{
   width: auto;

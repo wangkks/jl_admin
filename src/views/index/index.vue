@@ -61,8 +61,8 @@
     </div>
     <div class="bookList">
       <div class="bookList-title">
-        <span class="bookList-new">最新上架</span>
-        <span class="bookList-more" @click="goMoreNews">more</span>
+        <span class="bookList-new" @click="goBookList">最新上架</span>
+        <span class="bookList-more" @click="goBookList">more</span>
       </div>
       <div class="mybook_mine">
         <div
@@ -187,7 +187,10 @@ export default {
   methods: {
     goMoreNews() {
       this.$router.push('news')
-    }
+    },
+    goBookList(){
+      this.$router.push('example/bookLibraryList')
+    },
   }
 };
 </script>

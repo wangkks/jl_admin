@@ -43,19 +43,23 @@
         </div>
         <div class="resour_mine_table">
           <el-table :data="tableData" style="width: 100%">
-            <el-table-column prop="name" label="书名" width="180">
+            <el-table-column prop="bookName" label="书名" width="180">
             </el-table-column>
             <el-table-column prop="database" label="数据库" width="180">
             </el-table-column>
             <el-table-column prop="charge" label="主要责任者">
             </el-table-column>
-            <el-table-column prop="class" label="分类"> </el-table-column>
-            <el-table-column prop="publish" label="出版社"> </el-table-column>
-            <el-table-column prop="time" label="出版时间"> </el-table-column>
+            <el-table-column prop="resourceType" label="分类"> </el-table-column>
+            <el-table-column prop="publishland" label="出版社"> </el-table-column>
+            <el-table-column prop="publishYear" label="出版时间"> </el-table-column>
           </el-table>
         </div>
         <div class="resour_mine_page">
-          <el-pagination layout="prev, pager, next" :total="50">
+          <el-pagination
+            layout="prev, pager, next"
+            :total="total"
+            @current-chang="page"
+          >
           </el-pagination>
         </div>
       </div>
@@ -65,6 +69,7 @@
 
 <script>
 import { recourseList } from "@/api/index"
+import { pagList } from '@/api/index'
 export default {
   components: {
   },
@@ -79,49 +84,62 @@ export default {
         label: '机构2'
       }],
       value: '',
-      tableData: [{
-        name: '诗国南京',
-        database: '史料编',
-        charge: '（清）马士图 ',
-        class: '图书',
-        publish: '南京出版社',
-        time: '2020'
-      },
-      {
-        name: '诗国南京',
-        database: '史料编',
-        charge: '（清）马士图 ',
-        class: '图书',
-        publish: '南京出版社',
-        time: '2020'
-      },
-      {
-        name: '诗国南京',
-        database: '史料编',
-        charge: '（清）马士图 ',
-        class: '图书',
-        publish: '南京出版社',
-        time: '2020'
-      },
-      {
-        name: '诗国南京',
-        database: '史料编',
-        charge: '（清）马士图 ',
-        class: '图书',
-        publish: '南京出版社',
-        time: '2020'
-      },]
+      tableData: [
+        {
+          name: '诗国南京',
+          database: '史料编',
+          charge: '（清）马士图 ',
+          class: '图书',
+          publish: '南京出版社',
+          time: '2020'
+        },
+        {
+          name: '诗国南京',
+          database: '史料编',
+          charge: '（清）马士图 ',
+          class: '图书',
+          publish: '南京出版社',
+          time: '2020'
+        },
+        {
+          name: '诗国南京',
+          database: '史料编',
+          charge: '（清）马士图 ',
+          class: '图书',
+          publish: '南京出版社',
+          time: '2020'
+        },
+        {
+          name: '诗国南京',
+          database: '史料编',
+          charge: '（清）马士图 ',
+          class: '图书',
+          publish: '南京出版社',
+          time: '2020'
+        }
+      ],
+      total: 0,
+      pageNum: 1,
+      pageSize: 10,
     };
   },
   async created() {
-    const res = await recourseList({
-      pagesize: 10,
-      pageNum: 1,
-      createTime: new Date()
-    })
+    this.getList(1);
   },
   methods: {
-
+    async getList(page){
+      // 最新上架
+      const res = await pagList({
+        orgId: 1
+      })
+      console.log(333,res)
+      this.tableData = res.rows;
+      this.total = res.total;
+    },
+    // 分页
+    page(e) {
+      this.getList(e)
+    }
   }
 }
 </script>

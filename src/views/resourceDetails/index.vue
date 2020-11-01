@@ -25,10 +25,7 @@
             <div>内容简介</div>
           </div>
           <div class="resour_mine_box_ce">
-            2019年10月31日，联合国教科文组织宣布南京成为“创意城市网络·文学之都”，《诗国南京》为“文学之都经典文库”从书中的一本。金陵诗词承载南京历史文化、传承中华诗词优秀传统，是南京“世界文学之都”魅力的重要组成部分。我们在作者分布和篇目选择上，尽可能兼顾经典性、代表性、多样性和创新性，并收录诸多以往选本未收录的诗词，以求更加全面地反映南京这座城市以及金陵诗词的全貌。全书按年代排序、简要介绍作者生平及诗词的写作年代和背景，有助于读者深入了解诗词作品的内涵[<span
-              class="more"
-              >more</span
-            >]
+            {{detailData.bookDesc}}
           </div>
         </div>
         <div class="resour_mine_centent">
@@ -64,6 +61,7 @@
 </template>
 
 <script>
+import { booksDetail } from '@/api/bookLibrary'
 export default {
   components: {
     id: null,
@@ -71,6 +69,7 @@ export default {
   data() {
     return {
       input: "",
+      detailData: {},
       activities: [
         {
           content: "第一册简介",
@@ -97,7 +96,16 @@ export default {
   mounted() {
     this.id = this.$route.params.id;
   },
+  async created() {
+    this.getDetail();
+  },
   methods: {
+    async getDetail(){
+      const res = await booksDetail({id: this.id});
+      this.detailData = res.data;
+      localStorage.setItem('bookDetal',res.data)
+      console.log(444,res)
+    },
     goSynopsis(id){
       this.$router.push(`/myBook/resourceReading/${id}`);
     }

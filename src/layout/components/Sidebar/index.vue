@@ -99,7 +99,9 @@
         <template v-if="userRole == 1">
           <bookLibrary /><!-- 普通用户 -->
         </template>
-        <template v-else> <userInfo /><!-- 有权限用户 --> </template>
+        <template v-else>
+          <userInfo /><!-- 有权限用户 --> 
+        </template>
       </template>
       <template v-if="leftBarIndex == 2">
         <myBookshelf />
@@ -136,7 +138,7 @@ export default {
           urlred: require("@/assets/second/icon_bookshelf_red.png"),
         },
       ],
-      userRole: 2,
+      userRole: 1,
     };
   },
   components: {
