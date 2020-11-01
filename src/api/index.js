@@ -41,7 +41,7 @@ export function linkList(data) {
 
 export function recourseList(data) {
   return request({
-    url: "/tproBook/recoursestatistics/list",
+    url: "/readsum/list",
     method: "get",
     data
   });

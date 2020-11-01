@@ -180,7 +180,7 @@ export default {
         }
       }
       if (index == 2) {
-        this.$router.push("/myBook");
+        this.$router.push("/myBook/myNote");
       }
       localStorage.setItem("leftBarIndex", index);
       this.leftBarIndex = index;

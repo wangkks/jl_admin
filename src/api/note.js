@@ -8,18 +8,26 @@ export function readNotesList(data) {
   });
 }
 
-export function deleteReadNotes(data) {
+export function deleteReadNote(data) {
+  return request({
+    url: "/readnotes/readnotes/" + data.id,
+    method: "DELETE"
+  });
+}
+
+// 修改
+export function editReadNote(data) {
   return request({
     url: "/readnotes/readnotes",
-    method: "DELETE",
+    method: "put",
     data
   });
 }
 
-export function readReadNotes(data) {
+export function addReadNote(data) {
   return request({
     url: "/readnotes/readnotes",
-    method: "put",
+    method: "post",
     data
   });
 }

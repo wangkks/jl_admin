@@ -14,7 +14,11 @@
         </div>
         <div class="news-box-r">
           <ul>
-            <li v-for="(item, index) in newsDateList.rows" :key="index" @click="goDetail(item.id)">
+            <li
+              v-for="(item, index) in newsDateList.rows"
+              :key="index"
+              @click="goDetail(item.id)"
+            >
               <span>{{ item.newsTitle }}</span>
               <span v-html="item.newsContent"></span>
               <img :src="item.iconUrl" alt="" />
@@ -26,7 +30,7 @@
         <el-pagination
           layout="prev, pager, next"
           :total="newsDateList.total"
-          @current-chang="page"
+          @current-change="page"
         >
         </el-pagination>
       </div>
@@ -91,7 +95,7 @@ export default {
     page(e) {
       this.getList(e)
     },
-    goDetail(id){
+    goDetail(id) {
       this.$router.push(`newsDetail/${id}`)
     }
   }
@@ -112,12 +116,12 @@ export default {
 
     .new-title {
       width: 27%;
-      span{
+      span {
         width: 225px;
         height: 50px;
         font-size: 24px;
-        color: #D0021B;
-        border-bottom: 1px solid #D0021B;
+        color: #d0021b;
+        border-bottom: 1px solid #d0021b;
         display: block;
         margin: 0 0 30px auto;
       }

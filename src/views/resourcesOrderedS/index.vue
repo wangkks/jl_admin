@@ -1,5 +1,5 @@
 <template>
-  <div class="resour_box">
+  <div class="resour_boxs">
     <div class="resour_box_left"></div>
     <div class="resour_box_right">
       <div class="resour_box_t">已订阅资源</div>
@@ -36,29 +36,39 @@
           <div class="resour_reset">重置</div>
         </div>
         <div class="resour_mine_taboxs">
-          <div class="mine_taboxs_btn btn_red">史料编</div>
-          <div class="mine_taboxs_btn">史料编</div>
-          <div class="mine_taboxs_btn">文献编</div>
-          <div class="mine_taboxs_btn">档案编</div>
+          <div
+            v-for="item in tab"
+            :key="item.id"
+            :class="['mine_taboxs_btn', { btn_red: item.checked }]"
+          >
+            {{ item.text }}
+          </div>
         </div>
         <div class="resour_mine_table">
-          <el-table :data="tableData" style="width: 100%">
+          <el-table :data="tableData.rows" style="width: 100%">
             <el-table-column prop="bookName" label="书名" width="180">
             </el-table-column>
-            <el-table-column prop="database" label="数据库" width="180">
+            <!-- <el-table-column prop="database" label="数据库" width="180">
+            </el-table-column> -->
+            <el-table-column prop="mainResponsibility" label="主要责任者">
             </el-table-column>
-            <el-table-column prop="charge" label="主要责任者">
+            <!-- <el-table-column prop="class" label="分类"> </el-table-column> -->
+            <!-- <el-table-column prop="publish" label="出版单位"> </el-table-column> -->
+            <el-table-column prop="readTime" label="阅读时长">
             </el-table-column>
-            <el-table-column prop="resourceType" label="分类"> </el-table-column>
-            <el-table-column prop="publishland" label="出版社"> </el-table-column>
-            <el-table-column prop="publishYear" label="出版时间"> </el-table-column>
+            <el-table-column prop="readPeoples" label="浏览人数">
+            </el-table-column>
+            <el-table-column prop="delFlag" label="是否删除">
+              <template slot-scope="scope">
+                {{ scope.row.scope == 1 ? '已删除' : '正常' }}
+              </template>
+            </el-table-column>
           </el-table>
         </div>
         <div class="resour_mine_page">
           <el-pagination
             layout="prev, pager, next"
-            :total="total"
-            @current-chang="page"
+            :total="tableData.total * 1"
           >
           </el-pagination>
         </div>
@@ -69,13 +79,29 @@
 
 <script>
 import { recourseList } from "@/api/index"
-import { pagList } from '@/api/index'
 export default {
   components: {
   },
   data() {
     return {
       input: '',
+      tab: [
+        {
+          id: 1,
+          text: '最近7天',
+          checked: 1
+        },
+        {
+          id: 2,
+          text: '最近30天',
+          checked: 0
+        },
+        {
+          id: 3,
+          text: '最近90天',
+          checked: 0
+        }
+      ],
       options: [{
         value: '选项1',
         label: '机构1'
@@ -84,68 +110,34 @@ export default {
         label: '机构2'
       }],
       value: '',
-      tableData: [
-        {
-          name: '诗国南京',
-          database: '史料编',
-          charge: '（清）马士图 ',
-          class: '图书',
-          publish: '南京出版社',
-          time: '2020'
-        },
-        {
-          name: '诗国南京',
-          database: '史料编',
-          charge: '（清）马士图 ',
-          class: '图书',
-          publish: '南京出版社',
-          time: '2020'
-        },
-        {
-          name: '诗国南京',
-          database: '史料编',
-          charge: '（清）马士图 ',
-          class: '图书',
-          publish: '南京出版社',
-          time: '2020'
-        },
-        {
-          name: '诗国南京',
-          database: '史料编',
-          charge: '（清）马士图 ',
-          class: '图书',
-          publish: '南京出版社',
-          time: '2020'
-        }
-      ],
-      total: 0,
-      pageNum: 1,
-      pageSize: 10,
+      tableData: [{
+        name: '诗国南京',
+        database: '史料编',
+        charge: '（清）马士图 ',
+        class: '图书',
+        publish: '南京出版社',
+        time: '2020'
+      }]
     };
   },
   async created() {
-    this.getList(1);
+    const res = await recourseList({
+      pagesize: 10,
+      pageNum: 1,
+      createTime: new Date()
+    })
+
+    this.tableData = res
+
   },
   methods: {
-    async getList(page){
-      // 最新上架
-      const res = await pagList({
-        orgId: 1
-      })
-      console.log(333,res)
-      this.tableData = res.rows;
-      this.total = res.total;
-    },
-    // 分页
-    page(e) {
-      this.getList(e)
-    }
+
   }
 }
 </script>
 <style lang="scss">
 /* reset element-ui css */
-.resour_box {
+.resour_boxs {
   .resour_input .el-input__inner {
     width: 260px;
     height: 34px;
@@ -177,9 +169,10 @@ export default {
 }
 </style>
 <style lang="scss" scope>
-.resour_box {
+.resour_boxs {
   width: 100%;
-  height: auto;
+  height: 100vh;
+  overflow: scroll;
   display: flex;
   background: rgba(237, 239, 243, 1);
 
@@ -247,7 +240,6 @@ export default {
     font-weight: 400;
     color: #000;
     padding: 8px 20px;
-    width: 80px;
     margin-right: 10px;
   }
   .btn_red {
