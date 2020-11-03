@@ -17,15 +17,16 @@
         >
           <el-menu-item
             v-for="item in routesT"
+            :key="item.path"
             :index="item.path"
             :class="[
               'submenu-title-noDropdown',
-              '/' + $route.path.split('/')[1] + '/' + item.path == $route.path ||
-              item.path == $route.path
+              '/' + $route.path.split('/')[1] + '/' + item.path ==
+                $route.path || item.path == $route.path
                 ? 'activited'
                 : '',
             ]"
-          >{{ (item.meta && item.meta.title) || '' }}
+            >{{ (item.meta && item.meta.title) || '' }}
           </el-menu-item>
         </el-menu>
       </el-scrollbar>
@@ -45,15 +46,16 @@
         >
           <el-menu-item
             v-for="item in routesB"
+            :key="item.path"
             :index="item.path"
             :class="[
               'submenu-title-noDropdown',
-              '/' + $route.path.split('/')[1] + '/' + item.path == $route.path ||
-              item.path == $route.path
+              '/' + $route.path.split('/')[1] + '/' + item.path ==
+                $route.path || item.path == $route.path
                 ? 'activited'
                 : '',
             ]"
-          >{{ (item.meta && item.meta.title) || '' }}
+            >{{ (item.meta && item.meta.title) || '' }}
           </el-menu-item>
         </el-menu>
       </el-scrollbar>
@@ -106,7 +108,7 @@ export default {
   },
   mounted() {
     let route = this.$router.options.routes.find((item) => item.path == "/userInfo")
-    this.routesT = route.children.slice(0,3);
+    this.routesT = route.children.slice(0, 3);
     this.routesB = route.children.slice(3);
   },
   methods: {
@@ -124,11 +126,11 @@ export default {
 </script>
 <style lang="scss" scoped>
 .el-menu {
-  .submenu-title-noDropdown{
+  .submenu-title-noDropdown {
     margin: 0 25px 0 50px !important;
     padding: 0 !important;
   }
-  .submenu-title-noDropdown:last-child{
+  .submenu-title-noDropdown:last-child {
     border: none;
   }
 }
@@ -159,7 +161,7 @@ export default {
     letter-spacing: 2px;
     padding-left: 23px;
     margin-bottom: 22px;
-    &.user{
+    &.user {
       margin-top: 50px;
       border-top: 1px dashed #979797;
       padding-top: 24px;
