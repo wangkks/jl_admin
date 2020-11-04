@@ -88,23 +88,20 @@
     </div>
     <div class="rightBar">
       <logo v-if="showLogo" :collapse="isCollapse" />
-      {{ $route.path.split('/')[2] == 'resourceDetails' }}
       <template v-if="$route.path.split('/')[2] == 'resourceDetails'">
-        <bookDetailBar />
+        <BookDetailBar v-if="detailData.bookName" :data="detailData" />
       </template>
       <template v-if="$route.path.split('/')[2] == 'resourceReading'">
-        <bookSynopsisBar />
+        <BookSynopsisBar />
       </template>
       <template v-if="leftBarIndex == 1">
         <template v-if="userRole == 1">
-          <bookLibrary /><!-- 普通用户 -->
+          <BookLibrary /><!-- 普通用户 -->
         </template>
-        <template v-else>
-          <userInfo /><!-- 有权限用户 --> 
-        </template>
+        <template v-else> <userInfo /><!-- 有权限用户 --> </template>
       </template>
       <template v-if="leftBarIndex == 2">
-        <myBookshelf />
+        <MyBookshelf />
       </template>
     </div>
   </div>
@@ -119,6 +116,7 @@ import MyBookshelf from "./MyBookshelf";
 import BookDetailBar from "./BookDetailBar";
 import BookSynopsisBar from "./BookSynopsisBar";
 import UserInfo from "./UserInfo";
+import { booksDetail } from '@/api/bookLibrary'
 
 export default {
   data() {
@@ -139,6 +137,7 @@ export default {
         },
       ],
       userRole: 1,
+      detailData: []
     };
   },
   components: {
@@ -162,6 +161,12 @@ export default {
     leftBarIndex() {
       // this.leftBarIndex = localStorage.getItem('leftBarIndex')
     },
+  },
+  async created() {
+    if (this.$route.path.split('/')[2] == 'resourceDetails') {
+      const res = await booksDetail({ id: this.$route.params.id });
+      this.detailData = res.data;
+    }
   },
   mounted() {
     this.leftBarIndex = localStorage.getItem("leftBarIndex") || 1;

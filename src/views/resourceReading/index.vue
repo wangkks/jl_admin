@@ -1,6 +1,5 @@
 <template>
   <div class="resouing_box">
-    <div class="resouing_box_left"></div>
     <div class="resouing_box_right">
       <div class="resouing_box_t">
         <div class="resouing_left">
@@ -118,11 +117,6 @@ export default {
   height: auto;
   display: flex;
   background: rgba(237, 239, 243, 1);
-}
-.resouing_box_left {
-  width: 207px;
-  height: auto;
-  background: red;
 }
 .resouing_box_right {
   width: auto;

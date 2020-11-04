@@ -7,9 +7,18 @@ export function bookLibraryList(data) {
     data
   });
 }
+
 export function booksDetail(data) {
   return request({
     url: "product/books",
+    method: "get",
+    data
+  });
+}
+
+export function menuTree(data) {
+  return request({
+    url: "product/menu/menutree",
     method: "get",
     data
   });

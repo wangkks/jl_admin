@@ -1,84 +1,31 @@
 <template>
-  <div class="resour_box">
-    <div class="resour_box_right">
-      <div class="resour_box_t">
-        <div class="resour_left">
-          <div class="resour_left_n">书籍内容</div>
-          <div class="resour_totle">当前位置：经部-汉语言文学-中国文学</div>
-        </div>
-        <div class="resour_right">
-          <div class="resour_input">
-            <el-input v-model="input" placeholder="书内搜索"></el-input>
-            <img src="@/assets/icon_search.png" alt="" class="resour_input_i" />
-          </div>
-        </div>
-      </div>
-
-      <div class="resour_mine">
-        <div class="resour_mine_box">
-          <div class="resour_mine_box_t">
-            <img
-              src="@/assets/second/brief.png"
-              alt=""
-              class="resour_mine_box_t_i"
-            />
-            <div>内容简介</div>
-          </div>
-          <div class="resour_mine_box_ce">
-            {{ detailData.bookDesc }}
-          </div>
-        </div>
-        <div class="resour_mine_centent">
-          <div class="resour_mine_box_t">
-            <img
-              src="@/assets/second/catalog.png"
-              alt=""
-              class="resour_mine_box_t_i"
-            />
-            <div>目录</div>
-          </div>
-          <div class="book_synopsis">
-            <div class="book_synopsis_title">
-              <img src="@/assets/second/icon_goldFoil.png" alt="" />
-              讀四書大全説
-            </div>
-            <Menu :menu="menuData" />
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <el-timeline>
+    <el-timeline-item
+      v-for="(item, index) in menu"
+      :key="index"
+      :type="item.type"
+      :size="item.size"
+      @click.native="goSynopsis(item.id)"
+    >
+      {{ item.menuName }}
+      <menu-item v-if="item.children" :children="item.children"></menu-item>
+    </el-timeline-item>
+  </el-timeline>
 </template>
 
 <script>
-import { booksDetail, menuTree } from '@/api/bookLibrary'
-import Menu from './menu'
 
 export default {
-  components: {
-    Menu
-  },
+  name: 'menuItem',
+  props: ['menu'],
   data() {
     return {
-      input: "",
-      detailData: {},
-      menuData: []
     };
   },
-  async created() {
-    this.id = this.$route.params.id;
-    this.getDetail();
-    const res = await menuTree({
-      bookId: this.id
-    })
-
-    this.menuData = res
+  created() {
+    console.log('thhis', this.menu)
   },
   methods: {
-    async getDetail() {
-      const res = await booksDetail({ id: this.id });
-      this.detailData = res.data;
-    },
     goSynopsis(id) {
       this.$router.push(`/myBook/resourceReading/${id}`);
     }

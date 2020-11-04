@@ -1,37 +1,38 @@
 <template>
   <div class="book-detail">
-    <div class="book-img"><img src="@/assets/second/bitmap_bg.png" alt=""></div>
-    <div class="book-title">{{bookDeatil.bookName}}</div>
+    <div class="book-img">
+      <img :src="data.coverUrl" alt="" />
+    </div>
+    <div class="book-title">{{ data.bookName }}</div>
     <div class="book-join">
-      <img src="@/assets/second/bookmark-line.png" alt="">
+      <img src="@/assets/second/bookmark-line.png" alt="" />
       <span>加入书架</span>
     </div>
     <div class="book-info">
-      <span>作者：{{bookDeatil.mainResponsibility}}</span>
-      <span>出版社：{{bookDeatil.publisher}}</span>
-      <span>出版时间：{{bookDeatil.publishDate}}</span>
-      <span>资源分类：{{bookDeatil.resourceClasses}}</span>
-      <span>主题词：{{bookDeatil.subjectWord}}</span>
-      <span>版次：{{bookDeatil.revision}}</span>
-      <span>丛编：{{bookDeatil.dbName}}</span>
+      <span>作者：{{ data.mainResponsibility }}</span>
+      <span>出版社：{{ data.publisher }}</span>
+      <span>出版时间：{{ data.publishDate }}</span>
+      <span>资源分类：{{ data.resourceClasses }}</span>
+      <span>主题词：{{ data.subjectWord }}</span>
+      <span>版次：{{ data.revision }}</span>
+      <span>丛编：{{ data.dbName }}</span>
     </div>
   </div>
 </template>
 
 <script>
 export default {
+  name: 'BookDetailBar',
+  props: ['data'],
   data() {
     return {
-      bookDeatil: {},
     };
   },
   computed: {},
   mounted() {
-    this.bookDetal = localStorage.getItem('bookDetal');
-    console.log(222, this.bookDetal)
   },
   methods: {
-    
+
   },
   components: {
   },
@@ -42,7 +43,7 @@ export default {
   width: 210px;
   height: 100%;
   position: relative;
-  .book-img{
+  .book-img {
     width: 100%;
     border-bottom: 1px dashed #979797;
     text-align: center;
@@ -53,33 +54,33 @@ export default {
       // margin: 0 auto 20px;
     }
   }
-  .book-title{
+  .book-title {
     margin: 21px 0 13px 19px;
     color: #363636;
     font-size: 14px;
   }
-  .book-join{
+  .book-join {
     width: 100px;
     height: 33px;
     display: flex;
     align-items: center;
-    border: 1px solid #D0021B;
+    border: 1px solid #d0021b;
     margin-left: 19px;
-    img{
-      width :20px;
+    img {
+      width: 20px;
       height: 20px;
       margin: 0 8px 0 13px;
     }
-    span{
+    span {
       font-size: 12px;
-      color: #D0021B;
+      color: #d0021b;
     }
   }
-  .book-info{
+  .book-info {
     color: #363636;
     font-size: 12px;
     margin: 23px 0 0 19px;
-    span{
+    span {
       display: block;
       line-height: 25px;
     }

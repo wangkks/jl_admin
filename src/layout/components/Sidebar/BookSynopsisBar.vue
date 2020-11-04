@@ -46,14 +46,16 @@
 
 <script>
 export default {
+  name: 'BookSynopsisBar',
+  props: ['data'],
   data() {
     return {
-      bookDeatil:{
+      bookDeatil: {
         bookTitle: '诗国南京'
       },
-      catalog:[
-        {title:'目录',icon: require('@/assets/second/catalog.png'), iconred: require('@/assets/second/catalogred.png')},
-        {title:'笔记',icon: require('@/assets/second/icon_mynote.png'), iconred: require('@/assets/second/icon_mynote_red.png')},
+      catalog: [
+        { title: '目录', icon: require('@/assets/second/catalog.png'), iconred: require('@/assets/second/catalogred.png') },
+        { title: '笔记', icon: require('@/assets/second/icon_mynote.png'), iconred: require('@/assets/second/icon_mynote_red.png') },
       ],
       selected: 0,
       activities: [
@@ -64,7 +66,7 @@ export default {
           id: 1
         },
         {
-          id :2,
+          id: 2,
           content: "第二册简介",
         },
         {
@@ -77,24 +79,26 @@ export default {
           content: "第无册简介",
         },
       ],
-      mynoteData:{
-        'name':'01 笔记标题',
-        'citation':'莫愁湖位于南京秦淮河西，南京秦淮河西。',
-        'note':'孟子謂齊宣王曰：『王之臣，有託其妻子於其友而之楚遊者孟子謂齊宣王曰。『王之臣，有託其妻子於其友而之楚遊者孟子謂齊宣王曰。',
-        'time':'2020-09-12',
-        'source':'诗国南京／第六册簡介'
+      mynoteData: {
+        'name': '01 笔记标题',
+        'citation': '莫愁湖位于南京秦淮河西，南京秦淮河西。',
+        'note': '孟子謂齊宣王曰：『王之臣，有託其妻子於其友而之楚遊者孟子謂齊宣王曰。『王之臣，有託其妻子於其友而之楚遊者孟子謂齊宣王曰。',
+        'time': '2020-09-12',
+        'source': '诗国南京／第六册簡介'
       }
     };
   },
   computed: {
-    
+
   },
-  mounted() {},
+  mounted() {
+    console.log('this', this.data)
+  },
   methods: {
-    changeBtn(index){
+    changeBtn(index) {
       this.selected = index;
     },
-    goSynopsis(id){
+    goSynopsis(id) {
       this.$router.push(`/myBook/resourceReading/${id}`);
     }
   },
@@ -103,40 +107,40 @@ export default {
 };
 </script>
 <style lang="scss">
-.book-synopsis{
+.book-synopsis {
   margin-top: 19px;
-  .book-synopsis-title{
+  .book-synopsis-title {
     font-size: 14px;
     font-family: PingFangSC-Regular, PingFang SC;
     font-weight: 400;
     color: #000000;
     margin-bottom: 13px;
     padding-left: 19px;
-    img{
+    img {
       width: 11px;
       height: 12px;
     }
   }
-  .el-timeline-item{
+  .el-timeline-item {
     padding-bottom: 15px;
-    .el-timeline-item__content{
+    .el-timeline-item__content {
       padding-top: 17px;
     }
-    .el-timeline-item__node--normal{
+    .el-timeline-item__node--normal {
       width: 0;
     }
-    .el-timeline-item__tail{
+    .el-timeline-item__tail {
       height: 60px;
     }
-    .el-timeline-item__node--large{
+    .el-timeline-item__node--large {
       width: 15px;
       height: 5px;
       border-radius: 3px;
       top: 19px;
-      background-color: #D0021B;
+      background-color: #d0021b;
     }
   }
-  .el-timeline .el-timeline-item:last-child .el-timeline-item__tail{
+  .el-timeline .el-timeline-item:last-child .el-timeline-item__tail {
     display: block;
   }
 }
@@ -146,72 +150,72 @@ export default {
   width: 210px;
   height: 100%;
   position: relative;
-  .catalog-title{
+  .catalog-title {
     margin: 0 0 13px 19px;
     color: #363636;
     font-size: 14px;
   }
-  .dashed-line{
+  .dashed-line {
     margin-top: 29px;
     height: 1px;
     border-bottom: 1px dashed #979797;
   }
-  .catalog-note{
+  .catalog-note {
     display: flex;
     align-items: center;
     margin: 13px 0 0 19px;
-    .catalog-c.actived{
-      color: #D0021B;
-      border: 1px solid #D0021B;
+    .catalog-c.actived {
+      color: #d0021b;
+      border: 1px solid #d0021b;
     }
-    .catalog-c{
+    .catalog-c {
       width: 66px;
       height: 33px;
-      border: 1px solid #4A4A4A;
+      border: 1px solid #4a4a4a;
       display: flex;
       font-size: 12px;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      img{
+      img {
         width: 14px;
         height: 14px;
         margin-right: 2px;
       }
-      &:last-child{
+      &:last-child {
         border-left: none;
       }
     }
   }
-  .mynote-mine{
+  .mynote-mine {
     width: 200px;
     background-color: #fff;
     margin: 14px 5px 0 5px;
-    .mynote-name{
+    .mynote-name {
       color: #000000;
       font-size: 16px;
       padding: 8px 0 14px 14px;
     }
-    .mynote-t{
+    .mynote-t {
       width: 45px;
       height: 24px;
       font-size: 12px;
       font-weight: 600;
-      color: #FFFFFF;
+      color: #ffffff;
       text-align: center;
       line-height: 24px;
-      background: #D0021B;
+      background: #d0021b;
       margin: 0 0 13px 12px;
     }
-    .mynote-citation{
+    .mynote-citation {
       color: #000;
       font-size: 12px;
-      padding: 0 17px 16px 10px
+      padding: 0 17px 16px 10px;
     }
-    .tionred{
-      background: #99BFFF;
+    .tionred {
+      background: #99bfff;
     }
-    .mynote-n{
+    .mynote-n {
       font-size: 12px;
       color: #000;
       font-weight: 400;
@@ -220,29 +224,29 @@ export default {
       border-bottom: 1px solid #979797;
       margin: 0 5px;
     }
-    .mynote-time{
+    .mynote-time {
       font-size: 12px;
       color: #363636;
       padding: 14px 10px;
       line-height: 17px;
       border-bottom: 1px dashed #979797;
-      .btmbox_r{
+      .btmbox_r {
         color: #999999;
       }
     }
-    .mynote-btn{
+    .mynote-btn {
       width: 100%;
       height: 42px;
       display: flex;
       align-items: center;
-      div{
+      div {
         flex: 1;
         text-align: center;
-        &:last-child{
-          border-left: 1px dashed #DDDDDD;
+        &:last-child {
+          border-left: 1px dashed #dddddd;
         }
       }
-      img{
+      img {
         width: 15px;
         height: 15px;
       }

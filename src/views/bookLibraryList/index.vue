@@ -6,13 +6,17 @@
           <div class="booklibrary_left_n">书籍库</div>
           <div class="booklibrary_totle">
             共有
-            <span class="booklibrary_num">{{total}}</span>
+            <span class="booklibrary_num">{{ total }}</span>
             条记录库
           </div>
         </div>
         <div class="booklibrary_right">
           <div class="booklibrary_input">
-            <el-input v-model="bookname" placeholder="请输入关键字" @keyup.enter.native="getList(1)"></el-input>
+            <el-input
+              v-model="bookname"
+              placeholder="请输入关键字"
+              @keyup.enter.native="getList(1)"
+            ></el-input>
             <img
               src="@/assets/icon_search.png"
               alt=""
@@ -22,10 +26,36 @@
           </div>
           <div class="booklibrary_sort_box" @click="changeIsAsc">
             <div>出版时间</div>
-            <img :src="isAsc?require('@/assets/second/sort_out.png'):require('@/assets/second/sort_down.png')" alt="" class="sort_box" />
+            <img
+              :src="
+                isAsc
+                  ? require('@/assets/second/sort_out.png')
+                  : require('@/assets/second/sort_down.png')
+              "
+              alt=""
+              class="sort_box"
+            />
           </div>
-          <img :src="layoutStyle?require('@/assets/second/list_red.png'):require('@/assets/second/list.png')" alt="" class="sort_list" @click="changeLayoutStyle"/>
-          <img :src="layoutStyle?require('@/assets/second/window.png'):require('@/assets/second/window_red.png')" alt="" class="sort_window" @click="changeLayoutStyle"/>
+          <img
+            :src="
+              layoutStyle
+                ? require('@/assets/second/list_red.png')
+                : require('@/assets/second/list.png')
+            "
+            alt=""
+            class="sort_list"
+            @click="changeLayoutStyle"
+          />
+          <img
+            :src="
+              layoutStyle
+                ? require('@/assets/second/window.png')
+                : require('@/assets/second/window_red.png')
+            "
+            alt=""
+            class="sort_window"
+            @click="changeLayoutStyle"
+          />
         </div>
       </div>
       <div class="detection_mine" v-if="layoutStyle">
@@ -35,7 +65,11 @@
           :key="index"
           @click="goBookDetail(item.uniqueId)"
         >
-          <img :src="item.img || require('@/assets/second/bitmap_bg.png')" alt="" class="detection_mine_box_i" />
+          <img
+            :src="item.img || require('@/assets/second/bitmap_bg.png')"
+            alt=""
+            class="detection_mine_box_i"
+          />
           <div class="detection_mine_right">
             <div class="detection_mine_right_t">
               {{ item.bookName }}
@@ -44,32 +78,48 @@
               <div class="detection_mine_cent_l">
                 <div>作者：{{ item.mainResponsibility }} 编</div>
               </div>
-              <img src="@/assets/second/more.png" alt="" class="detection_mine_cent_i" />
+              <img
+                src="@/assets/second/more.png"
+                alt=""
+                class="detection_mine_cent_i"
+              />
             </div>
             <div class="detection_mine_cent_btm">
               {{ item.bookDesc }}
             </div>
           </div>
-          <img src="@/assets/second/bookmark-line.png" alt="" class="bookmark" />
+          <img
+            src="@/assets/second/bookmark-line.png"
+            alt=""
+            class="bookmark"
+          />
         </div>
       </div>
       <div class="library_mine" v-else>
-        <div 
+        <div
           class="library_mine_box"
-          v-for="(item,index) in detectionList"
+          v-for="(item, index) in detectionList"
           :key="index"
-          @click="goBookDetail(item.uniqueId)"
-          >
+          @click="goBookDetail(item.id)"
+        >
           <div class="library_mine_box_img">
-            <img :src="item.img || require('@/assets/second/bitmap_bg.png')" alt="" class="library_mine_box_i"/>
+            <img
+              :src="item.img || require('@/assets/second/bitmap_bg.png')"
+              alt=""
+              class="library_mine_box_i"
+            />
           </div>
           <div class="library_mine_right">
-            <div class="library_mine_right_t">{{item.bookName}}</div>
+            <div class="library_mine_right_t">{{ item.bookName }}</div>
             <div class="library_mine_cent">
-              <div>作者：{{item.mainResponsibility}}  编</div>
+              <div>作者：{{ item.mainResponsibility }} 编</div>
             </div>
           </div>
-          <img src="@/assets/second/bookmark-line.png" alt="" class="bookmark"/>
+          <img
+            src="@/assets/second/bookmark-line.png"
+            alt=""
+            class="bookmark"
+          />
         </div>
       </div>
       <div class="resour_mine_page">
@@ -103,14 +153,14 @@ export default {
     this.getList(1);
   },
   methods: {
-    async getList(page){
+    async getList(page) {
       let param = {
         pageNum: page,
         pageSize: this.pageNum,
         Bookname: this.bookname,
         isAsc: this.isAsc
       }
-      if(this.isAsc){
+      if (this.isAsc) {
         delete param.isAsc
       }
       const res = await bookLibraryList(param);
@@ -120,10 +170,10 @@ export default {
     goBookDetail(id) {
       this.$router.push(`/myBook/resourceDetails/${id}`);
     },
-    changeLayoutStyle(){
+    changeLayoutStyle() {
       this.layoutStyle = !this.layoutStyle;
     },
-    changeIsAsc(){
+    changeIsAsc() {
       this.isAsc = !this.isAsc;
       this.getList(1);
     },
@@ -279,42 +329,42 @@ export default {
     top: -2px;
   }
 }
-.library_mine{
+.library_mine {
   width: 1100px;
   margin: 22px 70px 80px 0;
   display: flex;
   flex-wrap: wrap;
-  .library_mine_box{
+  .library_mine_box {
     width: 230px;
     height: 333px;
     background: #fff;
     margin: 0 10px 20px;
     box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.05);
     border-radius: 8px;
-    border: 1px solid #E6E6E6;
+    border: 1px solid #e6e6e6;
     padding: 0 15px 15px;
     display: flex;
     flex-direction: column;
     position: relative;
   }
-  .library_mine_box_img{
+  .library_mine_box_img {
     text-align: center;
     border-bottom: 1px dashed #979797;
   }
-  .library_mine_box_i{
+  .library_mine_box_i {
     width: 145px;
     height: 199px;
     margin: 30px auto 20px;
   }
-  .library_mine_right{
+  .library_mine_right {
     margin-top: 20px;
   }
-  .library_mine_right_t{
+  .library_mine_right_t {
     font-size: 14px;
     font-weight: 500;
     color: #363636;
   }
-  .library_mine_cent{
+  .library_mine_cent {
     display: flex;
     justify-content: space-between;
     font-size: 12px;
@@ -322,15 +372,15 @@ export default {
     color: #363636;
     margin-top: 14px;
   }
-  .bookmark{
+  .bookmark {
     width: 24px;
-    height: 24px; 
+    height: 24px;
     position: absolute;
     left: 10px;
     top: -2px;
   }
 }
-.resour_mine_page{
+.resour_mine_page {
   text-align: center;
 }
 </style>
