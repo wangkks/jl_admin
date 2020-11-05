@@ -221,9 +221,10 @@ export default {
       }
     }
     .resour_mine_page {
+      display: inline-block;
       background-color: #fff;
-      padding: 80px 0;
-      text-align: center;
+      float: right;
+      margin-right: 30px;
     }
   }
   .footer {

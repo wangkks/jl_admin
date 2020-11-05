@@ -1,32 +1,30 @@
 <template>
   <div class="search_box">
-    <div class="search_box_right">
-      <div class="search_box_t">
-        <div class="serchre_left">
-          <div class="serchre_left_n">检索记录</div>
-          <div class="serchre_totle">共{{ searchData.total }}条</div>
-        </div>
+    <div class="search_box_t">
+      <div class="serchre_left">
+        <div class="serchre_left_n">检索记录</div>
+        <div class="serchre_totle">共{{ searchData.total }}条</div>
       </div>
-      <div class="serchre_mine">
-        <div
-          class="serchre_mine_box_max"
-          v-for="(item, index) in searchData.rows"
-          :key="index"
-        >
-          <div class="serchre_mine_box">
-            <div class="serchre_mine_box_t">
-              <div>{{ item.searchContent }}</div>
-              <div class="serchre_mine_box_t_s">
-                检索时间：{{ item.createTime }}
-              </div>
+    </div>
+    <div class="serchre_mine">
+      <div
+        class="serchre_mine_box_max"
+        v-for="(item, index) in searchData.rows"
+        :key="index"
+      >
+        <div class="serchre_mine_box">
+          <div class="serchre_mine_box_t">
+            <div>{{ item.searchContent }}</div>
+            <div class="serchre_mine_box_t_s">
+              检索时间：{{ item.createTime }}
             </div>
-            <img
-              @click="del(item.id)"
-              src="@/assets/delete_red.png"
-              alt=""
-              class="serchre_manage_i"
-            />
           </div>
+          <img
+            @click="del(item.id)"
+            src="@/assets/delete_red.png"
+            alt=""
+            class="serchre_manage_i"
+          />
         </div>
       </div>
     </div>
@@ -46,6 +44,7 @@ export default {
     };
   },
   async created() {
+    localStorage.setItem("leftBarIndex", 2)
     const result = await searchHistory({
       pageNum: 1,
       pageSize: 10
@@ -80,17 +79,11 @@ export default {
 <style lang="scss">
 .search_box {
   width: 100%;
+  padding: 0 30px;
   height: 100vh;
   overflow: scroll;
-  display: flex;
   background: rgba(237, 239, 243, 1);
-
-  .search_box_right {
-    width: auto;
-    margin-left: 30px;
-  }
   .search_box_t {
-    width: 1100px;
     font-size: 14px;
     font-weight: 400;
     color: #000000;
@@ -146,7 +139,6 @@ export default {
     margin-right: 20px;
   }
   .serchre_mine {
-    width: 1100px;
     margin: 22px 70px 80px 0;
     display: flex;
     flex-wrap: wrap;

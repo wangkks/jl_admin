@@ -1,48 +1,45 @@
 <template>
   <div class="reading_box">
-    <div class="reading_box_left"></div>
-    <div class="reading_box_right">
-      <div class="reading_box_t">
-        <div class="reading_left">
-          <div class="reading_left_n">阅读历史</div>
-        </div>
-        <div class="reading_right">
-          <div class="reading_sort_box">
-            <div>阅读时间</div>
-            <img src="@/assets/second/sort_down.png" alt="" class="sort_box" />
-          </div>
+    <div class="reading_box_t">
+      <div class="reading_left">
+        <div class="reading_left_n">阅读历史</div>
+      </div>
+      <div class="reading_right">
+        <div class="reading_sort_box">
+          <div>阅读时间</div>
+          <img src="@/assets/second/sort_down.png" alt="" class="sort_box" />
         </div>
       </div>
-      <div class="reading_record">共{{ readingData.total }}条</div>
-      <div class="reading_mine">
-        <div
-          class="reading_mine_box"
-          v-for="(item, index) in readingData.rows"
-          :key="index"
-        >
-          <div class="reading_mine_box_img">
-            <img :src="item.thumbCoverUrl" alt="" class="reading_mine_box_i" />
-          </div>
-          <div class="reading_mine_right">
-            <div class="reading_mine_right_t">{{ item.bookName }}</div>
-            <div class="reading_mine_cent">
-              <div>作者：{{ item.mainResponsibility }} 编</div>
-            </div>
-            <div class="reading_mine_time">
-              <div>阅读时间：{{ item.createTime }}</div>
-              <img
-                src="@/assets/delete_red.png"
-                class="reading_mine_time_i"
-                @click="del(item.id, index)"
-              />
-            </div>
-          </div>
-          <img
-            src="../../assets/second/bookmark-red.png"
-            alt=""
-            class="bookmark"
-          />
+    </div>
+    <div class="reading_record">共{{ readingData.total }}条</div>
+    <div class="reading_mine">
+      <div
+        class="reading_mine_box"
+        v-for="(item, index) in readingData.rows"
+        :key="index"
+      >
+        <div class="reading_mine_box_img">
+          <img :src="item.thumbCoverUrl" alt="" class="reading_mine_box_i" />
         </div>
+        <div class="reading_mine_right">
+          <div class="reading_mine_right_t">{{ item.bookName }}</div>
+          <div class="reading_mine_cent">
+            <div>作者：{{ item.mainResponsibility }} 编</div>
+          </div>
+          <div class="reading_mine_time">
+            <div>阅读时间：{{ item.createTime }}</div>
+            <img
+              src="@/assets/delete_red.png"
+              class="reading_mine_time_i"
+              @click="del(item.id, index)"
+            />
+          </div>
+        </div>
+        <img
+          src="../../assets/second/bookmark-red.png"
+          alt=""
+          class="bookmark"
+        />
       </div>
     </div>
   </div>
@@ -61,6 +58,7 @@ export default {
     };
   },
   async created() {
+    localStorage.setItem("leftBarIndex", 2)
     const result1 = await readHistoryList({
       pageNum: 1,
       pageSize: 10,
@@ -115,16 +113,12 @@ export default {
 <style lang="scss">
 .reading_box {
   width: 100%;
-  height: auto;
-  display: flex;
+  padding: 0 30px;
+  height: 100vh;
+  overflow: scroll;
   background: rgba(237, 239, 243, 1);
 }
-.reading_box_right {
-  width: auto;
-  margin-left: 30px;
-}
 .reading_box_t {
-  width: 1100px;
   font-size: 14px;
   font-weight: 400;
   color: #000000;
@@ -188,7 +182,6 @@ export default {
   margin: 20px 15px 0;
 }
 .reading_mine {
-  width: 1100px;
   margin: 22px 70px 80px 0;
   display: flex;
   flex-wrap: wrap;

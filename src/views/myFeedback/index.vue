@@ -26,7 +26,7 @@
             <div class="feed_mine_b_topbox">
               <div class="feed_mine_b_top" v-if="item.handleStatus == 1">
                 <div class="feed_mine_b_top_l">反馈内容</div>
-                <div class="feed_mine_b_top_r">
+                <div class="feed_mine_b_top_r" @click="del(item.id, index)">
                   <img
                     src="@/assets/delete_red.png"
                     alt=""
@@ -74,7 +74,7 @@
 </template>
 
 <script>
-import { feedbackCount, feedbackList } from "@/api/feedback"
+import { feedbackCount, feedbackList, feedbackDel } from "@/api/feedback"
 
 export default {
   components: {
@@ -106,9 +106,9 @@ export default {
     this.feedTab[1].num = res1.data.notCount
 
     this.getList(1)
-
   },
   methods: {
+    // 获取列表
     async getList(page) {
       const res = await feedbackList({
         pageNum: page,
@@ -118,6 +118,7 @@ export default {
 
       this.feedData = res
     },
+    //  切换
     tab(id) {
       this.status = id
       this.feedTab.map(item => {
@@ -133,6 +134,30 @@ export default {
     // 分页
     page(e) {
       this.getList(e)
+    },
+    // 删除
+    del(_id, index) {
+      this.$confirm('确定删除？', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        feedbackDel({
+          id: _id
+        })
+
+        // 刷新
+        this.getList(0)
+        this.$message({
+          type: 'success',
+          message: '删除成功!'
+        });
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消删除'
+        });
+      });
     }
   }
 }

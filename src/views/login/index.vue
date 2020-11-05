@@ -66,7 +66,7 @@
       >
       <div class="loginOther">
         <div @click="changeLogin">
-          {{ loginForm.type == 'phone' ? '邮箱登录' : '手机号登陆' }}
+          {{ loginForm.type == 'phone' ? '邮箱登录' : '手机号登录' }}
         </div>
         <div class="forget">
           <span @click="jump('/changePasswordOne')">忘记密码</span>

@@ -1,69 +1,67 @@
 <template>
   <div class="mynote_box">
-    <div class="mynote_box_right">
-      <div class="mynote_box_t">
-        <div class="mynote_left">
-          <div class="mynote_left_n">我的笔记</div>
-          <div class="mynote_totle">共{{ mynoteData.total }}条</div>
-        </div>
+    <div class="mynote_box_t">
+      <div class="mynote_left">
+        <div class="mynote_left_n">我的笔记</div>
+        <div class="mynote_totle">共{{ mynoteData.total }}条</div>
       </div>
-      <div class="mynote_mine">
-        <div
-          class="mynote_mine_minebox"
-          v-for="(item, index) in mynoteData.rows"
-          :key="index"
-        >
-          <div class="mynote_mine_box">
-            <div class="mynote_mine_b_topbox">
-              <div class="mynote_mine_b_top">
-                <div class="mynote_mine_b_top_l">{{ item.bookName }}</div>
-                <div class="mynote_mine_b_top_r">
-                  <img
-                    @click="editShow(index, item)"
-                    src="@/assets/edit.png"
-                    alt=""
-                    class="top_r_edit"
-                  />
-                  <img
-                    @click="del(item.id, index)"
-                    src="@/assets/delete_red.png"
-                    alt=""
-                    class="top_r_delete"
-                  />
-                </div>
-              </div>
-              <div class="mynote_mine_tion">
-                <div class="mynote_mine_tion_t">引文</div>
-                <div class="mynote_mine_tion_s">{{ item.menuId }}</div>
-              </div>
-              <div class="mynote_mine_tion">
-                <div class="mynote_mine_tion_t tionred">笔记</div>
-                <textarea
-                  class="mynote_mine_tion_s"
-                  :readonly="index == editIndex ? true : false"
-                  v-model="item.noteContent"
-                ></textarea>
-                <span @click="edit(item)">确定修改</span>
+    </div>
+    <div class="mynote_mine">
+      <div
+        class="mynote_mine_minebox"
+        v-for="(item, index) in mynoteData.rows"
+        :key="index"
+      >
+        <div class="mynote_mine_box">
+          <div class="mynote_mine_b_topbox">
+            <div class="mynote_mine_b_top">
+              <div class="mynote_mine_b_top_l">{{ item.bookName }}</div>
+              <div class="mynote_mine_b_top_r">
+                <img
+                  @click="editShow(index, item)"
+                  src="@/assets/edit.png"
+                  alt=""
+                  class="top_r_edit"
+                />
+                <img
+                  @click="del(item.id, index)"
+                  src="@/assets/delete_red.png"
+                  alt=""
+                  class="top_r_delete"
+                />
               </div>
             </div>
-            <div class="mynote_mine_b_btmbox">
-              <div class="btmbox_l">时间：{{ item.createTime }}</div>
-              <div class="btmbox_r">
-                来源：{{ item.bookName }}/{{ item.menuName }}
-              </div>
+            <div class="mynote_mine_tion">
+              <div class="mynote_mine_tion_t">引文</div>
+              <div class="mynote_mine_tion_s">{{ item.menuId }}</div>
+            </div>
+            <div class="mynote_mine_tion">
+              <div class="mynote_mine_tion_t tionred">笔记</div>
+              <textarea
+                class="mynote_mine_tion_s"
+                :readonly="index == editIndex ? true : false"
+                v-model="item.noteContent"
+              ></textarea>
+              <span @click="edit(item)">确定修改</span>
+            </div>
+          </div>
+          <div class="mynote_mine_b_btmbox">
+            <div class="btmbox_l">时间：{{ item.createTime }}</div>
+            <div class="btmbox_r">
+              来源：{{ item.bookName }}/{{ item.menuName }}
             </div>
           </div>
         </div>
       </div>
+    </div>
 
-      <div class="resour_mine_page">
-        <el-pagination
-          layout="prev, pager, next"
-          :total="mynoteData.total * 1"
-          @current-change="page"
-        >
-        </el-pagination>
-      </div>
+    <div class="resour_mine_page" v-if="mynoteData.total">
+      <el-pagination
+        layout="prev, pager, next"
+        :total="mynoteData.total * 1"
+        @current-change="page"
+      >
+      </el-pagination>
     </div>
     <!-- <Delete /> -->
   </div>
@@ -86,6 +84,7 @@ export default {
     };
   },
   created() {
+    localStorage.setItem("leftBarIndex", 2)
     // const result = await addReadNote({
     //   bookId: '936689ea817b44209e22394b9639a372',
     //   menuId: '111111111',
@@ -150,14 +149,16 @@ export default {
 
 <style lang="scss" scope>
 .mynote_box {
-  width: calc(100%);
+  width: 100%;
+  padding: 0 30px;
   height: 100vh;
   overflow: scroll;
-  display: flex;
   background: rgba(237, 239, 243, 1);
   .resour_mine_page {
-    text-align: center;
-    margin-bottom: 70px;
+    display: inline-block;
+    background-color: #fff;
+    float: right;
+    margin-right: 30px;
   }
 
   .mynote_box_right {

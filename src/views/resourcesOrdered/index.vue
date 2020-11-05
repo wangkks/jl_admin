@@ -36,22 +36,33 @@
           <div class="resour_reset">重置</div>
         </div>
         <div class="resour_mine_taboxs">
-          <div 
-            :class="['mine_taboxs_btn',index == orgId?'btn_red':'']" 
-            v-for="(item,index) in typeList"
+          <div
+            :class="['mine_taboxs_btn', index == orgId ? 'btn_red' : '']"
+            v-for="(item, index) in typeList"
             @click="changeType(index)"
           >
-            {{item.name}}
+            {{ item.name }}
           </div>
         </div>
         <div class="resour_mine_table">
           <el-table :data="tableData" style="width: 100%">
-            <el-table-column prop="bookName" label="书名" width="180"></el-table-column>
-            <el-table-column prop="database" label="数据库" width="180"></el-table-column>
+            <el-table-column
+              prop="bookName"
+              label="书名"
+              width="180"
+            ></el-table-column>
+            <el-table-column
+              prop="database"
+              label="数据库"
+              width="180"
+            ></el-table-column>
             <el-table-column prop="charge" label="主要责任者"></el-table-column>
-            <el-table-column prop="resourceType" label="分类"> </el-table-column>
-            <el-table-column prop="publishland" label="出版社"> </el-table-column>
-            <el-table-column prop="publishYear" label="出版时间"> </el-table-column>
+            <el-table-column prop="resourceType" label="分类">
+            </el-table-column>
+            <el-table-column prop="publishland" label="出版社">
+            </el-table-column>
+            <el-table-column prop="publishYear" label="出版时间">
+            </el-table-column>
           </el-table>
         </div>
         <div class="resour_mine_page">
@@ -85,10 +96,10 @@ export default {
       }],
       value: '',
       typeList: [
-        {name: '方志编',id: 0},
-        {name: '史料编',id: 1},
-        {name: '文献编',id: 2},
-        {name: '档案编',id: 3},
+        { name: '方志编', id: 0 },
+        { name: '史料编', id: 1 },
+        { name: '文献编', id: 2 },
+        { name: '档案编', id: 3 },
       ],
       tableData: [],
       total: 0,
@@ -101,16 +112,16 @@ export default {
     this.getList(1);
   },
   methods: {
-    async getList(page){
+    async getList(page) {
       // 最新上架
       const res = await pagList({
         orgId: this.orgId
       })
-      console.log(333,res)
+      console.log(333, res)
       this.tableData = res.rows;
       this.total = res.total;
     },
-    changeType(index){
+    changeType(index) {
       this.orgId = index;
       this.getList(1);
     },
@@ -160,6 +171,12 @@ export default {
   height: auto;
   display: flex;
   background: rgba(237, 239, 243, 1);
+  .resour_mine_page {
+    display: inline-block;
+    background-color: #fff;
+    float: right;
+    margin-right: 30px;
+  }
 
   .resour_box_left {
     width: 207px;

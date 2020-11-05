@@ -175,6 +175,12 @@ export default {
   overflow: scroll;
   display: flex;
   background: rgba(237, 239, 243, 1);
+  .resour_mine_page {
+    display: inline-block;
+    background-color: #fff;
+    float: right;
+    margin-right: 30px;
+  }
 
   .resour_box_left {
     width: 207px;

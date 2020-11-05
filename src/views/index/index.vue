@@ -17,7 +17,7 @@
         <img src="@/assets/icon_banner_b.png" alt="" class="banner-img" />
       </div>
     </div>
-    <div class="file-desc">
+    <div class="file-desc" @click="goBookList">
       <div class="file-word">
         <div
           class="file-word-item"
@@ -69,6 +69,7 @@
           class="mybook_mine_box"
           v-for="(item, index) in mybookData.rows"
           :key="index"
+          @click="goBookList"
         >
           <div class="mybook_mine_box_img">
             <img :src="item.coverUrl" alt="" class="mybook_mine_box_i" />
@@ -188,9 +189,10 @@ export default {
     goMoreNews() {
       this.$router.push('news')
     },
-    goBookList(){
+    goBookList() {
+      localStorage.setItem("leftBarIndex", 1)
       this.$router.push('example/bookLibraryList')
-    },
+    }
   }
 };
 </script>
@@ -209,10 +211,10 @@ export default {
   height: 14px;
   margin: 11px 16px 0 0;
 }
-.user-dropdown-title{
+.user-dropdown-title {
   border-bottom: 1px dashed #ccc;
 }
-.el-dropdown-menu__item{
+.el-dropdown-menu__item {
   display: flex;
 }
 </style>

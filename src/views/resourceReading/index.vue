@@ -122,9 +122,6 @@ export default {
     this.content = res.data
   },
   methods: {
-    // a1() {
-    //   console.log('111')
-    // }
   }
 }
 </script>
@@ -142,9 +139,46 @@ export default {
 }
 </style>
 <style lang="scss" scope>
-.zhu {
+.resouing_mine_centent_ce h2 {
+  font-size: 20px;
+  line-height: 30px;
+}
+.resouing_mine_centent_ce h2 p {
+  font-size: 14px;
+  color: #666;
+  line-height: 20px;
+}
+.resouing_mine_centent_ce .zhu {
+  color: #b9584e;
+}
+.resouing_mine_centent_ce .shu {
+  color: purple;
+}
+
+.resouing_mine_centent_ce .luokuan {
+  color: #b9584e;
+}
+
+.resouing_mine_centent_ce .xiaozh {
+  color: blue;
+}
+
+.resouing_mine_centent_ce .jiaozhu-jiao {
+  color: blue;
+}
+
+.resouing_mine_centent_ce .jiaozhu-zhu {
+  font-size: 16px;
+  color: blue;
+}
+
+.resouing_mine_centent_ce .zhuanming {
   text-decoration: underline;
 }
+.resouing_mine_centent_ce .shuming {
+  border-bottom: 1px dashed #666;
+}
+
 .resouing_box {
   width: 100%;
   height: auto;
@@ -264,14 +298,7 @@ export default {
   line-height: 17px;
   letter-spacing: 1px;
 }
-.resouing_mine_centent_ce h2 {
-  font-size: 18px;
-  line-height: 25px;
-}
-.resouing_mine_centent_ce h2 p {
-  font-size: 16px;
-  line-height: 20px;
-}
+
 .resouing_mine_centent_btn {
   width: 340px;
   height: 60px;

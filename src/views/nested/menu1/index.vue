@@ -56,6 +56,7 @@ export default {
     };
   },
   async created() {
+    localStorage.setItem("leftBarIndex", 2)
     let newRouter = constantRoutes
 
     if (newRouter[2].children[1]) {

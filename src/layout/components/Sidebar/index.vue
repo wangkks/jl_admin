@@ -8,7 +8,6 @@
           @click="changeBtn(index)"
           :class="[index == leftBarIndex ? 'activited' : '']"
         >
-          {
           <img :src="index == leftBarIndex ? item.urlred : item.url" alt="" />
           {{ index }}-{{ leftBarIndex }}
         </li>
@@ -19,7 +18,11 @@
         <img src="@/assets/second/icon_biaodian.png" alt="" />
       </div>
       <div class="leftBar-b">
-        <el-dropdown class="avatar-container" trigger="click">
+        <el-dropdown
+          class="avatar-container"
+          trigger="click"
+          v-if="userRole == 1"
+        >
           <img
             src="@/assets/second/icon_mine.png"
             alt=""
@@ -83,10 +86,18 @@
             </router-link>
           </el-dropdown-menu>
         </el-dropdown>
+
+        <img
+          v-else
+          src="@/assets/second/icon_mine.png"
+          alt=""
+          style="width: 19px; height: 20px"
+          @click="userInfo"
+        />
         <img src="@/assets/second/icon_logout.png" alt="" @click="loginOut" />
       </div>
     </div>
-    <div class="rightBar">
+    <div class="rightBar" v-if="leftBarIndex != 3">
       <logo v-if="showLogo" :collapse="isCollapse" />
       <template v-if="$route.path.split('/')[2] == 'resourceDetails'">
         <BookDetailBar v-if="detailData.bookName" :data="detailData" />
@@ -94,11 +105,14 @@
       <template v-if="$route.path.split('/')[2] == 'resourceReading'">
         <BookSynopsisBar />
       </template>
-      <template v-if="leftBarIndex == 1">
+      <!-- <template v-if="leftBarIndex == 1">
         <template v-if="userRole == 1">
-          <BookLibrary /><!-- 普通用户 -->
+          <BookLibrary />
         </template>
-        <template v-else> <userInfo /><!-- 有权限用户 --> </template>
+        <template v-else> <userInfo /></template>
+      </template> -->
+      <template v-if="leftBarIndex == 1">
+        <BookLibrary />
       </template>
       <template v-if="leftBarIndex == 2">
         <MyBookshelf />
@@ -136,7 +150,7 @@ export default {
           urlred: require("@/assets/second/icon_bookshelf_red.png"),
         },
       ],
-      userRole: 1,
+      userRole: 2,
       detailData: []
     };
   },
@@ -183,18 +197,24 @@ export default {
         return;
       }
       if (index == 1) {
-        if (this.userRole == 1) {//角色判断
-          this.$router.push("/example");
-        } else {
-          this.$router.push("/userInfo");
-        }
+        // if (this.userRole == 1) {//角色判断
+        this.$router.push("/example");
+        // }
       }
       if (index == 2) {
         this.$router.push("/myBook/myNote");
       }
+
+      if (index == 3) {
+        this.$router.push("/userInfo");
+      }
       localStorage.setItem("leftBarIndex", index);
       this.leftBarIndex = index;
     },
+    userInfo() {
+      this.leftBarIndex = 3
+      this.$router.push("/userInfo");
+    }
   },
 };
 </script>

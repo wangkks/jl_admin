@@ -1,135 +1,125 @@
 <template>
   <div class="booklibrary_box">
-    <div class="booklibrary_box_right">
-      <div class="booklibrary_box_t">
-        <div class="booklibrary_left">
-          <div class="booklibrary_left_n">书籍库</div>
-          <div class="booklibrary_totle">
-            共有
-            <span class="booklibrary_num">{{ total }}</span>
-            条记录库
-          </div>
-        </div>
-        <div class="booklibrary_right">
-          <div class="booklibrary_input">
-            <el-input
-              v-model="bookname"
-              placeholder="请输入关键字"
-              @keyup.enter.native="getList(1)"
-            ></el-input>
-            <img
-              src="@/assets/icon_search.png"
-              alt=""
-              class="booklibrary_input_i"
-              @click="getList(1)"
-            />
-          </div>
-          <div class="booklibrary_sort_box" @click="changeIsAsc">
-            <div>出版时间</div>
-            <img
-              :src="
-                isAsc
-                  ? require('@/assets/second/sort_out.png')
-                  : require('@/assets/second/sort_down.png')
-              "
-              alt=""
-              class="sort_box"
-            />
-          </div>
-          <img
-            :src="
-              layoutStyle
-                ? require('@/assets/second/list_red.png')
-                : require('@/assets/second/list.png')
-            "
-            alt=""
-            class="sort_list"
-            @click="changeLayoutStyle"
-          />
-          <img
-            :src="
-              layoutStyle
-                ? require('@/assets/second/window.png')
-                : require('@/assets/second/window_red.png')
-            "
-            alt=""
-            class="sort_window"
-            @click="changeLayoutStyle"
-          />
+    <div class="booklibrary_box_t">
+      <div class="booklibrary_left">
+        <div class="booklibrary_left_n">书籍库</div>
+        <div class="booklibrary_totle">
+          共有
+          <span class="booklibrary_num">{{ total }}</span>
+          条记录库
         </div>
       </div>
-      <div class="detection_mine" v-if="layoutStyle">
-        <div
-          class="detection_mine_box"
-          v-for="(item, index) in detectionList"
-          :key="index"
-          @click="goBookDetail(item.uniqueId)"
-        >
+      <div class="booklibrary_right">
+        <div class="booklibrary_input">
+          <el-input
+            v-model="bookname"
+            placeholder="请输入关键字"
+            @keyup.enter.native="getList(1)"
+          ></el-input>
+          <img
+            src="@/assets/icon_search.png"
+            alt=""
+            class="booklibrary_input_i"
+            @click="getList(1)"
+          />
+        </div>
+        <div class="booklibrary_sort_box" @click="changeIsAsc">
+          <div>出版时间</div>
+          <img
+            :src="
+              isAsc
+                ? require('@/assets/second/sort_out.png')
+                : require('@/assets/second/sort_down.png')
+            "
+            alt=""
+            class="sort_box"
+          />
+        </div>
+        <img
+          :src="
+            layoutStyle
+              ? require('@/assets/second/list_red.png')
+              : require('@/assets/second/list.png')
+          "
+          alt=""
+          class="sort_list"
+          @click="changeLayoutStyle"
+        />
+        <img
+          :src="
+            layoutStyle
+              ? require('@/assets/second/window.png')
+              : require('@/assets/second/window_red.png')
+          "
+          alt=""
+          class="sort_window"
+          @click="changeLayoutStyle"
+        />
+      </div>
+    </div>
+    <div class="detection_mine" v-if="layoutStyle">
+      <div
+        class="detection_mine_box"
+        v-for="(item, index) in detectionList"
+        :key="index"
+        @click="goBookDetail(item.uniqueId)"
+      >
+        <img
+          :src="item.img || require('@/assets/second/bitmap_bg.png')"
+          alt=""
+          class="detection_mine_box_i"
+        />
+        <div class="detection_mine_right">
+          <div class="detection_mine_right_t">
+            {{ item.bookName }}
+          </div>
+          <div class="detection_mine_cent">
+            <div class="detection_mine_cent_l">
+              <div>作者：{{ item.mainResponsibility }} 编</div>
+            </div>
+            <img
+              src="@/assets/second/more.png"
+              alt=""
+              class="detection_mine_cent_i"
+            />
+          </div>
+          <div class="detection_mine_cent_btm">
+            {{ item.bookDesc }}
+          </div>
+        </div>
+        <img src="@/assets/second/bookmark-line.png" alt="" class="bookmark" />
+      </div>
+    </div>
+    <div class="library_mine" v-else>
+      <div
+        class="library_mine_box"
+        v-for="(item, index) in detectionList"
+        :key="index"
+        @click="goBookDetail(item.id)"
+      >
+        <div class="library_mine_box_img">
           <img
             :src="item.img || require('@/assets/second/bitmap_bg.png')"
             alt=""
-            class="detection_mine_box_i"
-          />
-          <div class="detection_mine_right">
-            <div class="detection_mine_right_t">
-              {{ item.bookName }}
-            </div>
-            <div class="detection_mine_cent">
-              <div class="detection_mine_cent_l">
-                <div>作者：{{ item.mainResponsibility }} 编</div>
-              </div>
-              <img
-                src="@/assets/second/more.png"
-                alt=""
-                class="detection_mine_cent_i"
-              />
-            </div>
-            <div class="detection_mine_cent_btm">
-              {{ item.bookDesc }}
-            </div>
-          </div>
-          <img
-            src="@/assets/second/bookmark-line.png"
-            alt=""
-            class="bookmark"
+            class="library_mine_box_i"
           />
         </div>
-      </div>
-      <div class="library_mine" v-else>
-        <div
-          class="library_mine_box"
-          v-for="(item, index) in detectionList"
-          :key="index"
-          @click="goBookDetail(item.id)"
-        >
-          <div class="library_mine_box_img">
-            <img
-              :src="item.img || require('@/assets/second/bitmap_bg.png')"
-              alt=""
-              class="library_mine_box_i"
-            />
+        <div class="library_mine_right">
+          <div class="library_mine_right_t">{{ item.bookName }}</div>
+          <div class="library_mine_cent">
+            <div>作者：{{ item.mainResponsibility }} 编</div>
           </div>
-          <div class="library_mine_right">
-            <div class="library_mine_right_t">{{ item.bookName }}</div>
-            <div class="library_mine_cent">
-              <div>作者：{{ item.mainResponsibility }} 编</div>
-            </div>
-          </div>
-          <img
-            src="@/assets/second/bookmark-line.png"
-            alt=""
-            class="bookmark"
-          />
         </div>
+        <img src="@/assets/second/bookmark-line.png" alt="" class="bookmark" />
       </div>
-      <div class="resour_mine_page">
-        <el-pagination
-          layout="prev, pager, next"
-          :total="total"
-          @current-chang="page"
-        >
-        </el-pagination>
-      </div>
+    </div>
+    <div class="resour_mine_page">
+      <el-pagination
+        layout="prev, pager, next"
+        :total="total"
+        @current-chang="page"
+      >
+      </el-pagination>
     </div>
   </div>
 </template>
@@ -200,16 +190,12 @@ export default {
 <style lang="scss">
 .booklibrary_box {
   width: 100%;
-  height: auto;
-  display: flex;
+  padding: 0 30px;
+  height: 100vh;
+  overflow: scroll;
   background: rgba(237, 239, 243, 1);
 }
-.booklibrary_box_right {
-  width: auto;
-  margin-left: 30px;
-}
 .booklibrary_box_t {
-  width: 1100px;
   font-size: 14px;
   font-weight: 400;
   color: #000000;
@@ -272,7 +258,6 @@ export default {
 .detection_mine {
   margin: 22px auto;
   .detection_mine_box {
-    width: 1100px;
     height: auto;
     background: #fff;
     margin: 0 auto 10px;
@@ -330,7 +315,6 @@ export default {
   }
 }
 .library_mine {
-  width: 1100px;
   margin: 22px 70px 80px 0;
   display: flex;
   flex-wrap: wrap;
@@ -381,6 +365,9 @@ export default {
   }
 }
 .resour_mine_page {
-  text-align: center;
+  display: inline-block;
+  background-color: #fff;
+  float: right;
+  margin-right: 30px;
 }
 </style>
