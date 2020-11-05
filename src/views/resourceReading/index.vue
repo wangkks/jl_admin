@@ -266,9 +266,11 @@ export default {
 }
 .resouing_mine_centent_ce h2 {
   font-size: 18px;
+  line-height: 25px;
 }
 .resouing_mine_centent_ce h2 p {
   font-size: 16px;
+  line-height: 20px;
 }
 .resouing_mine_centent_btn {
   width: 340px;

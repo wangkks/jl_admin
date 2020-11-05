@@ -83,7 +83,7 @@
             </router-link>
           </el-dropdown-menu>
         </el-dropdown>
-        <img src="@/assets/second/icon_logout.png" alt="" />
+        <img src="@/assets/second/icon_logout.png" alt="" @click="loginOut" />
       </div>
     </div>
     <div class="rightBar">
@@ -172,6 +172,11 @@ export default {
     this.leftBarIndex = localStorage.getItem("leftBarIndex") || 1;
   },
   methods: {
+    // 登出
+    loginOut() {
+      this.$store.dispatch("user/logout", {})
+      this.$router.push('/login')
+    },
     changeBtn(index) {
       if (index == 0) {
         this.$router.push("/");
