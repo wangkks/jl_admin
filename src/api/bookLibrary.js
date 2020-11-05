@@ -23,3 +23,11 @@ export function menuTree(data) {
     data
   });
 }
+
+export function menuDetail(data) {
+  return request({
+    url: "product/menu/menudetail",
+    method: "get",
+    data
+  });
+}

@@ -42,7 +42,7 @@
               <img src="@/assets/second/icon_goldFoil.png" alt="" />
               讀四書大全説
             </div>
-            <Menu :menu="menuData" />
+            <Menu :children="menuData" />
           </div>
         </div>
       </div>
@@ -78,9 +78,6 @@ export default {
     async getDetail() {
       const res = await booksDetail({ id: this.id });
       this.detailData = res.data;
-    },
-    goSynopsis(id) {
-      this.$router.push(`/myBook/resourceReading/${id}`);
     }
   },
 };

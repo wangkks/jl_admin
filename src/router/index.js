@@ -164,7 +164,7 @@ export const constantRoutes = [
         meta: {}
       },
       {
-        path: "resourceReading/:id", //资源阅读页
+        path: "resourceReading/:bookid/:id", //资源阅读页
         component: () => import("@/views/resourceReading/index"),
         hidden: true,
         meta: {}

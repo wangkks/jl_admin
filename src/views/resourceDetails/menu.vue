@@ -1,33 +1,38 @@
 <template>
-  <el-timeline>
-    <el-timeline-item
-      v-for="(item, index) in menu"
-      :key="index"
-      :type="item.type"
-      :size="item.size"
-      @click.native="goSynopsis(item.id)"
-    >
+  <div>
+    <!-- <el-timeline>
+    <el-timeline-item>
       {{ item.menuName }}
       <menu-item v-if="item.children" :children="item.children"></menu-item>
     </el-timeline-item>
-  </el-timeline>
+  </el-timeline> -->
+    <div
+      v-for="(item, index) in children"
+      :key="index"
+      @click.stop="goSynopsis(item.id)"
+      class="item"
+    >
+      {{ item.menuName }}
+      <menu-item v-if="item.children" :children="item.children"></menu-item>
+    </div>
+  </div>
 </template>
 
 <script>
 
 export default {
   name: 'menuItem',
-  props: ['menu'],
+  props: ['children'],
   data() {
     return {
     };
   },
   created() {
-    console.log('thhis', this.menu)
   },
   methods: {
     goSynopsis(id) {
-      this.$router.push(`/myBook/resourceReading/${id}`);
+
+      this.$router.push(`/myBook/resourceReading/${this.$route.params.id}/${id}`);
     }
   },
 };
@@ -46,6 +51,11 @@ export default {
 }
 </style>
 <style lang="scss">
+.item {
+  padding-left: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
 .resour_box {
   width: 100%;
   height: auto;
