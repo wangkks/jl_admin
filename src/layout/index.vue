@@ -6,7 +6,7 @@
       @click="handleClickOutside"
     />
     <sidebar class="sidebar-container" />
-    <div :class="['main-container', { hideSidebar: leftBarIndex == 3 }]">
+    <div class="main-container">
       <app-main />
     </div>
   </div>
@@ -39,12 +39,6 @@ export default {
         mobile: this.device === "mobile",
       };
     },
-  },
-  data: {
-    leftBarIndex: ''
-  },
-  created() {
-    this.leftBarIndex = localStorage.getItem("leftBarIndex")
   },
   methods: {
     handleClickOutside() {

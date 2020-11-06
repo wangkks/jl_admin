@@ -116,6 +116,7 @@ export default {
   padding: 0 30px;
   height: 100vh;
   overflow: scroll;
+  margin-right: 270px;
   background: rgba(237, 239, 243, 1);
 }
 .reading_box_t {
