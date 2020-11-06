@@ -153,7 +153,6 @@ export default {
   padding: 0 30px;
   height: 100vh;
   overflow: scroll;
-  margin-left: 210px;
   background: rgba(237, 239, 243, 1);
   .resour_mine_page {
     display: inline-block;

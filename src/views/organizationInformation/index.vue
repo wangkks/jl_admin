@@ -137,8 +137,6 @@ $cursor: #000;
   overflow: scroll;
   background: rgba(237, 239, 243, 1);
   padding: 0 30px;
-  position: relative;
-  z-index: 10002;
 }
 .organizat_box_t {
   width: 1100px;

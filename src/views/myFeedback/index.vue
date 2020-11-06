@@ -197,7 +197,6 @@ export default {
 </style>
 <style lang="scss" scope>
 .feed_box {
-  margin-left: 210px;
   width: 100%;
   height: 100vh;
   overflow-y: scroll;

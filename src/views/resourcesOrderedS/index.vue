@@ -110,14 +110,7 @@ export default {
         label: '机构2'
       }],
       value: '',
-      tableData: [{
-        name: '诗国南京',
-        database: '史料编',
-        charge: '（清）马士图 ',
-        class: '图书',
-        publish: '南京出版社',
-        time: '2020'
-      }]
+      tableData: []
     };
   },
   async created() {
@@ -131,7 +124,6 @@ export default {
 
   },
   methods: {
-
   }
 }
 </script>

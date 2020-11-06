@@ -97,7 +97,7 @@
         <img src="@/assets/second/icon_logout.png" alt="" @click="loginOut" />
       </div>
     </div>
-    <div class="rightBar" v-if="leftBarIndex != 3">
+    <div class="rightBar">
       <logo v-if="showLogo" :collapse="isCollapse" />
       <template v-if="$route.path.split('/')[2] == 'resourceDetails'">
         <BookDetailBar v-if="detailData.bookName" :data="detailData" />
@@ -116,6 +116,9 @@
       </template>
       <template v-if="leftBarIndex == 2">
         <MyBookshelf />
+      </template>
+      <template v-if="leftBarIndex == 3">
+        <userInfo />
       </template>
     </div>
   </div>
