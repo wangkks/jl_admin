@@ -22,3 +22,11 @@ export function addReadHistory(data) {
     data
   });
 }
+
+export function booksType(data) {
+  return request({
+    url: "product/books/type",
+    method: "get",
+    data
+  });
+}

@@ -1,13 +1,12 @@
 <template>
   <div class="resour_boxs">
-    <div class="resour_box_left"></div>
     <div class="resour_box_right">
       <div class="resour_box_t">已订阅资源</div>
       <div class="resour_mine">
         <div class="resour_mine_box">
           <div class="resour_right">
             <div class="resour_input">
-              <el-select v-model="value" placeholder="机构名称">
+              <el-select v-model="value" placeholder="分类">
                 <el-option
                   v-for="item in options"
                   :key="item.value"
@@ -174,11 +173,6 @@ export default {
     margin-right: 30px;
   }
 
-  .resour_box_left {
-    width: 207px;
-    height: auto;
-    background: red;
-  }
   .resour_box_right {
     width: auto;
     margin-left: 30px;
