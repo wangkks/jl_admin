@@ -25,7 +25,7 @@ export function addReadHistory(data) {
 
 export function booksType(data) {
   return request({
-    url: "product/books/type",
+    url: "tproBook/type",
     method: "get",
     data
   });
