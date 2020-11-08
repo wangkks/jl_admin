@@ -4,7 +4,9 @@
       <div class="resour_box_t">
         <div class="resour_left">
           <div class="resour_left_n">书籍内容</div>
-          <div class="resour_totle">当前位置：经部-汉语言文学-中国文学</div>
+          <div class="resour_totle">
+            当前位置：{{ detailData.siClassification }}
+          </div>
         </div>
         <div class="resour_right">
           <div class="resour_input">
@@ -207,7 +209,7 @@ export default {
 .book_synopsis {
   margin-top: 14px;
   .book_synopsis_title {
-    font-size: 14px;
+    font-size: 12px;
     font-family: PingFangSC-Regular, PingFang SC;
     font-weight: 400;
     color: #000000;
