@@ -12,7 +12,7 @@
           <i class="el-icon-caret-bottom" />
         </div>
         <el-dropdown-menu slot="dropdown" class="user-dropdown">
-          <router-link to="/myBook">
+          <router-link to="/myBook/menu/0">
             <el-dropdown-item>
               <img
                 src="@/assets/second/icon_myshape.png"

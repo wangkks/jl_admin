@@ -50,6 +50,13 @@ export default {
     };
   },
   methods: {
+    handlePass(index) {
+      // if (index == 0) {
+      this.$router.push({
+        path: '/changePasswordTwo'
+      })
+      // }
+    }
   }
 }
 </script>

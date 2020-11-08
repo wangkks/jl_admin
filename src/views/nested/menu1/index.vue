@@ -57,13 +57,13 @@ export default {
     localStorage.setItem("leftBarIndex", 2)
     let newRouter = constantRoutes
 
-    if (newRouter[2].children[1]) {
+    if (newRouter[2].children[0]) {
       const res = await bookClassList({})
 
-      newRouter[2].children[1].children = []
+      newRouter[2].children[0].children = []
 
       res.rows.map(item => {
-        newRouter[2].children[1].children.push(
+        newRouter[2].children[0].children.push(
           {
             path: "/myBook/menu/" + item.id,
             name: "Menu" + item.id,

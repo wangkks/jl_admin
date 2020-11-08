@@ -60,7 +60,7 @@ service.interceptors.response.use(
       });
 
       if (res.code === 403) {
-        location.href = "/";
+        location.href = "/#/login";
         removeToken()
       }
 

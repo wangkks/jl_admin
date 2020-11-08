@@ -4,7 +4,7 @@
       <img :src="data.coverUrl" alt="" />
     </div>
     <div class="book-title">{{ data.bookName }}</div>
-    <div class="book-join">
+    <div class="book-join" @click="add">
       <img src="@/assets/second/bookmark-line.png" alt="" />
       <span>加入书架</span>
     </div>
@@ -21,6 +21,8 @@
 </template>
 
 <script>
+import { addBookClass } from '@/api/bookshelf'
+
 export default {
   name: 'BookDetailBar',
   props: ['data'],
@@ -28,6 +30,19 @@ export default {
     return {
     };
   },
+  methods: {
+    async add() {
+      const res = await addBookClass({
+        bookId: this.$route.params.bookid,
+        classesId: this.data.siClassificationId,
+      })
+
+      this.$message({
+        type: 'success',
+        message: '添加成功!'
+      });
+    }
+  }
 };
 </script>
 <style lang="scss" scoped>
@@ -58,6 +73,7 @@ export default {
     align-items: center;
     border: 1px solid #d0021b;
     margin-left: 19px;
+    cursor: pointer;
     img {
       width: 20px;
       height: 20px;

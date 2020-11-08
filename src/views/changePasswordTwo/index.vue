@@ -2,7 +2,7 @@
   <div class="passTwo_box">
     <HeadIndex></HeadIndex>
     <div class="passTwo_box_t">基本信息</div>
-    <div class="passTwo_form">
+    <div class="passTwo_form" v-if="!ruleOk">
       <div class="passTwo_form_tit">
         <div class="passTwo_form_s"></div>
         邮箱验证
@@ -31,22 +31,17 @@
         </el-form-item>
       </el-form>
     </div>
-    <div class="passTwo_form form_two">
+    <div v-else class="passTwo_form form_two">
       <div class="passTwo_form_tit">
         <div class="passTwo_form_s"></div>
         邮箱验证
       </div>
-      <el-form
-        :model="ruleFormTwo"
-        ref="ruleFormTwo"
-        label-width="114px"
-        class="demo-ruleForm"
-      >
+      <el-form label-width="114px" class="demo-ruleForm">
         <el-form-item label="请输入新密码">
           <el-input v-model="ruleForm.loginPass"></el-input>
         </el-form-item>
         <el-form-item label="再次输入新密码">
-          <el-input v-model="ruleForm.passwordTwo"></el-input>
+          <el-input v-model="passwordTwo"></el-input>
         </el-form-item>
         <el-form-item class="btn_box">
           <el-button type="primary" @click="submitFormTwo('ruleFormTwo')"
@@ -66,6 +61,8 @@ import { sendEmail, updatePassword } from '@/api/user'
 export default {
   data() {
     return {
+      ruleOk: false,
+      passwordTwo: '',
       ruleForm: {
         loginPass: '',
         uuid: '',
@@ -89,38 +86,59 @@ export default {
 
       this.ruleForm.uuid = res.data.uuid
     },
-    submitForm(formName) {
-      this.$refs[formName].validate((valid) => {
-        if (valid) {
-          let params = Object.assign({}, this.ruleForm, {
-            userEmail: this.userInfo.userEmail,
-            id: this.userInfo.id
-          })
-
-          updatePassword(params)
-        } else {
-          console.log('error submit!!');
-          return false;
-        }
-      });
-    },
-    submitFormTwo(formNameTwo) {
-      this.$refs[formNameTwo].validate((valid) => {
-        if (valid) {
-          alert('submit!');
-        } else {
-          console.log('error submit!!');
-          return false;
-        }
-      });
-    },
-    handlePass(index) {
-      if (index == 0) {
-        this.$router.push({
-          path: '/changePasswordOne'
-        })
+    submitForm() {
+      if (!this.ruleForm.code) {
+        this.$message({
+          message: '请输入验证码',
+          type: "error",
+          duration: 1000
+        });
+        return
       }
 
+      this.ruleOk = true
+    },
+    async submitFormTwo(formName) {
+      if (!this.ruleForm.loginPass) {
+        this.$message({
+          message: '请输入要修改的密码',
+          type: "error",
+          duration: 1000
+        });
+        return
+      }
+
+      if (!this.passwordTwo) {
+        this.$message({
+          message: '请再次输入密码',
+          type: "error",
+          duration: 1000
+        });
+        return
+      }
+
+      if (this.ruleForm.loginPass !== this.passwordTwo) {
+        this.$message({
+          message: '两次密码不一致',
+          type: "error",
+          duration: 1000
+        });
+        return
+      }
+
+      let params = Object.assign({}, this.ruleForm, {
+        userEmail: this.userInfo.userEmail,
+        id: this.userInfo.id
+      })
+
+      const res = await updatePassword(params)
+
+      this.$message({
+        type: 'success',
+        message: '修改成功!'
+      });
+
+      this.$router.go(-1)
     }
   }
 }
@@ -196,7 +214,7 @@ $cursor: #fff;
   font-weight: 400;
   color: #000000;
   line-height: 20px;
-  padding: 124p x 0 17px;
+  padding: 124px 0 17px;
   border-bottom: 1px dashed #979797;
   margin: 0 auto;
 }
@@ -225,6 +243,7 @@ $cursor: #fff;
   font-size: 14px;
   font-weight: 400;
   color: #000000;
+  cursor: pointer;
 }
 .form_two {
   margin: 60px auto 0;

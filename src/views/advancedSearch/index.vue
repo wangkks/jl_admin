@@ -74,28 +74,36 @@ export default {
       cities: ['关联字检索', '同义词关联', '忽略一个字', '忽略标点'],
       options: [
         {
+          id: 'menuName',
+          text: '文章名'
+        },
+        {
+          id: 'fullText',
+          text: '文章内容'
+        },
+        {
           id: 'bookName',
           text: '书名'
         },
         {
-          id: 2,
-          text: '标题'
-        },
-        {
-          id: 3,
-          text: '全文'
-        },
-        {
-          id: 4,
-          text: '图书简介'
-        },
-        {
-          id: 5,
+          id: 'mainResponsibility',
           text: '作者'
         },
         {
-          id: 6,
+          id: 'publisher',
           text: '出版社'
+        },
+        {
+          id: 'congbian',
+          text: '丛编'
+        },
+        {
+          id: 'bookDesc',
+          text: '图书简介'
+        },
+        {
+          id: 'fullText1',
+          text: '正文'
         },
       ],
       conditionArr: [
@@ -108,7 +116,7 @@ export default {
           text: '或'
         },
         {
-          id: '2',
+          id: 'not',
           text: '非'
         }
       ],
@@ -126,13 +134,18 @@ export default {
   },
   methods: {
     clickBtn() {
-      this.$store.commit('search/SET_SEARCHDATA', this.searchList)
+      this.$store.commit('search/SET_SEARCHDATA', {
+        filter: this.checkedCities,
+        list: this.searchList
+      })
+
       this.$router.push({
         path: '/detectionResult'
       })
     },
     add(item) {
-      this.searchList.push(item)
+      let _item = JSON.parse(JSON.stringify(item))
+      this.searchList.push(_item)
     },
     remove(index) {
       this.searchList.splice(index, 1)
@@ -205,8 +218,9 @@ export default {
   line-height: 30px;
   text-align: center;
   border-radius: 30px;
-  margin: 60px auto 0;
+  margin-top: 60px auto 0;
   cursor: pointer;
+  float: right;
 }
 
 .advance_centent_wrap {
@@ -217,6 +231,7 @@ export default {
   width: 300px;
   height: 30px;
   border: 1px solid #ccc;
+  padding-left: 10px;
 }
 
 .advance_select_input {

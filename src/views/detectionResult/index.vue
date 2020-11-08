@@ -102,7 +102,25 @@ export default {
           checked: 0
         }
       ],
-      loading: false
+      loading: false,
+      filterArr: [
+        {
+          id: 'associatedWord',
+          text: '关联字检索'
+        },
+        {
+          id: 'synonymWord',
+          text: '同义词关联'
+        },
+        {
+          id: 'ignoreWord',
+          text: '忽略一个字'
+        },
+        {
+          id: 'ignorePoint',
+          text: '忽略标点'
+        }
+      ]
     };
   },
   computed: {
@@ -124,20 +142,30 @@ export default {
         }
       })
 
-      if (id == 2) {
-        const res = await searchAllBook({
-          pageNum: page,
-          pageSize: 10,
-          searchList: this.searchData
+      let params = {
+        pageNum: page,
+        pageSize: 10,
+        searchList: this.searchData.list,
+        associatedWord: 'N',
+        synonymWord: 'N',
+        ignoreWord: 'N',
+        ignorePoint: 'N'
+      }
+
+      this.searchData.filter.map(item => {
+        this.filterArr.map(itm => {
+          if (item == itm.text) {
+            params[itm.id] = 'Y'
+          }
         })
+      })
+
+      if (id == 2) {
+        const res = await searchAllBook(params)
 
         this.detectionData = res
       } else {
-        const res = await searchAllList({
-          pageNum: 1,
-          pageSize: 10,
-          searchList: this.searchData
-        })
+        const res = await searchAllList(params)
 
         this.detectionData = res
       }
