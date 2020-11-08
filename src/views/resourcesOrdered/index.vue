@@ -1,77 +1,69 @@
 <template>
-  <div class="resour_box">
-    <div class="resour_box_right">
-      <div class="resour_box_t">已订阅资源</div>
-      <div class="resour_mine">
-        <div class="resour_mine_box">
-          <div class="resour_right">
-            <div class="resour_input">
-              <el-select v-model="value" placeholder="分类">
-                <el-option
-                  v-for="item in options"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value"
-                >
-                </el-option>
-              </el-select>
-            </div>
-          </div>
-          <div class="resour_right">
-            <div class="resour_input">
-              <el-input v-model="input" placeholder="书名名称"></el-input>
-            </div>
-          </div>
-          <div class="resour_right">
-            <div class="resour_input">
-              <el-input v-model="input" placeholder="主要责任者"></el-input>
-              <img
-                src="@/assets/icon_search.png"
-                alt=""
-                class="resour_input_i"
-              />
-            </div>
-          </div>
-          <div class="resour_reset">重置</div>
-        </div>
-        <div class="resour_mine_taboxs">
-          <div
-            :class="['mine_taboxs_btn', index == orgId ? 'btn_red' : '']"
-            v-for="(item, index) in typeList"
-            @click="changeType(index)"
-          >
-            {{ item.name }}
+  <div class="resour1_box">
+    <div class="resour_box_t">已订阅资源</div>
+    <div class="resour_mine">
+      <div class="resour_mine_box">
+        <div class="resour_right">
+          <div class="resour_input">
+            <el-select v-model="value" placeholder="分类">
+              <el-option
+                v-for="item in options"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value"
+              >
+              </el-option>
+            </el-select>
           </div>
         </div>
-        <div class="resour_mine_table">
-          <el-table :data="tableData" style="width: 100%">
-            <el-table-column
-              prop="bookName"
-              label="书名"
-              width="180"
-            ></el-table-column>
-            <el-table-column
-              prop="database"
-              label="数据库"
-              width="180"
-            ></el-table-column>
-            <el-table-column prop="charge" label="主要责任者"></el-table-column>
-            <el-table-column prop="resourceType" label="分类">
-            </el-table-column>
-            <el-table-column prop="publishland" label="出版社">
-            </el-table-column>
-            <el-table-column prop="publishYear" label="出版时间">
-            </el-table-column>
-          </el-table>
+        <div class="resour_right">
+          <div class="resour_input">
+            <el-input v-model="input" placeholder="书名名称"></el-input>
+          </div>
         </div>
-        <div class="resour_mine_page">
-          <el-pagination
-            layout="prev, pager, next"
-            :total="total"
-            @current-change="page"
-          >
-          </el-pagination>
+        <div class="resour_right">
+          <div class="resour_input">
+            <el-input v-model="input" placeholder="主要责任者"></el-input>
+            <img src="@/assets/icon_search.png" alt="" class="resour_input_i" />
+          </div>
         </div>
+        <div class="resour_reset">重置</div>
+      </div>
+      <div class="resour_mine_taboxs">
+        <div
+          :class="['mine_taboxs_btn', index == orgId ? 'btn_red' : '']"
+          v-for="(item, index) in typeList"
+          @click="changeType(index)"
+        >
+          {{ item.name }}
+        </div>
+      </div>
+      <div class="resour_mine_table">
+        <el-table :data="tableData" style="width: 100%">
+          <el-table-column
+            prop="bookName"
+            label="书名"
+            width="180"
+          ></el-table-column>
+          <el-table-column
+            prop="database"
+            label="数据库"
+            width="180"
+          ></el-table-column>
+          <el-table-column prop="charge" label="主要责任者"></el-table-column>
+          <el-table-column prop="resourceType" label="分类"> </el-table-column>
+          <el-table-column prop="publishland" label="出版社"> </el-table-column>
+          <el-table-column prop="publishYear" label="出版时间">
+          </el-table-column>
+        </el-table>
+      </div>
+      <div class="resour_mine_page">
+        <el-pagination
+          layout="prev, pager, next"
+          :total="total"
+          @current-change="page"
+        >
+        </el-pagination>
       </div>
     </div>
   </div>
@@ -133,7 +125,7 @@ export default {
 </script>
 <style lang="scss">
 /* reset element-ui css */
-.resour_box {
+.resour1_box {
   .resour_input .el-input__inner {
     width: 260px;
     height: 34px;
@@ -162,25 +154,23 @@ export default {
   .el-pagination {
     text-align: center;
   }
+  .resour_mine_page {
+    display: flex;
+    justify-content: flex-end;
+    position: absolute;
+    right: 30px;
+    bottom: 50px;
+  }
 }
 </style>
 <style lang="scss" scope>
-.resour_box {
+.resour1_box {
   width: 100%;
-  height: auto;
-  display: flex;
+  height: 100vh;
+  padding: 0 30px;
+  overflow: scroll;
   background: rgba(237, 239, 243, 1);
-  .resour_mine_page {
-    display: inline-block;
-    background-color: #fff;
-    float: right;
-    margin-right: 30px;
-  }
 
-  .resour_box_right {
-    width: auto;
-    margin-left: 30px;
-  }
   .resour_box_t {
     width: 1100px;
     font-weight: 400;
@@ -238,6 +228,7 @@ export default {
     padding: 8px 20px;
     width: 80px;
     margin-right: 10px;
+    cursor: pointer;
   }
   .btn_red {
     color: #fff;

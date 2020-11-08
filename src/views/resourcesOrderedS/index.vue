@@ -39,6 +39,7 @@
             v-for="item in tab"
             :key="item.id"
             :class="['mine_taboxs_btn', { btn_red: item.checked }]"
+            @click="tabCheck(item.id)"
           >
             {{ item.text }}
           </div>
@@ -120,9 +121,17 @@ export default {
     })
 
     this.tableData = res
-
   },
   methods: {
+    tabCheck(id) {
+      this.tab.map(item => {
+        if (item.id == id) {
+          item.checked = 1
+        } else {
+          item.checked = 0
+        }
+      })
+    }
   }
 }
 </script>
@@ -157,6 +166,14 @@ export default {
   .el-pagination {
     text-align: center;
   }
+
+  .resour_mine_page {
+    display: flex;
+    justify-content: flex-end;
+    position: absolute;
+    right: 30px;
+    bottom: 50px;
+  }
 }
 </style>
 <style lang="scss" scope>
@@ -166,12 +183,6 @@ export default {
   overflow: scroll;
   display: flex;
   background: rgba(237, 239, 243, 1);
-  .resour_mine_page {
-    display: inline-block;
-    background-color: #fff;
-    float: right;
-    margin-right: 30px;
-  }
 
   .resour_box_right {
     width: auto;
@@ -233,6 +244,7 @@ export default {
     color: #000;
     padding: 8px 20px;
     margin-right: 10px;
+    cursor: pointer;
   }
   .btn_red {
     color: #fff;

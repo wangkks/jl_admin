@@ -102,7 +102,7 @@ export default {
   }
 }
 </style>
-<style lang="scss">
+<style lang="scss" scope>
 .resour_box {
   width: 100%;
   height: auto;

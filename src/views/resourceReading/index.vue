@@ -1,51 +1,47 @@
 <template>
   <div class="resouing_box">
-    <div class="resouing_box_right">
-      <div class="resouing_box_t">
-        <div class="resouing_left">
-          <div class="resouing_left_top">
-            <div class="resouing_left_n">第六册简介</div>
-            <div class="resouing_totle">
-              当前位置：讀四書大全説 > 第六册簡介
-            </div>
-          </div>
-          <div>作者：［明］王夫之 著</div>
+    <div class="resouing_box_t">
+      <div class="resouing_left">
+        <div class="resouing_left_top">
+          <div class="resouing_left_n">第六册简介</div>
+          <div class="resouing_totle">当前位置：讀四書大全説 > 第六册簡介</div>
         </div>
-        <div class="resouing_right">
-          <div class="resouing_input">
-            <el-input
-              v-model="searchText"
-              placeholder="书内搜索"
-              @click="search"
-            ></el-input>
-            <img
-              src="@/assets/icon_search.png"
-              class="resouing_input_i"
-              @click="search"
-            />
-          </div>
+        <div>作者：［明］王夫之 著</div>
+      </div>
+      <div class="resouing_right">
+        <div class="resouing_input">
+          <el-input
+            v-model="searchText"
+            placeholder="书内搜索"
+            @click="search"
+          ></el-input>
+          <img
+            src="@/assets/icon_search.png"
+            class="resouing_input_i"
+            @click="search"
+          />
         </div>
       </div>
-      <div class="resouing_mine">
-        <div class="resouing_mine_box">
-          <div class="resouing_mine_box_t">点击查看原文</div>
-          <div class="resouing_mine_box_b">
-            <img
-              src="@/assets/second/book.png"
-              alt=""
-              class="resouing_mine_box_b_i"
-            />
-            <div>- P1 -</div>
-          </div>
+    </div>
+    <div class="resouing_mine">
+      <div class="resouing_mine_box">
+        <div class="resouing_mine_box_t">点击查看原文</div>
+        <div class="resouing_mine_box_b">
+          <img
+            src="@/assets/second/book.png"
+            alt=""
+            class="resouing_mine_box_b_i"
+          />
+          <div>- P1 -</div>
         </div>
-        <div class="resouing_mine_centent">
-          <div class="resouing_mine_box_t">文字版</div>
-          <div
-            id="selectable"
-            class="resouing_mine_centent_ce"
-            v-html="content.bookContent"
-          ></div>
-        </div>
+      </div>
+      <div class="resouing_mine_centent">
+        <div class="resouing_mine_box_t">文字版</div>
+        <div
+          id="selectable"
+          class="resouing_mine_centent_ce"
+          v-html="content.bookContent"
+        ></div>
       </div>
     </div>
     <div
@@ -244,13 +240,10 @@ export default {
 
 .resouing_box {
   width: 100%;
-  height: auto;
-  display: flex;
+  height: 100vh;
+  overflow: scroll;
   background: rgba(237, 239, 243, 1);
-}
-.resouing_box_right {
-  width: auto;
-  margin-left: 30px;
+  padding: 0 30px;
 }
 .resouing_box_t {
   width: 1100px;
@@ -358,6 +351,7 @@ export default {
 }
 
 .resouing_mine_centent_btn {
+  cursor: pointer;
   width: 340px;
   height: 60px;
   background: #ffffff;

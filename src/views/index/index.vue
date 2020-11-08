@@ -5,10 +5,6 @@
       <img src="@/assets/banner.png" alt="" />
       <div class="banner-content">
         <div class="search" @click="search">
-          <el-input
-            placeholder="请输入关键字"
-            v-model="searchContent"
-          ></el-input>
           <img src="@/assets/icon_search.png" alt="" />
         </div>
         <div class="banner-desc">
@@ -138,7 +134,6 @@ export default {
   },
   data() {
     return {
-      searchContent: '',
       wordsContentList: [],
       mybookData: [],
       newsDateList: [],
@@ -200,15 +195,6 @@ export default {
 };
 </script>
 <style lang="scss">
-.search .el-input__inner {
-  width: 629px;
-  height: 49px;
-  border: none;
-  background-image: url(../../assets/search_bg.png);
-  background-size: 100%;
-  background-color: initial;
-  padding: 0 60px 0 30px;
-}
 .icon {
   width: 14px;
   height: 14px;
@@ -242,6 +228,10 @@ export default {
         overflow: hidden;
         position: relative;
         margin: 0 auto;
+        cursor: pointer;
+        background-image: url(../../assets/search_bg.png);
+        background-size: 100%;
+        background-color: initial;
         img {
           position: absolute;
           right: 30px;
