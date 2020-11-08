@@ -18,7 +18,7 @@
               <div class="mynote_mine_b_top_l">{{ item.bookName }}</div>
               <div class="mynote_mine_b_top_r">
                 <img
-                  @click="editShow(index, item)"
+                  @click="editShow(item)"
                   src="@/assets/edit.png"
                   alt=""
                   class="top_r_edit"
@@ -37,12 +37,9 @@
             </div>
             <div class="mynote_mine_tion">
               <div class="mynote_mine_tion_t tionred">笔记</div>
-              <textarea
-                class="mynote_mine_tion_s"
-                :readonly="index == editIndex ? true : false"
-                v-model="item.noteContent"
-              ></textarea>
-              <span @click="edit(item)">确定修改</span>
+              <div class="mynote_mine_tion_s">
+                {{ item.noteContent }}
+              </div>
             </div>
           </div>
           <div class="mynote_mine_b_btmbox">
@@ -64,6 +61,19 @@
       </el-pagination>
     </div>
     <!-- <Delete /> -->
+
+    <el-dialog
+      title="提示"
+      :visible.sync="dialogVisible"
+      width="30%"
+      :before-close="handleClose"
+    >
+      <input type="text" class="node-text" v-model="noteContent" />
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="dialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="edit">确 定</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
@@ -77,10 +87,11 @@ export default {
   },
   data() {
     return {
-      showBtn: true,
       mynoteData: [],
-      editIndex: 0,
-      pageCurrent: 1
+      editId: '',
+      pageCurrent: 1,
+      dialogVisible: false,
+      noteContent: ''
     };
   },
   created() {
@@ -95,6 +106,9 @@ export default {
     this.getList(1)
   },
   methods: {
+    handleClose(done) {
+      this.dialogVisible = false
+    },
     async getList(page) {
       const result1 = await readNotesList({
         pageNum: page,
@@ -109,15 +123,25 @@ export default {
       this.mynoteData.rows = []
       this.getList(e)
     },
-    editShow(index, data) {
-      this.editIndex = index
+    editShow(data) {
+      this.dialogVisible = true
+      this.editId = data.id
     },
     // 编辑
-    edit(data) {
-      editReadNote({
-        id: data.id,
-        noteContent: data.noteContent
+    async edit(data) {
+      const res = await editReadNote({
+        id: this.editId,
+        noteContent: this.noteContent
       })
+
+      this.mynoteData.rows.map(item => {
+        if (item.id == this.editId) {
+          item.noteContent = this.noteContent
+        }
+      })
+
+      this.noteContent = ''
+      this.dialogVisible = false
     },
     // 删除
     del(_id, index) {
@@ -154,6 +178,12 @@ export default {
   height: 100vh;
   overflow: scroll;
   background: rgba(237, 239, 243, 1);
+  .node-text {
+    width: 300px;
+    height: 30px;
+    border: 1px solid #979797;
+    outline: none;
+  }
   .resour_mine_page {
     display: inline-block;
     background-color: #fff;

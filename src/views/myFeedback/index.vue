@@ -1,74 +1,72 @@
 <template>
   <div class="feed_box">
-    <div class="feed_box_right">
-      <div class="feed_box_t">
-        <div class="feed_left">
-          <div class="feed_left_n">我的反馈</div>
-        </div>
-        <div class="feed_right">
-          <div
-            :class="['feed_right_title', { redcolr: item.checked }]"
-            v-for="item in feedTab"
-            :key="item.id"
-            @click="tab(item.id)"
-          >
-            {{ item.content }}（{{ item.num }})
-          </div>
-        </div>
+    <div class="feed_box_t">
+      <div class="feed_left">
+        <div class="feed_left_n">我的反馈</div>
       </div>
-      <div class="feed_mine">
+      <div class="feed_right">
         <div
-          class="feed_mine_minebox"
-          v-for="(item, index) in feedData.rows"
-          :key="index"
+          :class="['feed_right_title', { redcolr: item.checked }]"
+          v-for="item in feedTab"
+          :key="item.id"
+          @click="tab(item.id)"
         >
-          <div class="feed_mine_box">
-            <div class="feed_mine_b_topbox">
-              <div class="feed_mine_b_top" v-if="item.handleStatus == 1">
-                <div class="feed_mine_b_top_l">反馈内容</div>
-                <div class="feed_mine_b_top_r" @click="del(item.id, index)">
-                  <img
-                    src="@/assets/delete_red.png"
-                    alt=""
-                    class="top_r_delete"
-                  />
-                </div>
-              </div>
-              <div class="feed_centent_b_top" v-if="item.handleStatus == 0">
-                <div>待回复</div>
-                <div class="feed_centent_b_top_l">反馈内容</div>
-              </div>
-              <div class="feed_mine_tion">
-                <div class="feed_mine_tion_s">{{ item.recContent }}</div>
-              </div>
-              <div class="feed_mine_b_btmbox">
-                <div>反馈时间：{{ item.createTime }}</div>
-                <div>来源：{{ item.bookName }} / {{ item.bookMenuName }}</div>
+          {{ item.content }}（{{ item.num }})
+        </div>
+      </div>
+    </div>
+    <div class="feed_mine">
+      <div
+        class="feed_mine_minebox"
+        v-for="(item, index) in feedData.rows"
+        :key="index"
+      >
+        <div class="feed_mine_box">
+          <div class="feed_mine_b_topbox">
+            <div class="feed_mine_b_top" v-if="item.handleStatus == 1">
+              <div class="feed_mine_b_top_l">反馈内容</div>
+              <div class="feed_mine_b_top_r" @click="del(item.id, index)">
+                <img
+                  src="@/assets/delete_red.png"
+                  alt=""
+                  class="top_r_delete"
+                />
               </div>
             </div>
-            <div v-if="item.handleStatus == 1">
-              <div class="feed_mine_tion">
-                <div class="feed_mine_tion_t tionred">回复</div>
-                <div class="feed_mine_tion_s notecolor">
-                  {{ item.feedbackContent }}
-                </div>
+            <div class="feed_centent_b_top" v-if="item.handleStatus == 0">
+              <div>待回复</div>
+              <div class="feed_centent_b_top_l">反馈内容</div>
+            </div>
+            <div class="feed_mine_tion">
+              <div class="feed_mine_tion_s">{{ item.recContent }}</div>
+            </div>
+            <div class="feed_mine_b_btmbox">
+              <div>反馈时间：{{ item.createTime }}</div>
+              <div>来源：{{ item.bookName }} / {{ item.bookMenuName }}</div>
+            </div>
+          </div>
+          <div v-if="item.handleStatus == 1">
+            <div class="feed_mine_tion">
+              <div class="feed_mine_tion_t tionred">回复</div>
+              <div class="feed_mine_tion_s notecolor">
+                {{ item.feedbackContent }}
               </div>
-              <div class="feed_mine_b_btmbox">
-                <div>回复时间：{{ item.handleTime }}</div>
-              </div>
+            </div>
+            <div class="feed_mine_b_btmbox">
+              <div>回复时间：{{ item.handleTime }}</div>
             </div>
           </div>
         </div>
       </div>
+    </div>
 
-      <div class="resour_mine_page">
-        <el-pagination
-          layout="prev, pager, next"
-          :total="feedData.total"
-          @current-change="page"
-        >
-        </el-pagination>
-      </div>
+    <div class="resour_mine_page">
+      <el-pagination
+        layout="prev, pager, next"
+        :total="feedData.total"
+        @current-change="page"
+      >
+      </el-pagination>
     </div>
   </div>
 </template>
@@ -200,17 +198,12 @@ export default {
   width: 100%;
   height: 100vh;
   overflow-y: scroll;
-  display: flex;
   background: rgba(237, 239, 243, 1);
+  padding: 0 30px;
   .resour_mine_page {
     display: inline-block;
     background-color: #fff;
     float: right;
-    margin-right: 70px;
-  }
-  .feed_box_right {
-    width: 100%;
-    margin-left: 30px;
   }
   .feed_box_t {
     font-size: 14px;
@@ -263,7 +256,7 @@ export default {
     top: 10px;
   }
   .feed_mine {
-    margin: 22px 70px 0 0;
+    margin-top: 22px;
     display: flex;
     flex-wrap: wrap;
   }

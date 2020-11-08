@@ -101,16 +101,6 @@ export const constantRoutes = [
     meta: { title: "" },
     children: [
       {
-        path: "/myBook/myNote",
-        name: "MyNote",
-        component: () => import("@/views/myNotes/index"),
-        meta: {
-          title: "我的笔记",
-          icon: require("@/assets/second/icon_mynote.png"),
-          iconred: require("@/assets/second/icon_mynote_red.png")
-        }
-      },
-      {
         path: "/myBook",
         name: "MyBook",
         redirect: "/myBook/menu/:id",
@@ -126,6 +116,16 @@ export const constantRoutes = [
             meta: { title: "古典文学" }
           }
         ]
+      },
+      {
+        path: "/myBook/myNote",
+        name: "MyNote",
+        component: () => import("@/views/myNotes/index"),
+        meta: {
+          title: "我的笔记",
+          icon: require("@/assets/second/icon_mynote.png"),
+          iconred: require("@/assets/second/icon_mynote_red.png")
+        }
       },
       {
         path: "/myBook/searchRecords",
