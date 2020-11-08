@@ -99,9 +99,6 @@
     </div>
     <div class="rightBar">
       <logo v-if="showLogo" :collapse="isCollapse" />
-      <template v-if="$route.path.split('/')[2] == 'resourceDetails'">
-        <BookDetailBar v-if="detailData.bookName" :data="detailData" />
-      </template>
       <template v-if="$route.path.split('/')[2] == 'resourceReading'">
         <BookSynopsisBar />
       </template>
@@ -111,6 +108,9 @@
         </template>
         <template v-else> <userInfo /></template>
       </template> -->
+      <template v-if="$route.path.split('/')[2] == 'resourceDetails'">
+        <BookDetailBar v-if="detailData.bookName" :data="detailData" />
+      </template>
       <template v-else-if="leftBarIndex == 1">
         <BookLibrary />
       </template>
@@ -178,17 +178,22 @@ export default {
     leftBarIndex() {
       // this.leftBarIndex = localStorage.getItem('leftBarIndex')
     },
-  },
-  async created() {
-    if (this.$route.path.split('/')[2] == 'resourceDetails') {
-      const res = await booksDetail({ id: this.$route.params.id });
-      this.detailData = res.data;
-    }
+    "$route": "getPath"
   },
   mounted() {
     this.leftBarIndex = localStorage.getItem("leftBarIndex") || 1;
+
+    this.getPath()
   },
   methods: {
+    async getPath() {
+      console.log('111')
+      let path = this.$route.path;
+      if (path.indexOf('resourceDetails') != -1) {
+        const res = await booksDetail({ id: this.$route.params.id });
+        this.detailData = res.data;
+      }
+    },
     // 登出
     loginOut() {
       this.$store.dispatch("user/logout", {})
