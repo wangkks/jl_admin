@@ -4,6 +4,7 @@ import getters from './getters'
 import app from './modules/app'
 import settings from './modules/settings'
 import user from './modules/user'
+import search from './modules/search'
 import permission from './modules/permission'
 import VuexPersist from 'vuex-persist'
 
@@ -32,7 +33,8 @@ const store = new Vuex.Store({
     app,
     settings,
     user,
-    permission
+    permission,
+    search
   },
   getters,
   plugins: [vuexLocal.plugin]

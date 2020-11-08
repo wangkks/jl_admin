@@ -215,7 +215,7 @@ export default {
     margin-right: 20px;
   }
   .mynote_mine {
-    margin: 22px 70px 0 0;
+    margin-top: 22px;
     display: flex;
     flex-wrap: wrap;
   }

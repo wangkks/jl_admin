@@ -14,3 +14,19 @@ export function deleteSearchHistory(data) {
     method: "delete"
   });
 }
+
+export function searchAllList(data) {
+  return request({
+    url: "/search/advancedsearch/list",
+    method: "post",
+    data
+  });
+}
+
+export function searchAllBook(data) {
+  return request({
+    url: "/search/advancedsearch/booklist",
+    method: "post",
+    data
+  });
+}

@@ -4,40 +4,61 @@
     <div class="advance_box_t">
       <div class="advance_box_span">
         <div>高级检索</div>
-        <div class="advance_box_totle">
-          共有 
-          <span class="advance_box_num">10000</span> 
-          条记录库
-        </div>
       </div>
     </div>
     <div class="advance_centent">
-      <div class="advance_centent_add">
-        <div><i class="el-icon-plus addplus"></i></div>
-        <div class="advance_centent_input">
-          <el-input
-            placeholder="请选择日期"
-            suffix-icon="el-icon-d-caret"
-            v-model="input1">
-          </el-input>
+      <div
+        class="advance_centent_wrap"
+        v-for="(item, index) in searchList"
+        :key="index"
+      >
+        <div class="advance_centent_add" @click="remove(index)">
+          <i class="el-icon-minus addplus"></i>
         </div>
-      </div>
-      <div class="advance_select">
-        <el-checkbox-group 
-          v-model="checkedCities"
+        <div class="advance_centent_add" @click="add(item)">
+          <i class="el-icon-plus addplus"></i>
+        </div>
+        <el-select
+          v-model="item.combinationCondition"
+          placeholder="请选择"
+          class="advance_select_input"
+        >
+          <el-option
+            v-for="item in conditionArr"
+            :key="item.id"
+            :label="item.text"
+            :value="item.id"
           >
-          <el-checkbox 
-            v-for="city in cities" 
-            :label="city" 
-            :key="city">{{city}}
+          </el-option>
+        </el-select>
+        <el-select
+          v-model="item.queryField"
+          placeholder="请选择"
+          class="advance_select_input"
+        >
+          <el-option
+            v-for="item in options"
+            :key="item.id"
+            :label="item.text"
+            :value="item.id"
+          >
+          </el-option>
+        </el-select>
+        <input
+          type="text"
+          placeholder="关键字"
+          class="input"
+          v-model="item.keyword"
+        />
+      </div>
+
+      <div class="advance_select">
+        <el-checkbox-group v-model="checkedCities">
+          <el-checkbox v-for="item in cities" :label="item" :key="item"
+            >{{ item }}
           </el-checkbox>
         </el-checkbox-group>
-        <div 
-          class="advance_select_btn"
-          @click="clickBtn()"
-          >
-          搜索
-        </div>
+        <div class="advance_select_btn" @click="clickBtn()">搜索</div>
       </div>
     </div>
   </div>
@@ -45,40 +66,93 @@
 
 <script>
 import HeadIndex from '@/components/head/index.vue'
-const cityOptions = ['关联字检索', '同义词关联', '忽略一个字', '忽略标点'];
-  export default {
-    data() {
-      return {
-        input1: '文章名',
-        checkedCities: ['关联字检索', '忽略一个字'],
-        cities: cityOptions
-      };
+
+export default {
+  data() {
+    return {
+      checkedCities: ['关联字检索', '忽略一个字'],
+      cities: ['关联字检索', '同义词关联', '忽略一个字', '忽略标点'],
+      options: [
+        {
+          id: 'bookName',
+          text: '书名'
+        },
+        {
+          id: 2,
+          text: '标题'
+        },
+        {
+          id: 3,
+          text: '全文'
+        },
+        {
+          id: 4,
+          text: '图书简介'
+        },
+        {
+          id: 5,
+          text: '作者'
+        },
+        {
+          id: 6,
+          text: '出版社'
+        },
+      ],
+      conditionArr: [
+        {
+          id: 'and',
+          text: '与'
+        },
+        {
+          id: 'or',
+          text: '或'
+        },
+        {
+          id: '2',
+          text: '非'
+        }
+      ],
+      searchList: [
+        {
+          queryField: "bookName",
+          keyword: "应天",
+          combinationCondition: "and"
+        }
+      ]
+    };
+  },
+  components: {
+    HeadIndex
+  },
+  methods: {
+    clickBtn() {
+      this.$store.commit('search/SET_SEARCHDATA', this.searchList)
+      this.$router.push({
+        path: '/detectionResult'
+      })
     },
-    components:{
-      HeadIndex
+    add(item) {
+      this.searchList.push(item)
     },
-    methods: {
-      clickBtn(){
-        this.$router.push({
-          path:'/detectionResult'
-        })
-      }
+    remove(index) {
+      this.searchList.splice(index, 1)
     }
   }
+}
 </script>
 <style lang="scss">
-.advance_box{
+.advance_box {
   width: 100%;
   height: 900px;
-  background:  rgba(237, 239, 243, 1);
+  background: rgba(237, 239, 243, 1);
 }
-.advance_box_t{
+.advance_box_t {
   width: 1286px;
   padding: 90px 0 44px;
   border-bottom: 1px dashed #979797;
   margin: 84px auto 0;
 }
-.advance_box_span{
+.advance_box_span {
   font-size: 24px;
   font-weight: 400;
   color: #000000;
@@ -86,42 +160,73 @@ const cityOptions = ['关联字检索', '同义词关联', '忽略一个字', '�
   display: flex;
   align-items: flex-end;
 }
-.advance_box_totle{
+.advance_box_totle {
   font-size: 14px;
   font-weight: 400;
   color: #000000;
   margin-left: 7px;
 }
-.advance_box_num{
-  color: #D0021B;
+.advance_box_num {
+  color: #d0021b;
 }
-.advance_centent{
-  width: 800px;
+.advance_centent {
+  width: 900px;
   margin: 52px auto 0;
 }
-.advance_centent_add{
-  width: 19px;
+.advance_centent_wrap {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.advance_centent_add {
+  width: 20px;
   height: 20px;
-  border: 1px solid #BCBCBC;
+  border: 1px solid #bcbcbc;
   border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin-right: 20px;
 }
-.addplus{
-  color: #BCBCBC;
+.addplus {
+  color: #bcbcbc;
 }
-.advance_select{
+.advance_select {
   margin-top: 80px;
   margin: 80px 0 0 100px;
 }
-.advance_select_btn{
+.advance_select_btn {
   width: 97px;
   height: 30px;
-  background: #D0021B;
+  background: #d0021b;
   font-size: 14px;
-  color: #FFFFFF;
+  color: #ffffff;
   line-height: 30px;
   text-align: center;
   border-radius: 30px;
   margin: 60px auto 0;
   cursor: pointer;
+}
+
+.advance_centent_wrap {
+  font-size: 12px;
+}
+
+.advance_centent_wrap .input {
+  width: 300px;
+  height: 30px;
+  border: 1px solid #ccc;
+}
+
+.advance_select_input {
+  width: 200px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  margin: 0 20px;
+}
+.advance_select_input input {
+  width: 200px;
 }
 </style>

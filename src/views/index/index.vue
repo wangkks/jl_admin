@@ -4,7 +4,7 @@
     <div class="banner">
       <img src="@/assets/banner.png" alt="" />
       <div class="banner-content">
-        <div class="search">
+        <div class="search" @click="search">
           <el-input
             placeholder="请输入关键字"
             v-model="searchContent"
@@ -192,6 +192,9 @@ export default {
     goBookList() {
       localStorage.setItem("leftBarIndex", 1)
       this.$router.push('example/bookLibraryList')
+    },
+    search() {
+      this.$router.push('advancedSearch')
     }
   }
 };
