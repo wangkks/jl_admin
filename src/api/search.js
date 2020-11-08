@@ -30,3 +30,20 @@ export function searchAllBook(data) {
     data
   });
 }
+
+export function searchList(data) {
+  return request({
+    url: "/search/generalsearch/list",
+    method: "post",
+    data
+  });
+}
+
+export function searchBook(data) {
+  return request({
+    url: "/search/generalsearch/booklist",
+    method: "post",
+    data
+  });
+}
+

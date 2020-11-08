@@ -65,7 +65,7 @@
         <el-pagination
           layout="prev, pager, next"
           :total="feedData.total"
-          @current-chang="page"
+          @current-change="page"
         >
         </el-pagination>
       </div>
@@ -206,7 +206,7 @@ export default {
     display: inline-block;
     background-color: #fff;
     float: right;
-    margin-right: 30px;
+    margin-right: 70px;
   }
   .feed_box_right {
     width: 100%;

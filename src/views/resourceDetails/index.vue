@@ -41,10 +41,10 @@
           </div>
           <div class="book_synopsis">
             <div class="book_synopsis_title">
-              <img src="@/assets/second/icon_goldFoil.png" alt="" />
+              <img src="@/assets/second/icon_goldFoil.png" />
               讀四書大全説
             </div>
-            <Menu :children="menuData" />
+            <Menu v-if="!loading" :children="menuData" :bookId="id" />
           </div>
         </div>
       </div>
@@ -64,21 +64,26 @@ export default {
     return {
       input: "",
       detailData: {},
-      menuData: []
+      menuData: [],
+      id: '',
+      loading: true
     };
   },
   async created() {
     this.id = this.$route.params.id;
+
     this.getDetail();
     const res = await menuTree({
       bookId: this.id
     })
 
     this.menuData = res
+    this.loading = false
   },
   methods: {
     async getDetail() {
       const res = await booksDetail({ id: this.id });
+
       this.detailData = res.data;
     }
   },

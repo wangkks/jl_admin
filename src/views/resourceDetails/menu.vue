@@ -19,20 +19,20 @@
 </template>
 
 <script>
-
 export default {
   name: 'menuItem',
   props: ['children'],
   data() {
     return {
+      bookId: ''
     };
   },
   created() {
+    this.bookId = this.$route.params.bookid || this.$route.params.id
   },
   methods: {
     goSynopsis(id) {
-
-      this.$router.push(`/myBook/resourceReading/${this.$route.params.id}/${id}`);
+      this.$router.push(`/myBook/resourceReading/${this.bookId}/${id}`);
     }
   },
 };

@@ -1,19 +1,27 @@
 <template>
   <div class="book-catalog">
-    <div class="catalog-title">{{bookDeatil.bookTitle}}</div>
+    <div class="catalog-title">{{ bookDeatil.bookTitle }}</div>
     <div class="catalog-note">
-      <div v-for="(item,index) in catalog" :class="['catalog-c', selected == index ? 'actived':'']" @click="changeBtn(index)">
-        <img :src="selected == index? item.iconred:item.icon" alt="">
-        <span>{{item.title}}</span>
+      <div
+        v-for="(item, index) in catalog"
+        :class="['catalog-c', selected == index ? 'actived' : '']"
+        @click="changeBtn(index)"
+      >
+        <img :src="selected == index ? item.iconred : item.icon" alt="" />
+        <span>{{ item.title }}</span>
       </div>
     </div>
     <div class="dashed-line"></div>
     <div class="book-synopsis" v-if="selected == 0">
       <div class="book-synopsis-title">
-        <img src="@/assets/second/icon_goldFoil.png" alt="">
+        <img src="@/assets/second/icon_goldFoil.png" />
         讀四書大全説
       </div>
-      <el-timeline>
+
+      <div class="book-synopsis-title">
+        <Menu :children="menuData" :bookId="bookId" />
+      </div>
+      <!-- <el-timeline>
         <el-timeline-item
           v-for="(item, index) in activities"
           :key="index"
@@ -23,30 +31,36 @@
         >
           {{ item.content }}
         </el-timeline-item>
-      </el-timeline>
+      </el-timeline> -->
     </div>
     <div class="mynote-mine" v-else>
-      <div class="mynote-name">{{mynoteData.name}}</div>
+      <div class="mynote-name">{{ mynoteData.name }}</div>
       <div class="mynote-t">引文</div>
-      <div class="mynote-citation">{{mynoteData.citation}}</div>
+      <div class="mynote-citation">{{ mynoteData.citation }}</div>
       <div class="mynote-t tionred">笔记</div>
-      <div class="mynote-n">{{mynoteData.note}}</div>
+      <div class="mynote-n">{{ mynoteData.note }}</div>
       <div class="mynote-time">
-        <div class="btmbox_l">时间：{{mynoteData.time}}</div>
-        <div class="btmbox_r">来源：{{mynoteData.source}}</div>
+        <div class="btmbox_l">时间：{{ mynoteData.time }}</div>
+        <div class="btmbox_r">来源：{{ mynoteData.source }}</div>
       </div>
       <div class="mynote-btn">
-        <div><img src="@/assets/edit.png" alt="" class="edit"/></div>
-        <div><img src="@/assets/delete_red.png" alt="" class="delete"/></div>
+        <div><img src="@/assets/edit.png" alt="" class="edit" /></div>
+        <div><img src="@/assets/delete_red.png" alt="" class="delete" /></div>
       </div>
     </div>
-    </div>
+    <!-- </div> -->
   </div>
 </template>
 
 <script>
+import { booksDetail, menuTree } from '@/api/bookLibrary'
+import Menu from '@/views/resourceDetails/menu'
+
 export default {
   name: 'BookSynopsisBar',
+  components: {
+    Menu
+  },
   props: ['data'],
   data() {
     return {
@@ -58,41 +72,26 @@ export default {
         { title: '笔记', icon: require('@/assets/second/icon_mynote.png'), iconred: require('@/assets/second/icon_mynote_red.png') },
       ],
       selected: 0,
-      activities: [
-        {
-          content: "第一册简介",
-          size: "large",
-          type: "primary",
-          id: 1
-        },
-        {
-          id: 2,
-          content: "第二册简介",
-        },
-        {
-          content: "第三册简介",
-        },
-        {
-          content: "第四册简介",
-        },
-        {
-          content: "第无册简介",
-        },
-      ],
+      menuData: [],
       mynoteData: {
         'name': '01 笔记标题',
         'citation': '莫愁湖位于南京秦淮河西，南京秦淮河西。',
         'note': '孟子謂齊宣王曰：『王之臣，有託其妻子於其友而之楚遊者孟子謂齊宣王曰。『王之臣，有託其妻子於其友而之楚遊者孟子謂齊宣王曰。',
         'time': '2020-09-12',
         'source': '诗国南京／第六册簡介'
-      }
+      },
+      bookId: ''
     };
   },
-  computed: {
 
-  },
-  mounted() {
-    console.log('this', this.data)
+  async mounted() {
+    this.bookId = this.$route.params.bookid
+
+    const res = await menuTree({
+      bookId: this.$route.params.bookid
+    })
+
+    this.menuData = res
   },
   methods: {
     changeBtn(index) {
@@ -101,9 +100,7 @@ export default {
     goSynopsis(id) {
       this.$router.push(`/myBook/resourceReading/${id}`);
     }
-  },
-  components: {
-  },
+  }
 };
 </script>
 <style lang="scss">
@@ -149,6 +146,7 @@ export default {
 .book-catalog {
   width: 210px;
   height: 100%;
+  overflow: scroll;
   position: relative;
   .catalog-title {
     margin: 0 0 13px 19px;

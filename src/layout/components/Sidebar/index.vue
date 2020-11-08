@@ -111,7 +111,7 @@
         </template>
         <template v-else> <userInfo /></template>
       </template> -->
-      <template v-if="leftBarIndex == 1">
+      <template v-else-if="leftBarIndex == 1">
         <BookLibrary />
       </template>
       <template v-if="leftBarIndex == 2">

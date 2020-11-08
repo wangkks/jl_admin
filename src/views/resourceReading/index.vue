@@ -13,11 +13,15 @@
         </div>
         <div class="resouing_right">
           <div class="resouing_input">
-            <el-input v-model="input" placeholder="书内搜索"></el-input>
+            <el-input
+              v-model="searchText"
+              placeholder="书内搜索"
+              @click="search"
+            ></el-input>
             <img
               src="@/assets/icon_search.png"
-              alt=""
               class="resouing_input_i"
+              @click="search"
             />
           </div>
         </div>
@@ -70,16 +74,16 @@
 </template>
 
 <script>
+import copy from "copy-to-clipboard";
 import { menuDetail } from "@/api/bookLibrary";
 import { addReadNote } from "@/api/note";
-
-import copy from "copy-to-clipboard";
+import { searchList } from "@/api/search";
 
 export default {
   components: {},
   data() {
     return {
-      input: "",
+      searchText: "",
       content: {},
       leftPosition: 0,
       topPosition: 0,
@@ -103,7 +107,7 @@ export default {
     //   //     window.getSelection().addRange(range).getRangeAt(0);
     //   //   }
     // }
-    document.onmouseup = function(e) {
+    document.onmouseup = function (e) {
       // if (document.selection) {
       //   //IE
       //   var range = document.body.createTextRange();
@@ -152,8 +156,6 @@ export default {
     },
     // 添加笔记
     async note() {
-      console.log("111", this.selectText);
-      return;
       const res = await addReadNote({
         bookId: this.$route.params.bookid,
         menuId: this.$route.params.id,
@@ -161,11 +163,21 @@ export default {
         noteSrcWord: this.selectText,
         noteContent: this.selectText
       });
+    },
+    search() {
+      searchList({
+        pageNum: 1,
+        pageSize: 10,
+        keyword: this.searchText,
+        orderByColumn: '',
+        isAsc: ''
+      })
     }
+
   }
 };
 </script>
-<style lang="scss">
+<style lang="scss" scope>
 /* reset element-ui css */
 .resouing_box {
   .resouing_input .el-input__inner {
@@ -291,8 +303,6 @@ export default {
 }
 .resouing_mine {
   margin: 22px 70px 80px 0;
-  display: flex;
-  flex-wrap: wrap;
 }
 .resouing_mine_box {
   height: auto;

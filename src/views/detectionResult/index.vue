@@ -175,8 +175,10 @@ export default {
   }
 }
 .resour_mine_page {
+  width: 1286px;
   display: flex;
-  justify-content: flex-start;
+  justify-content: flex-end;
+  margin: 0 auto;
 }
 .detection_box {
   width: 100%;

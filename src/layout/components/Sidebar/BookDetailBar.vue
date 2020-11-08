@@ -28,14 +28,6 @@ export default {
     return {
     };
   },
-  computed: {},
-  mounted() {
-  },
-  methods: {
-
-  },
-  components: {
-  },
 };
 </script>
 <style lang="scss" scoped>

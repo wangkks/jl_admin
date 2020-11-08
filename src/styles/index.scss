@@ -63,3 +63,21 @@ div:focus {
 .app-container {
   padding: 20px;
 }
+
+@font-face {
+  font-family: "中华书局宋体02平面";
+  src: url("../font/FZSONG02.TTF");
+}
+
+@font-face {
+  font-family: "中华书局宋体15平面";
+  src: url("../font/FZSONG15.TTF");
+}
+
+.big02 {
+  font-family: "中华书局宋体02平面";
+}
+
+.big15 {
+  font-family: "中华书局宋体15平面";
+}

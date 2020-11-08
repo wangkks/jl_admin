@@ -14,13 +14,13 @@
           <el-input
             v-model="bookname"
             placeholder="请输入关键字"
-            @keyup.enter.native="getList(1)"
+            @keyup.enter.native="search()"
           ></el-input>
           <img
             src="@/assets/icon_search.png"
             alt=""
             class="booklibrary_input_i"
-            @click="getList(1)"
+            @click="search()"
           />
         </div>
         <div class="booklibrary_sort_box" @click="changeIsAsc">
@@ -60,7 +60,7 @@
     <div class="detection_mine" v-if="layoutStyle">
       <div
         class="detection_mine_box"
-        v-for="(item, index) in detectionList"
+        v-for="(item, index) in detectionList.rows"
         :key="index"
         @click="goBookDetail(item.uniqueId)"
       >
@@ -93,7 +93,7 @@
     <div class="library_mine" v-else>
       <div
         class="library_mine_box"
-        v-for="(item, index) in detectionList"
+        v-for="(item, index) in detectionList.rows"
         :key="index"
         @click="goBookDetail(item.id)"
       >
@@ -113,11 +113,11 @@
         <img src="@/assets/second/bookmark-line.png" alt="" class="bookmark" />
       </div>
     </div>
-    <div class="resour_mine_page">
+    <div class="resour_mine_page" v-if="detectionList.total">
       <el-pagination
         layout="prev, pager, next"
-        :total="total"
-        @current-chang="page"
+        :total="detectionList.total"
+        @current-change="page"
       >
       </el-pagination>
     </div>
@@ -126,6 +126,8 @@
 
 <script>
 import { bookLibraryList } from '@/api/bookLibrary'
+import { searchBook } from '@/api/search'
+
 export default {
   components: {},
   data() {
@@ -143,6 +145,28 @@ export default {
     this.getList(1);
   },
   methods: {
+    async search() {
+      if (!this.bookname) {
+        this.$message({
+          message: '请输入关键字',
+          type: "error",
+          duration: 1000
+        });
+
+        return
+      }
+
+      const res = await searchBook({
+        pageNum: 1,
+        pageSize: 10,
+        keyword: this.bookname,
+        orderByColumn: '',
+        isAsc: ''
+      })
+
+      this.detectionList = res;
+
+    },
     async getList(page) {
       let param = {
         pageNum: page,
@@ -154,8 +178,7 @@ export default {
         delete param.isAsc
       }
       const res = await bookLibraryList(param);
-      this.detectionList = res.rows;
-      this.total = res.total;
+      this.detectionList = res
     },
     goBookDetail(id) {
       this.$router.push(`/myBook/resourceDetails/${id}`);

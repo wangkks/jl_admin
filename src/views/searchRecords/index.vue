@@ -20,13 +20,22 @@
             </div>
           </div>
           <img
-            @click="del(item.id)"
+            @click="del(item.id, index)"
             src="@/assets/delete_red.png"
             alt=""
             class="serchre_manage_i"
           />
         </div>
       </div>
+    </div>
+
+    <div class="resour_mine_page">
+      <el-pagination
+        layout="prev, pager, next"
+        :total="searchData.total"
+        @current-change="page"
+      >
+      </el-pagination>
     </div>
   </div>
 </template>
@@ -40,20 +49,24 @@ export default {
   data() {
     return {
       input: '',
-      searchData: []
+      searchData: [],
+      pageNumber: 1
     };
   },
-  async created() {
+  created() {
     localStorage.setItem("leftBarIndex", 2)
-    const result = await searchHistory({
-      pageNum: 1,
-      pageSize: 10
-    })
-
-    this.searchData = result
+    this.getList(1)
   },
   methods: {
-    del(_id) {
+    async getList(page) {
+      const result = await searchHistory({
+        pageNum: page,
+        pageSize: 10
+      })
+
+      this.searchData = result
+    },
+    del(_id, index) {
       this.$confirm('确定删除？', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
@@ -62,6 +75,10 @@ export default {
         deleteSearchHistory({
           id: _id
         })
+
+        setTimeout(() => {
+          this.getList(this.pageNumber)
+        }, 500)
         this.$message({
           type: 'success',
           message: '删除成功!'
@@ -72,17 +89,28 @@ export default {
           message: '已取消删除'
         });
       });
+    },
+    page(e) {
+      this.pageNumber = e
+      this.getList(e)
     }
   }
 }
 </script>
-<style lang="scss">
+<style lang="scss" scope>
 .search_box {
   width: 100%;
   padding: 0 30px;
   height: 100vh;
   overflow: scroll;
   background: rgba(237, 239, 243, 1);
+  .resour_mine_page {
+    display: inline-block;
+    background-color: #fff;
+    position: absolute;
+    right: 30px;
+    bottom: 50px;
+  }
   .search_box_t {
     font-size: 14px;
     font-weight: 400;
