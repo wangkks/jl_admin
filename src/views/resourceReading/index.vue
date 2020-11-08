@@ -37,93 +37,133 @@
         <div class="resouing_mine_centent">
           <div class="resouing_mine_box_t">文字版</div>
           <div
+            id="selectable"
             class="resouing_mine_centent_ce"
             v-html="content.bookContent"
           ></div>
         </div>
       </div>
     </div>
+    <div
+      v-if="topPosition"
+      class="resouing_mine_centent_btn"
+      :style="{ top: topPosition + 'px', left: leftPosition + 'px' }"
+    >
+      <div class="centent_btn_box" @click="copyText">
+        <img src="@/assets/second/fuzhi.png" class="centent_btn_box_i" />
+        <div class="btnred">复制</div>
+      </div>
+      <div class="centent_btn_box" @click="note">
+        <img src="@/assets/second/brush.png" class="centent_btn_box_t" />
+        <div>笔记</div>
+      </div>
+      <div class="centent_btn_box">
+        <img src="@/assets/second/marks.png" class="centent_btn_box_y" />
+        <div>引用</div>
+      </div>
+      <div class="centent_btn_box boxright">
+        <img src="@/assets/icon_search.png" class="centent_btn_box_t" />
+        <div>检索</div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import { menuDetail } from '@/api/bookLibrary'
+import { menuDetail } from "@/api/bookLibrary";
+import { addReadNote } from "@/api/note";
+
+import copy from "copy-to-clipboard";
 
 export default {
-  components: {
-
-  },
+  components: {},
   data() {
     return {
-      input: '',
-      content: {}
+      input: "",
+      content: {},
+      leftPosition: 0,
+      topPosition: 0,
+      selectText: ""
     };
   },
   async created() {
-    var content = ''
-    document.onmouseup = function (e) {
+    var content = "";
+    const me = this;
+
+    // document.onmouseup = function (e) {
+    //   console.log('111', window.getSelection())
+    //   //   if (document.selection) {
+    //   //     //IE
+    //   //     var range = document.body.createTextRange();
+    //   //     range.moveToElementText(document.getElementById('selectable'));
+    //   //     range.select();
+    //   //   } else if (window.getSelection) {
+    //   //     var range = document.createRange();
+    //   //     range.selectNode(document.getElementById('selectable'));
+    //   //     window.getSelection().addRange(range).getRangeAt(0);
+    //   //   }
+    // }
+    document.onmouseup = function(e) {
+      // if (document.selection) {
+      //   //IE
+      //   var range = document.body.createTextRange();
+      //   range.moveToElementText(document.getElementById('selectable'));
+      //   range.select();
+      // } else if (window.getSelection) {
+      //   var range = document.createRange();
+      //   range.selectNode(document.getElementById('selectable'));
+      //   window.getSelection().addRange(range)
+      // }
       content = window.getSelection().toString();
-      if (content != '') {
-        var len = content.length;
-        var target = e.target;
-        var position = target.innerHTML.indexOf(content);
-        var position2 = position + len;
-        var tempstr1 = target.innerHTML.substring(0, position);
-        var tempstr2 = target.innerHTML.substring(position2);
 
-        if (document.getElementById("box")) {
-          let _box = document.getElementById("box")
-          document.getElementById("box").innerHTML = ''
-          document.getElementById("box").parentNode.removeChild(_box)
-        }
+      // me.leftPosition = 0;
+      // me.topPosition = 0;
+      if (content) {
+        let len = content.length;
+        let target = e.target;
+        let position = target.innerHTML.indexOf(content);
+        let position2 = position + len;
+        let tempstr1 = target.innerHTML.substring(0, position);
+        let tempstr2 = target.innerHTML.substring(position2);
+        let randomId = "copy" + new Date().getTime();
+        me.selectText = content;
+        console.log("111", me.selectText, content);
 
-        let img = require('@/assets/second/fuzhi.png')
-        let img1 = require('@/assets/second/brush.png')
-        let img2 = require('@/assets/second/marks.png')
-        let img3 = require('@/assets/icon_search.png')
+        content = `<i id="${randomId}" style="font-style: normal;color: red;">${content}</i>`;
 
-        content = "<span style='position: relative;display: inline-block;'>"
-          + "<span style='color:red;'>"
-          + content
-          + "</span>"
-          + '<div id="box" class="resouing_mine_centent_btn">'
-          + '<div class="centent_btn_box" οnclick="onSubmit()">'
-          + `<img src="${img}" class="centent_btn_box_i"/>`
-          + '<div class="btnred">复制</div>'
-          + '</div>'
-          + '<div class="centent_btn_box">'
-          + `<img src="${img1}" class="centent_btn_box_t" />`
-          + '<div>笔记</div>'
-          + '</div>'
-          + '<div class="centent_btn_box" οnclick="onSubmit()">'
-          + `<img src="${img2}" class="centent_btn_box_y"/>`
-          + '<div>引用</div>'
-          + '</div>'
-          + '<div class="centent_btn_box boxright">'
-          + `<img src="${img3}" class="centent_btn_box_t" />`
-          + '<div>检索</div>'
-          + '</div>'
-          + '</div>'
-          + "</span>";
         target.innerHTML = tempstr1 + content + tempstr2;
 
+        me.leftPosition = document.getElementById(randomId).offsetLeft;
+        me.topPosition = document.getElementById(randomId).offsetTop - 90;
       }
-    }
-
-    window.onSubmit = function () {
-      console.log(123)
-    }
+    };
 
     const res = await menuDetail({
       bookId: this.$route.params.bookid,
       menuId: this.$route.params.id
-    })
+    });
 
-    this.content = res.data
+    this.content = res.data;
   },
   methods: {
+    // 复制
+    copyText() {
+      copy(this.selectText);
+    },
+    // 添加笔记
+    async note() {
+      console.log("111", this.selectText);
+      return;
+      const res = await addReadNote({
+        bookId: this.$route.params.bookid,
+        menuId: this.$route.params.id,
+        encodeFontUrl: "",
+        noteSrcWord: this.selectText,
+        noteContent: this.selectText
+      });
+    }
   }
-}
+};
 </script>
 <style lang="scss">
 /* reset element-ui css */
@@ -139,6 +179,12 @@ export default {
 }
 </style>
 <style lang="scss" scope>
+::-moz-selection {
+  color: red;
+}
+::selection {
+  color: red;
+}
 .resouing_mine_centent_ce h2 {
   font-size: 20px;
   line-height: 30px;
@@ -177,6 +223,11 @@ export default {
 }
 .resouing_mine_centent_ce .shuming {
   border-bottom: 1px dashed #666;
+}
+.resouing_mine_centent_ce img {
+  width: 16px;
+  height: 16px;
+  vertical-align: middle;
 }
 
 .resouing_box {
@@ -239,13 +290,11 @@ export default {
   top: 10px;
 }
 .resouing_mine {
-  width: 1100px;
   margin: 22px 70px 80px 0;
   display: flex;
   flex-wrap: wrap;
 }
 .resouing_mine_box {
-  width: 1100px;
   height: auto;
   background: #fff;
   margin: 0 10px 20px;
@@ -280,7 +329,6 @@ export default {
   margin-right: 6px;
 }
 .resouing_mine_centent {
-  width: 1100px;
   height: auto;
   background: #fff;
   margin: 0 10px 20px;
@@ -310,8 +358,8 @@ export default {
   padding: 10px;
   display: flex;
   position: absolute;
-  top: -80px;
-  left: -100px;
+  // top: -80px;
+  // left: -100px;
 }
 .centent_btn_box {
   font-size: 14px;

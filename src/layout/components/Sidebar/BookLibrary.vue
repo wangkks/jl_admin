@@ -55,6 +55,8 @@
 import SidebarItem from "./SidebarItem";
 import { mapGetters } from "vuex";
 import variables from "@/styles/variables.scss";
+import { booksType } from '@/api/read'
+
 export default {
   data() {
     return {
@@ -102,7 +104,9 @@ export default {
       // }
     },
   },
-  mounted() {},
+  mounted() {
+    booksType({})
+  },
   methods: {
     changeBtn: function (index, path) {
       this.num = index;
