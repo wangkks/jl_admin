@@ -3,21 +3,44 @@
     <HeadIndex></HeadIndex>
     <div class="news">
       <h3 class="new-title"><span>新闻动态</span></h3>
-      <div class="news-box" v-if="newsDateList.rows && newsDateList.rows.length>0">
+      <div
+        class="news-box"
+        v-if="newsDateList.rows && newsDateList.rows.length > 0"
+      >
         <div class="news-box-l">
           <ul>
             <li>
               <span>{{ newsDateList.rows[0].day }}</span>
-              <span>{{ newsDateList.rows[0].month }} {{ newsDateList.rows[0].year }}</span>
+              <span
+                >{{ newsDateList.rows[0].month }}
+                {{ newsDateList.rows[0].year }}</span
+              >
             </li>
           </ul>
         </div>
         <div class="news-box-r">
           <ul>
             <li>
-              <span class="news-box-r-title">{{ newsDateList.rows[0].newsTitle }}</span>
+              <span class="news-box-r-title">{{
+                newsDateList.rows[0].newsTitle
+              }}</span>
               <img :src="newsDateList.rows[0].iconUrl" alt="" />
-              <span>去问问撒打算的阿 dads阿 dasd哈说古道今啊还是感动阿斯顿噶会及时赶到安德森给大家哈是个大阿水给大家哈公司的哈说古道今哈是个大卡说古道今卡是个大去问问撒打算的阿 dads阿 dasd哈说古道今啊还是感动阿斯顿噶会及时赶到安德森给大家哈是个大阿水给大家哈公司的哈说古道今哈是个大卡说古道今卡是个大去问问撒打算的阿 dads阿 dasd哈说古道今啊还是感动阿斯顿噶会及时赶到安德森给大家哈是个大阿水给大家哈公司的哈说古道今哈是个大卡说古道今卡是个大去问问撒打算的阿 dads阿 dasd哈说古道今啊还是感动阿斯顿噶会及时赶到安德森给大家哈是个大阿水给大家哈公司的哈说古道今哈是个大卡说古道今卡是个大去问问撒打算的阿 dads阿 dasd哈说古道今啊还是感动阿斯顿噶会及时赶到安德森给大家哈是个大阿水给大家哈公司的哈说古道今哈是个大卡说古道今卡是个大去问问撒打算的阿 dads阿 dasd哈说古道今啊还是感动阿斯顿噶会及时赶到安德森给大家哈是个大阿水给大家哈公司的哈说古道今哈是个大卡说古道今卡是个大去问问撒打算的阿 dads阿 dasd哈说古道今啊还是感动阿斯顿噶会及时赶到安德森给大家哈是个大阿水给大家哈公司的哈说古道今哈是个大卡说古道今卡是个大</span>
+              <span
+                >去问问撒打算的阿 dads阿
+                dasd哈说古道今啊还是感动阿斯顿噶会及时赶到安德森给大家哈是个大阿水给大家哈公司的哈说古道今哈是个大卡说古道今卡是个大去问问撒打算的阿
+                dads阿
+                dasd哈说古道今啊还是感动阿斯顿噶会及时赶到安德森给大家哈是个大阿水给大家哈公司的哈说古道今哈是个大卡说古道今卡是个大去问问撒打算的阿
+                dads阿
+                dasd哈说古道今啊还是感动阿斯顿噶会及时赶到安德森给大家哈是个大阿水给大家哈公司的哈说古道今哈是个大卡说古道今卡是个大去问问撒打算的阿
+                dads阿
+                dasd哈说古道今啊还是感动阿斯顿噶会及时赶到安德森给大家哈是个大阿水给大家哈公司的哈说古道今哈是个大卡说古道今卡是个大去问问撒打算的阿
+                dads阿
+                dasd哈说古道今啊还是感动阿斯顿噶会及时赶到安德森给大家哈是个大阿水给大家哈公司的哈说古道今哈是个大卡说古道今卡是个大去问问撒打算的阿
+                dads阿
+                dasd哈说古道今啊还是感动阿斯顿噶会及时赶到安德森给大家哈是个大阿水给大家哈公司的哈说古道今哈是个大卡说古道今卡是个大去问问撒打算的阿
+                dads阿
+                dasd哈说古道今啊还是感动阿斯顿噶会及时赶到安德森给大家哈是个大阿水给大家哈公司的哈说古道今哈是个大卡说古道今卡是个大</span
+              >
             </li>
           </ul>
         </div>
@@ -97,12 +120,12 @@ export default {
 
     .new-title {
       width: 27%;
-      span{
+      span {
         width: 225px;
         height: 50px;
         font-size: 24px;
-        color: #D0021B;
-        border-bottom: 1px solid #D0021B;
+        color: #d0021b;
+        border-bottom: 1px solid #d0021b;
         display: block;
         margin: 0 0 30px auto;
       }
@@ -156,7 +179,7 @@ export default {
           padding-right: 20px;
           position: relative;
           border-bottom: none;
-          .news-box-r-title{
+          .news-box-r-title {
             border-bottom: 2px solid #cbcbcb;
           }
           span {
@@ -165,7 +188,7 @@ export default {
             line-height: 30px;
             padding-bottom: 40px;
             &:first-child {
-              margin: 50px 0 12px;
+              margin: 30px 0 12px;
               font-size: 16px;
             }
           }

@@ -87,7 +87,11 @@
         <div class="news-box-l">
           <h3>新闻动态</h3>
           <ul>
-            <li v-for="(item, index) in newsDateList.rows" :key="index">
+            <li
+              v-for="(item, index) in newsDateList.rows"
+              :key="index"
+              @click="goList(item.id)"
+            >
               <span>{{ item.day }}</span>
               <span>{{ item.month }} {{ item.year }}</span>
             </li>
@@ -98,7 +102,11 @@
             <span @click="goMoreNews">more</span>
           </div>
           <ul>
-            <li v-for="(item, index) in newsDateList.rows" :key="index">
+            <li
+              v-for="(item, index) in newsDateList.rows"
+              :key="index"
+              @click="goList(item.id)"
+            >
               <span>{{ item.newsTitle }}</span>
               <span v-html="item.newsContent"></span>
               <img :src="item.iconUrl" alt="" />
@@ -183,6 +191,9 @@ export default {
   methods: {
     goMoreNews() {
       this.$router.push('news')
+    },
+    goList(id) {
+      this.$router.push('newsDetail/' + id)
     },
     goBookList() {
       localStorage.setItem("leftBarIndex", 1)
@@ -513,6 +524,7 @@ export default {
         padding-left: 12px;
         color: #363636;
         margin-right: 9px;
+        cursor: pointer;
         span {
           display: block;
           font-size: 14px;
@@ -550,12 +562,13 @@ export default {
           border-top: 1px solid #cbcbcb;
           padding-right: 20px;
           position: relative;
+          cursor: pointer;
           span {
             display: block;
             font-size: 14px;
             line-height: 20px;
             &:first-child {
-              margin: 50px 0 12px;
+              margin: 30px 0 12px;
               font-size: 16px;
             }
             &:nth-of-type(2) {
