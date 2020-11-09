@@ -127,7 +127,6 @@ export default {
         let tempstr2 = target.innerHTML.substring(position2);
         let randomId = "copy" + new Date().getTime();
         me.selectText = content;
-        console.log("111", me.selectText, content);
 
         content = `<i id="${randomId}" style="font-style: normal;color: red;">${content}</i>`;
 
@@ -232,10 +231,44 @@ export default {
 .resouing_mine_centent_ce .shuming {
   border-bottom: 1px dashed #666;
 }
-.resouing_mine_centent_ce img {
+.resouing_mine_centent_ce .zitu {
   width: 16px;
   height: 16px;
   vertical-align: middle;
+}
+
+.resouing_mine_centent_ce .chatu {
+  width: 500px;
+  height: 500px;
+  display: block;
+  margin: 10px auto;
+}
+
+.resouing_mine_centent_ce .meipi {
+  font-size: 14px;
+  color: #000;
+  display: block;
+  text-align: center;
+}
+
+.resouing_mine_centent_ce table,
+.resouing_mine_centent_ce table tr th,
+.resouing_mine_centent_ce table tr td {
+  border: 1px solid #ccc;
+}
+.resouing_mine_centent_ce table tr {
+  display: flex;
+}
+.resouing_mine_centent_ce table tr td {
+  flex: 1;
+  display: inline-block;
+}
+.resouing_mine_centent_ce table {
+  min-height: 25px;
+  line-height: 25px;
+  text-align: center;
+  border-collapse: collapse;
+  width: 100%;
 }
 
 .resouing_box {

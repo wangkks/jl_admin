@@ -33,7 +33,7 @@
             </div>
             <div class="mynote_mine_tion">
               <div class="mynote_mine_tion_t">引文</div>
-              <div class="mynote_mine_tion_s">{{ item.menuId }}</div>
+              <div class="mynote_mine_tion_s">{{ item.noteSrcWord }}</div>
             </div>
             <div class="mynote_mine_tion">
               <div class="mynote_mine_tion_t tionred">笔记</div>

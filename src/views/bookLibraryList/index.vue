@@ -64,11 +64,7 @@
         :key="index"
         @click="goBookDetail(item.uniqueId)"
       >
-        <img
-          :src="item.img || require('@/assets/second/bitmap_bg.png')"
-          alt=""
-          class="detection_mine_box_i"
-        />
+        <img :src="item.coverUrl" class="detection_mine_box_i" />
         <div class="detection_mine_right">
           <div class="detection_mine_right_t">
             {{ item.bookName }}
@@ -98,11 +94,7 @@
         @click="goBookDetail(item.id)"
       >
         <div class="library_mine_box_img">
-          <img
-            :src="item.img || require('@/assets/second/bitmap_bg.png')"
-            alt=""
-            class="library_mine_box_i"
-          />
+          <img :src="item.coverUrl" alt="" class="library_mine_box_i" />
         </div>
         <div class="library_mine_right">
           <div class="library_mine_right_t">{{ item.bookName }}</div>

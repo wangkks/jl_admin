@@ -1,7 +1,6 @@
 <template>
   <div class="detection_box">
-    <HeadIndex></HeadIndex>
-    <div class="detection_box_t">
+    <!-- <div class="detection_box_t">
       <div class="detection_left">
         <div>搜索 ”诗国 “</div>
         <div class="detection_totle">
@@ -18,16 +17,27 @@
         <img src="@/assets/second/list_red.png" class="sort_list" />
         <img src="@/assets/second/window.png" class="sort_window" />
       </div>
-    </div>
-    <div class="tab">
-      <span
-        v-for="item in tabArr"
-        :key="item.id"
-        @click="tab(item.id)"
-        :class="[{ active: item.checked }]"
-      >
-        {{ item.text }}
-      </span>
+    </div> -->
+    <div class="detection_top">
+      <div style="display: flex; align-items: center">
+        <div class="tab">
+          <span
+            v-for="item in tabArr"
+            :key="item.id"
+            @click="tab(item.id)"
+            :class="[{ active: item.checked }]"
+          >
+            {{ item.text }}
+            <i></i>
+          </span>
+        </div>
+        <p>
+          检索 <b>书名-史记与文章内容 - 书</b> 共有
+          <span>{{ detectionData.total }}</span>
+          条记录
+        </p>
+      </div>
+      <p class="back">返回高级检索</p>
     </div>
     <div v-loading="loading">
       <div v-if="tabArr[0].checked" class="detection_mine">
@@ -36,9 +46,22 @@
           v-for="(item, index) in detectionData.rows"
           :key="index"
         >
-          <h1>标题：{{ item.menuName }}</h1>
-          <p>来源：{{ item.menuFullName }}</p>
-          <p>摘要：{{ item.fullText }}</p>
+          <h1>{{ item.menuName }}</h1>
+          <p>
+            <span>来源</span>：{{ item.menuName }} >
+            {{ item.menuFullName }}
+          </p>
+          <p>
+            <span>书目</span>：{{ item.bookName }} /
+            {{ item.mainResponsibility }}/ {{ item.publisher }} /{{
+              item.publishDate
+            }}
+            /
+            {{ item.siClassification }}
+          </p>
+          <p>{{ item.fullText }}</p>
+          <span class="big02">&#x28ef6;</span>
+          <p><span>摘要</span>：<b v-html="item.fullText"></b></p>
         </div>
       </div>
       <div v-if="tabArr[1].checked" class="detection_mine">
@@ -190,20 +213,60 @@ export default {
 }
 </script>
 <style lang="scss" scope>
-.tab {
-  width: 1286px;
-  margin: 20px auto;
-  cursor: pointer;
-  span {
-    padding-bottom: 4px;
-    margin-right: 10px;
+.detection_top {
+  display: flex;
+  padding: 40px 0 26px;
+  margin-bottom: 18px;
+  justify-content: space-between;
+  border-bottom: 1px dashed #979797;
+  .tab {
+    margin-right: 40px;
+    cursor: pointer;
+    display: flex;
+    span {
+      padding-bottom: 12px;
+      margin-right: 10px;
+      font-size: 24px;
+    }
+    .active {
+      i {
+        width: 15px;
+        height: 5px;
+        background: #d0021b;
+        border-radius: 3px;
+        display: block;
+        margin: 0 auto;
+      }
+    }
   }
-  .active {
-    border-bottom: 2px solid #d0021b;
+  p {
+    font-size: 14px;
+    font-family: PingFangSC-Regular, PingFang SC;
+    font-weight: 400;
+    color: #9b9b9b;
+    b {
+      color: #000000;
+      padding: 0 4px;
+    }
+    span {
+      color: #d0021b;
+      padding: 0 4px;
+    }
+  }
+  .back {
+    width: 117px;
+    height: 30px;
+    background: #d0021b;
+    font-size: 14px;
+    font-family: PingFangSC-Regular, PingFang SC;
+    font-weight: 400;
+    color: #ffffff;
+    line-height: 30px;
+    text-align: center;
+    border-radius: 15px;
   }
 }
 .resour_mine_page {
-  width: 1286px;
   display: flex;
   justify-content: flex-end;
   margin: 0 auto;
@@ -212,11 +275,10 @@ export default {
   width: 100%;
   height: 100vh;
   overflow: scroll;
-  padding: 20px;
+  padding: 0 30px;
   background: rgba(237, 239, 243, 1);
 }
 .detection_box_t {
-  width: 1286px;
   font-size: 14px;
   font-weight: 400;
   color: #000000;
@@ -261,12 +323,8 @@ export default {
   width: 20px;
   height: 19px;
 }
-.detection_mine {
-  margin: 22px auto;
-}
 .detection_mine_OneBox {
-  width: 1286px;
-  height: 226px;
+  max-height: 187px;
   background: #fff;
   margin: 0 auto 10px;
   box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.05);
@@ -274,15 +332,27 @@ export default {
   border: 1px solid #e6e6e6;
   padding: 12px 17px 15px 20px;
 }
+.detection_mine_OneBox h1 {
+  font-size: 14px;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: #363636;
+  margin-bottom: 17px;
+}
 
 .detection_mine_OneBox p {
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  font-size: 12px;
+  color: #363636;
+  margin-bottom: 13px;
+  span {
+    color: #9b9b9b;
+  }
 }
 .detection_mine_box {
-  width: 1286px;
   height: 226px;
   background: #fff;
   margin: 0 auto 10px;

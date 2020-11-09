@@ -33,27 +33,52 @@
         </el-timeline-item>
       </el-timeline> -->
     </div>
-    <div class="mynote-mine" v-else>
-      <div class="mynote-name">{{ mynoteData.name }}</div>
-      <div class="mynote-t">引文</div>
-      <div class="mynote-citation">{{ mynoteData.citation }}</div>
-      <div class="mynote-t tionred">笔记</div>
-      <div class="mynote-n">{{ mynoteData.note }}</div>
-      <div class="mynote-time">
-        <div class="btmbox_l">时间：{{ mynoteData.time }}</div>
-        <div class="btmbox_r">来源：{{ mynoteData.source }}</div>
-      </div>
-      <div class="mynote-btn">
-        <div><img src="@/assets/edit.png" alt="" class="edit" /></div>
-        <div><img src="@/assets/delete_red.png" alt="" class="delete" /></div>
+    <div v-else>
+      <div
+        class="mynote-mine"
+        v-for="(item, index) in mynoteData.rows"
+        :key="index"
+      >
+        <div class="mynote-name">{{ item.bookName }}</div>
+        <div class="mynote-t">引文</div>
+        <div class="mynote-citation">{{ item.noteSrcWord }}</div>
+        <div class="mynote-t tionred">笔记</div>
+        <div class="mynote-n">{{ item.noteContent }}</div>
+        <div class="mynote-time">
+          <div class="btmbox_l">时间：{{ item.createTime }}</div>
+          <div class="btmbox_r">
+            来源：{{ item.bookName }}/{{ item.menuName }}
+          </div>
+        </div>
+        <div class="mynote-btn">
+          <div @click="editShow(item)">
+            <img src="@/assets/edit.png" class="edit" />
+          </div>
+          <div @click="del(item.id, index)">
+            <img src="@/assets/delete_red.png" class="delete" />
+          </div>
+        </div>
       </div>
     </div>
-    <!-- </div> -->
+
+    <el-dialog
+      title="提示"
+      :visible.sync="dialogVisible"
+      width="30%"
+      :before-close="handleClose"
+    >
+      <input type="text" class="node-text" v-model="noteContent" />
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="dialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="edit">确 定</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
 <script>
 import { booksDetail, menuTree } from '@/api/bookLibrary'
+import { readNotesList, deleteReadNote, editReadNote } from '@/api/note'
 import Menu from '@/views/resourceDetails/menu'
 
 export default {
@@ -73,14 +98,10 @@ export default {
       ],
       selected: 0,
       menuData: [],
-      mynoteData: {
-        'name': '01 笔记标题',
-        'citation': '莫愁湖位于南京秦淮河西，南京秦淮河西。',
-        'note': '孟子謂齊宣王曰：『王之臣，有託其妻子於其友而之楚遊者孟子謂齊宣王曰。『王之臣，有託其妻子於其友而之楚遊者孟子謂齊宣王曰。',
-        'time': '2020-09-12',
-        'source': '诗国南京／第六册簡介'
-      },
-      bookId: ''
+      mynoteData: [],
+      bookId: '',
+      dialogVisible: false,
+      noteContent: ''
     };
   },
 
@@ -94,11 +115,66 @@ export default {
     this.menuData = res
   },
   methods: {
-    changeBtn(index) {
+    async changeBtn(index) {
       this.selected = index;
+
+      if (index == 1) {
+        const res = await readNotesList({
+          pageNum: 1,
+          pageSize: 9999,
+          bookId: this.$route.params.bookid,
+          menuId: this.$route.params.id
+        })
+
+        this.mynoteData = res
+      }
     },
     goSynopsis(id) {
       this.$router.push(`/myBook/resourceReading/${id}`);
+    },
+    editShow(data) {
+      this.dialogVisible = true
+      this.editId = data.id
+    },
+    // 编辑
+    async edit(data) {
+      const res = await editReadNote({
+        id: this.editId,
+        noteContent: this.noteContent
+      })
+
+      this.mynoteData.rows.map(item => {
+        if (item.id == this.editId) {
+          item.noteContent = this.noteContent
+        }
+      })
+
+      this.noteContent = ''
+      this.dialogVisible = false
+    },
+    // 删除
+    del(_id, index) {
+      this.$confirm('确定删除？', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        deleteReadNote({
+          id: _id
+        })
+
+        // 刷新
+        this.changeBtn(1)
+        this.$message({
+          type: 'success',
+          message: '删除成功!'
+        });
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消删除'
+        });
+      });
     }
   }
 };

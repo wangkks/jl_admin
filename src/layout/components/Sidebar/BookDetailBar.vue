@@ -55,6 +55,7 @@ export default {
     border-bottom: 1px dashed #979797;
     text-align: center;
     padding-bottom: 20px;
+    margin-top: 20px;
     img {
       width: 145px;
       height: 199px;
@@ -87,7 +88,7 @@ export default {
   .book-info {
     color: #363636;
     font-size: 12px;
-    margin: 23px 0 0 19px;
+    margin: 23px 5px 0 19px;
     span {
       display: block;
       line-height: 25px;

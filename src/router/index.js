@@ -55,6 +55,11 @@ export const constantRoutes = [
             meta: { title: "Tree" }
           }
         ]
+      },
+      {
+        path: "/detectionResult", //检索结果
+        component: () => import("@/views/detectionResult/index"),
+        hidden: true
       }
     ]
   },
@@ -158,7 +163,7 @@ export const constantRoutes = [
         }
       },
       {
-        path: "resourceDetails/:id", //资源详情页
+        path: "resourceDetails/:bookid", //资源详情页
         component: () => import("@/views/resourceDetails/index"),
         hidden: true,
         meta: {}
@@ -182,13 +187,13 @@ export const constantRoutes = [
         path: "organization",
         name: "Organization",
         component: () => import("@/views/organizationInformation/index"),
-        meta: {title: "机构信息"}
+        meta: { title: "机构信息" }
       },
       {
         path: "searchRecords",
         name: "ResourcesOrdered",
         component: () => import("@/views/resourcesOrdered/index"),
-        meta: {title: "已订阅资源"}
+        meta: { title: "已订阅资源" }
       },
       // {
       //   path: "resourcesOrdered",
@@ -200,20 +205,20 @@ export const constantRoutes = [
         path: "resourcesOrderedS",
         name: "resourcesOrderedS",
         component: () => import("@/views/resourcesOrderedS/index"),
-        meta: {title: "资源统计"}
+        meta: { title: "资源统计" }
       },
       {
         path: "baseInfo",
         name: "BaseInfo",
         component: () => import("@/views/essentialInformation/index"),
-        meta: {title: "基本信息"}
+        meta: { title: "基本信息" }
       },
       {
         path: "accountSecurity",
         name: "AccountSecurity",
         component: () => import("@/views/accountSecurity/index"),
-        meta: {title: "账号安全"}
-      },
+        meta: { title: "账号安全" }
+      }
     ]
   },
   {
@@ -265,10 +270,6 @@ export const constantRoutes = [
   {
     path: "/advancedSearch", //高级检索
     component: () => import("@/views/advancedSearch/index")
-  },
-  {
-    path: "/detectionResult", //检索结果
-    component: () => import("@/views/detectionResult/index")
   },
   {
     path: "/libraryWindow", //书籍库橱窗

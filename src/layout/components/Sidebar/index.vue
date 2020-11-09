@@ -100,7 +100,7 @@
     <div class="rightBar">
       <logo v-if="showLogo" :collapse="isCollapse" />
       <template v-if="$route.path.split('/')[2] == 'resourceReading'">
-        <BookSynopsisBar />
+        <BookSynopsisBar :data="detailData" />
       </template>
       <!-- <template v-if="leftBarIndex == 1">
         <template v-if="userRole == 1">
@@ -187,10 +187,9 @@ export default {
   },
   methods: {
     async getPath() {
-      console.log('111')
       let path = this.$route.path;
       if (path.indexOf('resourceDetails') != -1) {
-        const res = await booksDetail({ id: this.$route.params.id });
+        const res = await booksDetail({ id: this.$route.params.bookid });
         this.detailData = res.data;
       }
     },

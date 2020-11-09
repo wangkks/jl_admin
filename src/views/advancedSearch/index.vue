@@ -138,6 +138,7 @@ export default {
         filter: this.checkedCities,
         list: this.searchList
       })
+      localStorage.setItem("leftBarIndex", 1)
 
       this.$router.push({
         path: '/detectionResult'

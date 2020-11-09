@@ -4,8 +4,11 @@
     <div class="banner">
       <img src="@/assets/banner.png" alt="" />
       <div class="banner-content">
-        <div class="search" @click="search">
-          <img src="@/assets/icon_search.png" alt="" />
+        <div class="search-box">
+          <div class="search">
+            <img src="@/assets/icon_search.png" alt="" />
+          </div>
+          <span @click="search">高级搜索</span>
         </div>
         <div class="banner-desc">
           是距今600多年前明朝中央政府在南京编纂《永乐大典》以来，南京地方政府对南京文献的首次系统编簒整理<br />同时，也是南京自行组织编纂的最大规模的出版工程
@@ -222,6 +225,23 @@ export default {
       left: 50%;
       margin-left: -358px;
       text-align: center;
+      .search-box {
+        display: flex;
+        align-items: center;
+        span {
+          width: 97px;
+          height: 30px;
+          background: #d0021b;
+          font-size: 14px;
+          font-weight: 400;
+          color: #ffffff;
+          line-height: 30px;
+          text-align: center;
+          border-radius: 15px;
+          margin-left: 14px;
+          cursor: pointer;
+        }
+      }
       .search {
         width: 629px;
         height: 49px;
