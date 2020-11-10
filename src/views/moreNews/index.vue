@@ -107,7 +107,8 @@ export default {
   .news {
     position: relative;
     width: 100%;
-    height: 100%;
+    height: 100vh;
+    overflow: scroll;
     margin-top: 84px;
     background-image: url('../../assets/news_bg.png');
     background-repeat: no-repeat;
@@ -198,7 +199,7 @@ export default {
             font-size: 14px;
             line-height: 20px;
             &:first-child {
-              margin: 50px 0 12px;
+              margin: 30px 0 12px;
               font-size: 16px;
             }
             &:nth-of-type(2) {
@@ -224,7 +225,7 @@ export default {
       display: inline-block;
       background-color: #fff;
       float: right;
-      margin-right: 30px;
+      margin: 0 30px 50px 0;
     }
   }
   .footer {
